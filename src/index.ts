@@ -22,3 +22,4 @@ export * from "./molecules/form-field";
 export * from "./molecules/search-input";
 export * from "./molecules/segmented-control";
 export * from "./molecules/star-rating";
+export * from "./molecules/theme-toggle";
