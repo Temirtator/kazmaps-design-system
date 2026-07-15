@@ -3,3 +3,6 @@ export { colorFor } from "./lib/color-for";
 
 export * from "./atoms/spinner";
 export * from "./atoms/button";
+export * from "./atoms/heading";
+export * from "./atoms/text";
+export * from "./atoms/caption";
