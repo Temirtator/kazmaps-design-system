@@ -5,7 +5,7 @@ import { useState } from "react";
 
 import { cn } from "../../lib/cn";
 
-export type StarRatingProps = {
+type StarRatingProps = {
   value: number;
   onChange?: (v: number) => void;
   size?: "sm" | "md" | "lg";
@@ -33,25 +33,7 @@ function StarRating({ value, onChange, size = "md" }: StarRatingProps) {
       {Array.from({ length: 5 }, (_, i) => {
         const index = i + 1;
         const filled = index <= (hovered ?? value);
-        return isInteractive ? (
-          <button
-            key={index}
-            type="button"
-            className="flex items-center justify-center p-0 bg-transparent border-0"
-            onMouseEnter={() => setHovered(index)}
-            onClick={() => onChange?.(index)}
-          >
-            <Star
-              size={px}
-              className={cn(
-                "transition-colors duration-[var(--dur-fast)] ease-[var(--ease-standard)]",
-                filled
-                  ? "fill-[var(--gold)] text-[var(--gold)]"
-                  : "fill-transparent text-[var(--line-2)]",
-              )}
-            />
-          </button>
-        ) : (
+        return (
           <Star
             key={index}
             size={px}
@@ -61,6 +43,8 @@ function StarRating({ value, onChange, size = "md" }: StarRatingProps) {
                 ? "fill-[var(--gold)] text-[var(--gold)]"
                 : "fill-transparent text-[var(--line-2)]",
             )}
+            onMouseEnter={isInteractive ? () => setHovered(index) : undefined}
+            onClick={isInteractive ? () => onChange?.(index) : undefined}
           />
         );
       })}
@@ -68,4 +52,4 @@ function StarRating({ value, onChange, size = "md" }: StarRatingProps) {
   );
 }
 
-export { StarRating };
+export { StarRating, type StarRatingProps };
