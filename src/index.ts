@@ -6,3 +6,6 @@ export * from "./atoms/button";
 export * from "./atoms/heading";
 export * from "./atoms/text";
 export * from "./atoms/caption";
+export * from "./atoms/badge";
+export * from "./atoms/chip";
+export * from "./atoms/chip-pill";
