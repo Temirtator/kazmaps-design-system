@@ -10,7 +10,8 @@
     "url": "https://github.com/Temirtator/kazmaps-design-system.git"
   },
   "files": [
-    "dist"
+    "dist",
+    "CHANGELOG.md"
   ],
   "sideEffects": [
     "**/*.css"
