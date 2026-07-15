@@ -1,0 +1,5 @@
+@import "tailwindcss";
+@import "../src/styles/core.css";
+@import "../src/styles/brands/business.css";
+@import "../src/styles/brands/booking.css";
+@source "../src";

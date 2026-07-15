@@ -14,6 +14,6 @@
     "forceConsistentCasingInFileNames": true,
     "types": ["node", "vitest/globals", "@testing-library/jest-dom"]
   },
-  "include": ["src", ".storybook", "vitest.setup.ts"],
+  "include": ["src", ".storybook/**/*.ts", "vitest.setup.ts"],
   "exclude": ["dist", "node_modules"]
 }
