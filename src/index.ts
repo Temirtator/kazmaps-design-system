@@ -24,3 +24,4 @@ export * from "./molecules/segmented-control";
 export * from "./molecules/star-rating";
 export * from "./molecules/theme-toggle";
 export * from "./molecules/tabs";
+export * from "./molecules/error-boundary";
