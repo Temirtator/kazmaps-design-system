@@ -12,3 +12,5 @@ export * from "./atoms/chip-pill";
 export * from "./atoms/divider";
 export * from "./atoms/skeleton";
 export * from "./atoms/avatar";
+export * from "./atoms/input";
+export * from "./atoms/textarea";
