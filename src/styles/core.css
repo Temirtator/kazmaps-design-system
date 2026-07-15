@@ -1,0 +1,130 @@
+/* @temirtator/kazmaps-design-system — core token contract (brand-independent defaults).
+   Brand files (brands/*.css) set palettes, radii, shadows and fonts under
+   [data-brand] / [data-brand][data-theme="light"] and may override any token here. */
+
+:root {
+  /* type scale */
+  --text-xs: 11px;
+  --text-sm: 13px;
+  --text-base: 15px;
+  --text-lg: 17px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 30px;
+
+  /* spacing */
+  --space-3: 12px;
+  --space-page: 16px;
+
+  /* motion */
+  --ease-standard: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-reveal: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 100ms;
+  --dur-base: 160ms;
+  --dur-slow: 240ms;
+  --dur-reveal: 500ms;
+}
+
+@keyframes reveal-rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.reveal {
+  animation: reveal-rise var(--dur-reveal) var(--ease-reveal) both;
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* dropdown / popover entry */
+.animate-scale-in {
+  animation: scale-in var(--dur-base) var(--ease-spring) both;
+}
+
+/* page / route transition */
+.page-enter {
+  animation: page-enter 280ms var(--ease-reveal) both;
+}
+
+@keyframes shimmer {
+  from {
+    background-position: -200% 0;
+  }
+  to {
+    background-position: 200% 0;
+  }
+}
+
+/* skeleton shimmer — use with bg-gradient-to-r bg-[length:200%_100%] */
+.animate-shimmer {
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+/* stagger list — add .stagger-list to container; children get staggered reveal-rise */
+.stagger-list > * {
+  animation: reveal-rise var(--dur-slow) var(--ease-reveal) both;
+}
+.stagger-list > *:nth-child(1) {
+  animation-delay: 0ms;
+}
+.stagger-list > *:nth-child(2) {
+  animation-delay: 35ms;
+}
+.stagger-list > *:nth-child(3) {
+  animation-delay: 70ms;
+}
+.stagger-list > *:nth-child(4) {
+  animation-delay: 105ms;
+}
+.stagger-list > *:nth-child(5) {
+  animation-delay: 140ms;
+}
+.stagger-list > *:nth-child(6) {
+  animation-delay: 175ms;
+}
+.stagger-list > *:nth-child(7) {
+  animation-delay: 210ms;
+}
+.stagger-list > *:nth-child(8) {
+  animation-delay: 245ms;
+}
+.stagger-list > *:nth-child(n + 9) {
+  animation-delay: 280ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
