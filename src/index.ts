@@ -9,3 +9,6 @@ export * from "./atoms/caption";
 export * from "./atoms/badge";
 export * from "./atoms/chip";
 export * from "./atoms/chip-pill";
+export * from "./atoms/divider";
+export * from "./atoms/skeleton";
+export * from "./atoms/avatar";
