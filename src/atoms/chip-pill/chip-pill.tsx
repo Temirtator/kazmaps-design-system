@@ -2,8 +2,7 @@
 
 import { cn } from "../../lib/cn";
 
-// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
-type ChipPillProps = {
+export type ChipPillProps = {
   label: string;
   selected?: boolean;
   onClick?: () => void;
@@ -38,5 +37,3 @@ export function ChipPill({
     </button>
   );
 }
-
-export type { ChipPillProps };

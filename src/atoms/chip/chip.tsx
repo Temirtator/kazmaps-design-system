@@ -2,7 +2,6 @@
 
 import { cn } from "../../lib/cn";
 
-// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 type ChipProps = {
   label: string;
   active?: boolean;

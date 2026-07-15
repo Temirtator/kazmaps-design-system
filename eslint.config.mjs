@@ -8,6 +8,13 @@ export default tseslint.config(
   ...tseslint.configs.recommendedTypeChecked,
   ...tseslint.configs.stylisticTypeChecked,
   {
+    rules: {
+      // Mirrors business-client: its autofix (type X = {} -> interface) breaks
+      // copied components' export shapes; keep type aliases as-is.
+      "@typescript-eslint/consistent-type-definitions": "off",
+    },
+  },
+  {
     plugins: { "react-hooks": reactHooks },
     rules: reactHooks.configs["recommended-latest"].rules,
   },
