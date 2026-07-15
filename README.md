@@ -153,9 +153,13 @@ export default function MyComponent() {
 Если вашему приложению нужны дополнительные цвета, типографика или другие переменные, вы можете добавить их в CSS:
 
 ```css
+/* приложение может переопределить любой токен ПОСЛЕ импорта бренд-файла.
+   Пример business-client: подключить Inter из next/font (variable: --font-inter)
+   и вернуть его в стек. ВАЖНО: --font-inter должен быть определён вашим
+   загрузчиком шрифтов ДО этого объявления — голый var() на несуществующую
+   переменную инвалидирует весь --font-sans. */
 html {
-  --custom-color: #123456;
-  --font-sans: var(--font-inter); /* переопределение шрифта из приложения */
+  --font-sans: var(--font-inter, "Inter"), "SF Pro Display", system-ui, sans-serif;
 }
 ```
 
