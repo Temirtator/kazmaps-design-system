@@ -16,3 +16,4 @@ export * from "./atoms/input";
 export * from "./atoms/textarea";
 export * from "./atoms/checkbox";
 export * from "./atoms/toggle";
+export * from "./atoms/select";
