@@ -11,5 +11,5 @@ export default defineConfig({
   external: ["react", "react-dom", "lucide-react"],
   banner: { js: '"use client";' },
   onSuccess:
-    "mkdir -p dist/styles/brands && (cp src/styles/core.css dist/styles/ 2>/dev/null || true) && (cp src/styles/brands/*.css dist/styles/brands/ 2>/dev/null || true)",
+    "mkdir -p dist/styles/brands && if [ -f src/styles/core.css ]; then cp src/styles/core.css dist/styles/ && cp src/styles/brands/*.css dist/styles/brands/; fi",
 });
