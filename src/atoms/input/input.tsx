@@ -152,9 +152,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
         {isPassword && revealable ? (
           <button
             type="button"
-            tabIndex={-1}
             onClick={() => setRevealed((v) => !v)}
-            className="absolute right-3 flex items-center text-[var(--muted)] hover:text-[var(--ink)]"
+            className={cn(
+              "absolute right-3 flex items-center rounded-[var(--radius-sm)] text-[var(--muted)] hover:text-[var(--ink)]",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand)]",
+            )}
             aria-label={revealed ? "Скрыть пароль" : "Показать пароль"}
           >
             {revealed ? <EyeOff size={16} /> : <Eye size={16} />}

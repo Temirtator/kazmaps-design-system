@@ -19,4 +19,16 @@ describe("Input", () => {
     await userEvent.click(screen.getByRole("button"));
     expect(input).toHaveAttribute("type", "text");
   });
+  it("reveal button is keyboard reachable and toggles visibility", async () => {
+    const user = userEvent.setup();
+    render(<Input label="Пароль" type="password" revealable />);
+    const input = screen.getByLabelText("Пароль");
+    await user.tab();
+    expect(input).toHaveFocus();
+    await user.tab();
+    expect(screen.getByRole("button", { name: "Показать пароль" })).toHaveFocus();
+    await user.keyboard("{Enter}");
+    expect(input).toHaveAttribute("type", "text");
+    expect(screen.getByRole("button", { name: "Скрыть пароль" })).toBeInTheDocument();
+  });
 });
