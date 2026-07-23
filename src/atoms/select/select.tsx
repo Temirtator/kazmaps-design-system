@@ -54,6 +54,9 @@ export function Select({
   const descId = `${id}-desc`;
 
   const containerRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
+  const initialFocusRef = useRef<"selected" | "first" | "last">("selected");
   const [open, setOpen] = useState(false);
   const [internalValue, setInternalValue] = useState(defaultValue);
 
@@ -66,10 +69,23 @@ export function Select({
   const hasError = Boolean(error);
   const hasDesc = Boolean(error ?? hint);
 
+  // Reserved for Task 6 (list arrow-key navigation); not called yet in this task.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  function enabledOptions(): HTMLButtonElement[] {
+    return Array.from(
+      listRef.current?.querySelectorAll<HTMLButtonElement>('[role="option"]:not(:disabled)') ?? [],
+    );
+  }
+
+  function closeAndRefocus() {
+    setOpen(false);
+    triggerRef.current?.focus();
+  }
+
   function handleSelect(optValue: string) {
     if (!isControlled) setInternalValue(optValue);
     onChange?.(optValue);
-    setOpen(false);
+    closeAndRefocus();
   }
 
   useEffect(() => {
@@ -81,6 +97,19 @@ export function Select({
     }
     document.addEventListener("pointerdown", onPointerDown);
     return () => document.removeEventListener("pointerdown", onPointerDown);
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+    const options = Array.from(
+      listRef.current?.querySelectorAll<HTMLButtonElement>('[role="option"]:not(:disabled)') ?? [],
+    );
+    if (options.length === 0) return;
+    let target: HTMLButtonElement | undefined;
+    if (initialFocusRef.current === "first") target = options[0];
+    else if (initialFocusRef.current === "last") target = options[options.length - 1];
+    else target = options.find((o) => o.dataset.selected === "true") ?? options[0];
+    target.focus();
   }, [open]);
 
   return (
@@ -96,10 +125,19 @@ export function Select({
         </label>
       )}
 
-      <div ref={containerRef} className="relative">
+      <div
+        ref={containerRef}
+        className="relative"
+        onBlur={(e) => {
+          if (open && !containerRef.current?.contains(e.relatedTarget)) {
+            setOpen(false);
+          }
+        }}
+      >
         {name && <input type="hidden" name={name} value={value} />}
 
         <button
+          ref={triggerRef}
           id={id}
           type="button"
           disabled={disabled}
@@ -107,10 +145,18 @@ export function Select({
           aria-expanded={open}
           aria-describedby={hasDesc ? descId : undefined}
           aria-invalid={hasError || undefined}
-          onClick={() => setOpen((v) => !v)}
+          onClick={() => {
+            initialFocusRef.current = "selected";
+            setOpen((v) => !v);
+          }}
           onKeyDown={(e) => {
-            if (e.key === "Escape") setOpen(false);
-            if (e.key === "Enter" || e.key === " ") setOpen((v) => !v);
+            if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+              e.preventDefault();
+              initialFocusRef.current = e.key === "ArrowDown" ? "first" : "last";
+              setOpen(true);
+            } else if (e.key === "Escape") {
+              setOpen(false);
+            }
           }}
           className={cn(
             "flex h-9 w-full items-center justify-between px-3",
@@ -146,6 +192,7 @@ export function Select({
 
         {open && (
           <div
+            ref={listRef}
             role="listbox"
             className={cn(
               "absolute left-0 right-0 top-[calc(100%+4px)] z-50",
@@ -210,6 +257,7 @@ function OptionItem({ opt, selected, onSelect }: OptionItemProps) {
       type="button"
       role="option"
       aria-selected={selected}
+      data-selected={selected || undefined}
       disabled={opt.disabled}
       onClick={() => onSelect(opt.value)}
       className={cn(
