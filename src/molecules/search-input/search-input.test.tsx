@@ -10,4 +10,9 @@ describe("SearchInput", () => {
     await userEvent.type(screen.getByPlaceholderText("Поиск"), "а");
     expect(onChange).toHaveBeenCalledWith("а");
   });
+
+  it("input has a default accessible name", () => {
+    render(<SearchInput value="" onChange={vi.fn()} />);
+    expect(screen.getByRole("searchbox", { name: "Поиск" })).toBeInTheDocument();
+  });
 });
