@@ -13,7 +13,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning: se
   опциям (disabled пропускаются), Escape закрывает с возвратом фокуса на триггер; listbox
   связан с label через aria-labelledby.
 - StarRating: интерактивный режим — radiogroup из 5 звёзд (стрелки, roving tabindex,
-  «N из 5»); display-режим — role="img" с подписью рейтинга; новый проп `label`.
+  «N из 5»); display-режим — role="img" с подписью рейтинга; новый проп `ariaLabel`.
 - Tabs: паттерн tablist/tab (aria-selected, стрелки, Home/End, roving tabindex).
 - SegmentedControl: radiogroup-семантика со стрелками; новый проп `ariaLabel`.
 - SearchInput: дефолтный aria-label («Поиск»); новый проп `ariaLabel`.
@@ -36,6 +36,11 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning: se
 - FormField render-prop: сигнатура `(id: string)` → `(field: { id, describedBy, invalid })`.
 - Tabs/SegmentedControl: роли кнопок изменились (button → tab/radio) — селекторы в тестах
   потребителей обновить.
+- StarRating: интерактивный режим теперь рендерит 5 кнопок role="radio" вместо голых SVG
+  (селекторы по svg/кнопкам в тестах потребителей обновить); display-режим обёрнут в
+  role="img", звёзды aria-hidden.
+- Tabs: элемент-обёртка сменился с <nav> на <div role="tablist"> — лендмарк navigation
+  исчез (селекторы getByRole("navigation") в тестах потребителей обновить).
 
 ## [0.1.0] — 2026-07-16
 
