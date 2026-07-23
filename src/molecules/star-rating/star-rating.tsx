@@ -10,7 +10,7 @@ type StarRatingProps = {
   onChange?: (v: number) => void;
   size?: "sm" | "md" | "lg";
   /** Имя группы (интерактив) / подпись рейтинга (display). */
-  label?: string;
+  ariaLabel?: string;
 };
 
 const SIZE_MAP: Record<NonNullable<StarRatingProps["size"]>, number> = {
@@ -26,7 +26,7 @@ function starClass(filled: boolean): string {
   );
 }
 
-function StarRating({ value, onChange, size = "md", label = "Оценка" }: StarRatingProps) {
+function StarRating({ value, onChange, size = "md", ariaLabel = "Оценка" }: StarRatingProps) {
   const [hovered, setHovered] = useState<number | null>(null);
   const refs = useRef<(HTMLButtonElement | null)[]>([]);
   const px = SIZE_MAP[size];
@@ -35,7 +35,7 @@ function StarRating({ value, onChange, size = "md", label = "Оценка" }: St
     return (
       <div
         role="img"
-        aria-label={`${label}: ${value} из 5`}
+        aria-label={`${ariaLabel}: ${value} из 5`}
         className="flex cursor-default items-center gap-0.5"
       >
         {Array.from({ length: 5 }, (_, i) => (
@@ -53,7 +53,7 @@ function StarRating({ value, onChange, size = "md", label = "Оценка" }: St
   return (
     <div
       role="radiogroup"
-      aria-label={label}
+      aria-label={ariaLabel}
       className="flex items-center gap-0.5"
       onMouseLeave={() => setHovered(null)}
     >
