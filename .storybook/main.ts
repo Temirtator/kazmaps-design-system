@@ -4,6 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 const config: StorybookConfig = {
   framework: { name: "@storybook/react-vite", options: {} },
   stories: ["../src/**/*.stories.tsx"],
+  addons: ["@storybook/addon-a11y"],
   viteFinal(cfg) {
     cfg.plugins = [...(cfg.plugins ?? []), tailwindcss()];
     return cfg;
