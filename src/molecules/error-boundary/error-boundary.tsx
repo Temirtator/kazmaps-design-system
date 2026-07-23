@@ -29,12 +29,14 @@ export class ErrorBoundary extends Component<Props, State> {
       return (
         this.props.fallback ?? (
           <div className="flex min-h-dvh flex-col items-center justify-center gap-3 px-4 text-center">
-            <p className="text-lg font-semibold text-[var(--ink)]">Ошибка приложения</p>
-            <p className="text-sm text-[var(--muted)]">{this.state.message}</p>
+            <p className="text-[length:var(--text-lg)] font-semibold text-[var(--ink)]">
+              Ошибка приложения
+            </p>
+            <p className="text-[length:var(--text-sm)] text-[var(--muted)]">{this.state.message}</p>
             <button
               type="button"
               onClick={() => window.location.reload()}
-              className="rounded-xl bg-[var(--brand)] px-4 py-2 text-sm font-medium text-inverse"
+              className="rounded-[var(--radius-md)] bg-[var(--brand)] px-4 py-2 text-[length:var(--text-sm)] font-medium text-white"
             >
               Обновить страницу
             </button>
