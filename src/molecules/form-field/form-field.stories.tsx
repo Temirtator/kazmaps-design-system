@@ -14,7 +14,7 @@ export const WithError: StoryObj<typeof FormField> = {
         errorMessage="Обязательное поле"
         hint="Как в реестре"
       >
-        {(id) => <Input id={id} placeholder="ТОО Ромашка" />}
+        {(field) => <Input id={field.id} placeholder="ТОО Ромашка" />}
       </FormField>
     </div>
   ),
