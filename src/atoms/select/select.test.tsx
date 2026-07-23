@@ -111,3 +111,46 @@ describe("keyboard open/close", () => {
     expect(screen.queryByRole("listbox")).not.toBeInTheDocument();
   });
 });
+
+describe("list navigation", () => {
+  async function openSelect(user: ReturnType<typeof userEvent.setup>) {
+    render(<Select label="Город" options={OPTIONS} />);
+    await user.tab();
+    await user.keyboard("{Enter}");
+  }
+
+  it("ArrowDown/ArrowUp move focus between enabled options, skipping disabled", async () => {
+    const user = userEvent.setup();
+    await openSelect(user);
+    expect(screen.getByRole("option", { name: "Алматы" })).toHaveFocus();
+    await user.keyboard("{ArrowDown}");
+    expect(screen.getByRole("option", { name: "Астана" })).toHaveFocus();
+    await user.keyboard("{ArrowDown}"); // Шымкент disabled — остаёмся на последней доступной
+    expect(screen.getByRole("option", { name: "Астана" })).toHaveFocus();
+    await user.keyboard("{ArrowUp}");
+    expect(screen.getByRole("option", { name: "Алматы" })).toHaveFocus();
+  });
+
+  it("Home/End jump to first/last enabled option", async () => {
+    const user = userEvent.setup();
+    await openSelect(user);
+    await user.keyboard("{End}");
+    expect(screen.getByRole("option", { name: "Астана" })).toHaveFocus();
+    await user.keyboard("{Home}");
+    expect(screen.getByRole("option", { name: "Алматы" })).toHaveFocus();
+  });
+
+  it("Escape inside the list closes and refocuses the trigger", async () => {
+    const user = userEvent.setup();
+    await openSelect(user);
+    await user.keyboard("{Escape}");
+    expect(screen.queryByRole("listbox")).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /Город|Выберите/ })).toHaveFocus();
+  });
+
+  it("listbox is labelled by the field label", async () => {
+    const user = userEvent.setup();
+    await openSelect(user);
+    expect(screen.getByRole("listbox", { name: "Город" })).toBeInTheDocument();
+  });
+});

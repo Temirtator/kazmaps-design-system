@@ -52,6 +52,7 @@ export function Select({
   const generatedId = useId();
   const id = idProp ?? generatedId;
   const descId = `${id}-desc`;
+  const labelId = `${id}-label`;
 
   const containerRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -69,8 +70,6 @@ export function Select({
   const hasError = Boolean(error);
   const hasDesc = Boolean(error ?? hint);
 
-  // Reserved for Task 6 (list arrow-key navigation); not called yet in this task.
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function enabledOptions(): HTMLButtonElement[] {
     return Array.from(
       listRef.current?.querySelectorAll<HTMLButtonElement>('[role="option"]:not(:disabled)') ?? [],
@@ -88,6 +87,28 @@ export function Select({
     closeAndRefocus();
   }
 
+  function handleListKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
+    const options = enabledOptions();
+    if (options.length === 0) return;
+    const current = options.indexOf(document.activeElement as HTMLButtonElement);
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      options[Math.min(current + 1, options.length - 1)]?.focus();
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      options[Math.max(current - 1, 0)]?.focus();
+    } else if (e.key === "Home") {
+      e.preventDefault();
+      options[0]?.focus();
+    } else if (e.key === "End") {
+      e.preventDefault();
+      options[options.length - 1]?.focus();
+    } else if (e.key === "Escape") {
+      e.stopPropagation();
+      closeAndRefocus();
+    }
+  }
+
   useEffect(() => {
     if (!open) return;
     function onPointerDown(e: PointerEvent) {
@@ -101,9 +122,7 @@ export function Select({
 
   useEffect(() => {
     if (!open) return;
-    const options = Array.from(
-      listRef.current?.querySelectorAll<HTMLButtonElement>('[role="option"]:not(:disabled)') ?? [],
-    );
+    const options = enabledOptions();
     if (options.length === 0) return;
     let target: HTMLButtonElement | undefined;
     if (initialFocusRef.current === "first") target = options[0];
@@ -115,7 +134,11 @@ export function Select({
   return (
     <div className={cn("flex flex-col gap-1", className)}>
       {label && (
-        <label htmlFor={id} className="text-[length:var(--text-sm)] font-medium text-[var(--ink)]">
+        <label
+          htmlFor={id}
+          id={labelId}
+          className="text-[length:var(--text-sm)] font-medium text-[var(--ink)]"
+        >
           {label}
           {required && (
             <span className="ml-0.5 text-[var(--danger)]" aria-hidden="true">
@@ -194,6 +217,8 @@ export function Select({
           <div
             ref={listRef}
             role="listbox"
+            aria-labelledby={label ? labelId : undefined}
+            onKeyDown={handleListKeyDown}
             className={cn(
               "absolute left-0 right-0 top-[calc(100%+4px)] z-50",
               "rounded-[var(--radius-md)] border border-[var(--line)] bg-[var(--card)]",
@@ -264,6 +289,7 @@ function OptionItem({ opt, selected, onSelect }: OptionItemProps) {
         "flex w-full items-center justify-between px-3 py-2",
         "text-[length:var(--text-sm)] text-left",
         "transition-colors duration-[var(--dur-base)] ease-[var(--ease-standard)]",
+        "focus-visible:outline-none focus-visible:bg-[var(--bg-2)]",
         selected ? "font-medium text-[var(--ink)]" : "text-[var(--ink-2)]",
         opt.disabled ? "cursor-not-allowed opacity-40" : "cursor-pointer hover:bg-[var(--bg-2)]",
       )}
