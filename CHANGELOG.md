@@ -20,6 +20,9 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning: se
 - FormField: render-prop получает `{ id, describedBy, invalid }` для aria-проводки; новый
   экспорт типа `FormFieldRenderProps`.
 - Сводный axe-сьют по всем компонентам; a11y-аддон в Storybook.
+- Скриншот-тесты (Playwright поверх собранного Storybook, `npm run test:vrt`): 28 базлайнов —
+  все затронутые релизом компоненты × dark/light, плюс состояния open-Select и включённый
+  Toggle. Базлайны платформозависимы (chromium-darwin); обновление — `npm run test:vrt:update`.
 - Фокус-кольца у Toggle, reveal-кнопки Input, опций Select, звёзд StarRating.
 
 ### Fixed
