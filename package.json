@@ -1,6 +1,6 @@
 {
   "name": "@temirtator/kazmaps-design-system",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "KazMaps design system — multi-brand UI kit (tokens, atoms, molecules) for Tailwind v4 + React 19 apps",
   "type": "module",
   "license": "MIT",
