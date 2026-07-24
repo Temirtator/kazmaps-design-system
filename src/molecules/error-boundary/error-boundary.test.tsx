@@ -28,4 +28,21 @@ describe("ErrorBoundary", () => {
     expect(screen.getByText("Свой фолбэк")).toBeInTheDocument();
     vi.restoreAllMocks();
   });
+
+  it("fallback uses contract tokens, not legacy aliases", () => {
+    vi.spyOn(console, "error").mockImplementation(() => undefined);
+    render(
+      <ErrorBoundary>
+        <Boom />
+      </ErrorBoundary>,
+    );
+    const btn = screen.getByRole("button", { name: "Обновить страницу" });
+    expect(btn.className).not.toContain("text-inverse");
+    expect(btn).toHaveClass(
+      "text-white",
+      "rounded-[var(--radius-md)]",
+      "text-[length:var(--text-sm)]",
+    );
+    vi.restoreAllMocks();
+  });
 });

@@ -48,7 +48,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Che
           <Check
             size={11}
             strokeWidth={3}
-            className="hidden text-white group-has-[:checked]:block"
+            className="hidden text-[var(--bg)] group-has-[:checked]:block"
           />
         </span>
       </span>

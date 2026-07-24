@@ -9,6 +9,7 @@ export type SearchInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "onCh
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
+  ariaLabel?: string;
   shortcut?: string;
 };
 
@@ -16,6 +17,7 @@ export function SearchInput({
   value,
   onChange,
   placeholder = "Поиск…",
+  ariaLabel = "Поиск",
   shortcut,
   className,
   ...rest
@@ -37,6 +39,7 @@ export function SearchInput({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
+        aria-label={ariaLabel}
         className={cn(
           "flex-1 bg-transparent text-[length:var(--text-sm)] text-[var(--ink)]",
           "outline-none placeholder:text-[var(--muted)]",

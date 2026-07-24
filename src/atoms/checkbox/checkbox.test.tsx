@@ -11,4 +11,11 @@ describe("Checkbox", () => {
     await userEvent.click(box);
     expect(box).toBeChecked();
   });
+
+  it("check icon uses the bg token so it stays visible in dark theme", () => {
+    const { container } = render(<Checkbox label="Согласен" defaultChecked />);
+    const icon = container.querySelector("svg");
+    expect(icon).toHaveClass("text-[var(--bg)]");
+    expect(icon).not.toHaveClass("text-white");
+  });
 });
