@@ -16,6 +16,10 @@ export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   endIcon?: ReactNode;
   mask?: InputMask;
   revealable?: boolean;
+  /** Подпись reveal-кнопки в состоянии «пароль скрыт». */
+  revealLabel?: string;
+  /** Подпись reveal-кнопки в состоянии «пароль виден». */
+  hideLabel?: string;
 };
 
 function formatBin(raw: string): string {
@@ -51,6 +55,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     endIcon,
     mask,
     revealable = false,
+    revealLabel = "Показать пароль",
+    hideLabel = "Скрыть пароль",
     className,
     type,
     onChange,
@@ -157,7 +163,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
               "absolute right-3 flex items-center rounded-[var(--radius-sm)] text-[var(--muted)] hover:text-[var(--ink)]",
               "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand)]",
             )}
-            aria-label={revealed ? "Скрыть пароль" : "Показать пароль"}
+            aria-label={revealed ? hideLabel : revealLabel}
           >
             {revealed ? <EyeOff size={16} /> : <Eye size={16} />}
           </button>
