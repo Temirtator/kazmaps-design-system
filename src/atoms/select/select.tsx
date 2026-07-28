@@ -31,6 +31,8 @@ export type SelectProps = {
   id?: string;
   name?: string;
   className?: string;
+  /** Доступное имя триггера, когда видимого `label` нет. Перекрывает `label`. */
+  ariaLabel?: string;
 };
 
 export function Select({
@@ -48,6 +50,7 @@ export function Select({
   id: idProp,
   name,
   className,
+  ariaLabel,
 }: SelectProps) {
   const generatedId = useId();
   const id = idProp ?? generatedId;
@@ -165,6 +168,7 @@ export function Select({
           type="button"
           disabled={disabled}
           aria-haspopup="listbox"
+          aria-label={ariaLabel}
           aria-expanded={open}
           aria-describedby={hasDesc ? descId : undefined}
           aria-invalid={hasError || undefined}

@@ -38,6 +38,21 @@ describe("Select", () => {
     await userEvent.click(screen.getByRole("button", { name: "снаружи" }));
     expect(screen.queryByText("Алматы")).not.toBeInTheDocument();
   });
+
+  it("names the trigger from ariaLabel when there is no visible label", () => {
+    render(<Select ariaLabel="Фильтр по городу" options={OPTIONS} placeholder="Все города" />);
+    expect(screen.getByRole("button", { name: "Фильтр по городу" })).toBeInTheDocument();
+  });
+
+  it("names the trigger from the visible label when ariaLabel is absent", () => {
+    render(<Select label="Город" options={OPTIONS} placeholder="Все города" />);
+    expect(screen.getByRole("button", { name: "Город" })).toBeInTheDocument();
+  });
+
+  it("lets ariaLabel win over the visible label", () => {
+    render(<Select label="Город" ariaLabel="Фильтр по городу" options={OPTIONS} />);
+    expect(screen.getByRole("button", { name: "Фильтр по городу" })).toBeInTheDocument();
+  });
 });
 
 describe("keyboard open/close", () => {
