@@ -14,6 +14,8 @@ export type AvatarProps = Omit<ImgHTMLAttributes<HTMLImageElement>, "src"> & {
   size?: AvatarSize | number;
   shape?: AvatarShape;
   color?: CSSProperties["backgroundColor"];
+  /** Доступное имя, когда `name` не задан. */
+  ariaLabel?: string;
 };
 
 const SIZE_PX: Record<AvatarSize, number> = {
@@ -39,7 +41,17 @@ function getInitials(name: string): string {
 }
 
 export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(function Avatar(
-  { name = "", photoUrl, size = "md", shape = "circle", color, className, style, ...rest },
+  {
+    name = "",
+    photoUrl,
+    size = "md",
+    shape = "circle",
+    color,
+    ariaLabel = "Аватар пользователя",
+    className,
+    style,
+    ...rest
+  },
   ref,
 ) {
   const [imgLoaded, setImgLoaded] = useState(false);
@@ -73,7 +85,7 @@ export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(function Avatar(
       )}
       style={{ ...containerStyle, backgroundColor: bg }}
       role="img"
-      aria-label={name || "Аватар пользователя"}
+      aria-label={name || ariaLabel}
     >
       <span
         className={cn(

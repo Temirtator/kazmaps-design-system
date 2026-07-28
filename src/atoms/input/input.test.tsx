@@ -31,4 +31,19 @@ describe("Input", () => {
     expect(input).toHaveAttribute("type", "text");
     expect(screen.getByRole("button", { name: "Скрыть пароль" })).toBeInTheDocument();
   });
+  it("reveal button labels are overridable", async () => {
+    const user = userEvent.setup();
+    render(
+      <Input
+        label="Password"
+        type="password"
+        revealable
+        revealLabel="Show password"
+        hideLabel="Hide password"
+      />,
+    );
+    const button = screen.getByRole("button", { name: "Show password" });
+    await user.click(button);
+    expect(screen.getByRole("button", { name: "Hide password" })).toBeInTheDocument();
+  });
 });

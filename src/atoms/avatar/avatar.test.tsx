@@ -11,4 +11,12 @@ describe("Avatar", () => {
     render(<Avatar name="Иван" photoUrl="/x.png" alt="Иван" />);
     expect(screen.getByAltText("Иван")).toBeInTheDocument();
   });
+  it("falls back to a default accessible name without name", () => {
+    render(<Avatar />);
+    expect(screen.getByRole("img", { name: "Аватар пользователя" })).toBeInTheDocument();
+  });
+  it("fallback accessible name is overridable", () => {
+    render(<Avatar ariaLabel="User avatar" />);
+    expect(screen.getByRole("img", { name: "User avatar" })).toBeInTheDocument();
+  });
 });
