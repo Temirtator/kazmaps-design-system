@@ -11,6 +11,8 @@ type StarRatingProps = {
   size?: "sm" | "md" | "lg";
   /** Имя группы (интерактив) / подпись рейтинга (display). */
   ariaLabel?: string;
+  /** Числовая часть подписи: и каждая звезда в интерактиве, и рейтинг в display. */
+  formatRating?: (value: number, max: number) => string;
 };
 
 const SIZE_MAP: Record<NonNullable<StarRatingProps["size"]>, number> = {
@@ -19,6 +21,8 @@ const SIZE_MAP: Record<NonNullable<StarRatingProps["size"]>, number> = {
   lg: 22,
 };
 
+const STAR_COUNT = 5;
+
 function starClass(filled: boolean): string {
   return cn(
     "transition-colors duration-[var(--dur-fast)] ease-[var(--ease-standard)]",
@@ -26,7 +30,13 @@ function starClass(filled: boolean): string {
   );
 }
 
-function StarRating({ value, onChange, size = "md", ariaLabel = "Оценка" }: StarRatingProps) {
+function StarRating({
+  value,
+  onChange,
+  size = "md",
+  ariaLabel = "Оценка",
+  formatRating = (v, max) => `${v} из ${max}`,
+}: StarRatingProps) {
   const [hovered, setHovered] = useState<number | null>(null);
   const refs = useRef<(HTMLButtonElement | null)[]>([]);
   const px = SIZE_MAP[size];
@@ -35,10 +45,10 @@ function StarRating({ value, onChange, size = "md", ariaLabel = "Оценка" }
     return (
       <div
         role="img"
-        aria-label={`${ariaLabel}: ${value} из 5`}
+        aria-label={`${ariaLabel}: ${formatRating(value, STAR_COUNT)}`}
         className="flex cursor-default items-center gap-0.5"
       >
-        {Array.from({ length: 5 }, (_, i) => (
+        {Array.from({ length: STAR_COUNT }, (_, i) => (
           <Star key={i + 1} size={px} aria-hidden="true" className={starClass(i + 1 <= value)} />
         ))}
       </div>
@@ -50,6 +60,10 @@ function StarRating({ value, onChange, size = "md", ariaLabel = "Оценка" }
     refs.current[next - 1]?.focus();
   }
 
+  // Округляем: при дробном value (например, средний рейтинг 3.4) точное сравнение
+  // не совпадало ни с одной звездой и группа оставалась без фокусируемого элемента.
+  const activeStar = Math.min(Math.max(Math.round(value), 1), STAR_COUNT);
+
   return (
     <div
       role="radiogroup"
@@ -57,7 +71,7 @@ function StarRating({ value, onChange, size = "md", ariaLabel = "Оценка" }
       className="flex items-center gap-0.5"
       onMouseLeave={() => setHovered(null)}
     >
-      {Array.from({ length: 5 }, (_, i) => {
+      {Array.from({ length: STAR_COUNT }, (_, i) => {
         const index = i + 1;
         return (
           <button
@@ -68,14 +82,14 @@ function StarRating({ value, onChange, size = "md", ariaLabel = "Оценка" }
             type="button"
             role="radio"
             aria-checked={value === index}
-            aria-label={`${index} из 5`}
-            tabIndex={index === Math.min(Math.max(value, 1), 5) ? 0 : -1}
+            aria-label={formatRating(index, STAR_COUNT)}
+            tabIndex={index === activeStar ? 0 : -1}
             onMouseEnter={() => setHovered(index)}
             onClick={() => onChange?.(index)}
             onKeyDown={(e) => {
               if (e.key === "ArrowRight" || e.key === "ArrowUp") {
                 e.preventDefault();
-                moveTo(Math.min(index + 1, 5));
+                moveTo(Math.min(index + 1, STAR_COUNT));
               } else if (e.key === "ArrowLeft" || e.key === "ArrowDown") {
                 e.preventDefault();
                 moveTo(Math.max(index - 1, 1));

@@ -48,4 +48,22 @@ describe("StarRating", () => {
     await user.keyboard("{ArrowLeft}");
     expect(screen.getByRole("radio", { name: "2 из 5" })).toHaveAttribute("aria-checked", "true");
   });
+
+  it("formatRating overrides the display-mode rating label", () => {
+    render(<StarRating value={3} formatRating={(v, max) => `${v} of ${max}`} />);
+    expect(screen.getByRole("img", { name: "Оценка: 3 of 5" })).toBeInTheDocument();
+  });
+
+  it("formatRating overrides the per-star label in interactive mode", () => {
+    render(<StarRating value={2} onChange={vi.fn()} formatRating={(v, max) => `${v} of ${max}`} />);
+    expect(screen.getByRole("radio", { name: "2 of 5" })).toHaveAttribute("aria-checked", "true");
+    expect(screen.getByRole("radio", { name: "5 of 5" })).toBeInTheDocument();
+  });
+
+  it("keeps exactly one roving tab stop when value is fractional", () => {
+    render(<StarRating value={3.4} onChange={vi.fn()} />);
+    const stops = screen.getAllByRole("radio").filter((el) => el.tabIndex === 0);
+    expect(stops).toHaveLength(1);
+    expect(stops[0]).toHaveAttribute("aria-label", "3 из 5");
+  });
 });
