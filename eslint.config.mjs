@@ -23,6 +23,13 @@ export default tseslint.config(
       parserOptions: { projectService: true, tsconfigRootDir: import.meta.dirname },
     },
   },
+  // Продуктовый код не логирует в консоль: отладочный вывод доезжает до браузера
+  // пользователя. Диагностика ошибок — через обработчик ошибок, не через console.
+  {
+    files: ["src/**/*.{ts,tsx}"],
+    ignores: ["src/**/*.{test,spec,stories}.{ts,tsx}"],
+    rules: { "no-console": "error" },
+  },
   { files: ["**/*.{js,mjs}"], extends: [tseslint.configs.disableTypeChecked] },
   { files: ["tsup.config.ts", "vitest.config.ts"], extends: [tseslint.configs.disableTypeChecked] },
   prettier,
