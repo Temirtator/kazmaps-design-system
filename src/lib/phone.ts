@@ -115,7 +115,7 @@ export function isKazakhstanMobile(value: string): boolean {
 }
 
 function capacity(region: Region): number {
-  return region.mask ? maskDigitCount(region.mask) : E164_MAX_DIGITS;
+  return region.mask ? maskDigitCount(region.mask) : E164_MAX_DIGITS - region.dial.length;
 }
 
 export function normalizeNational(

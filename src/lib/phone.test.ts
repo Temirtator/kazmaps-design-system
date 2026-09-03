@@ -18,6 +18,7 @@ const KZ = findRegion("KZ")!;
 const RU = findRegion("RU")!;
 const UZ = findRegion("UZ")!;
 const US = findRegion("US")!;
+const AE = findRegion("AE")!;
 
 describe("mask helpers", () => {
   it("counts digits incl. literal ones", () => {
@@ -103,6 +104,12 @@ describe("normalizeNational", () => {
   });
   it("caps national at the mask capacity", () => {
     expect(normalizeNational("701234567890", KZ).national).toBe("7012345678");
-    expect(normalizeNational("2125551234567890", US).national).toBe("212555123456789");
+    expect(normalizeNational("2125551234567890", US).national).toBe("21255512345678");
+  });
+  it("caps a 3-digit-dial generic region at E.164 total length and round-trips", () => {
+    const r = normalizeNational("501234567890123456", AE);
+    expect(r.national).toHaveLength(12);
+    expect(isComplete(AE, r.national)).toBe(true);
+    expect(toE164(AE, r.national)).toBe("+971501234567890");
   });
 });
