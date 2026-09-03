@@ -38,8 +38,9 @@
     "format:check": "prettier --check .",
     "test": "vitest run --passWithNoTests",
     "test:watch": "vitest",
-    "test:vrt": "storybook build && playwright test",
-    "test:vrt:update": "storybook build && playwright test --update-snapshots",
+    "test:vrt": "storybook build && playwright test --project=vrt",
+    "test:vrt:update": "storybook build && playwright test --project=vrt --update-snapshots",
+    "test:e2e": "storybook build && playwright test --project=interactions",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "prepublishOnly": "npm run lint && npm run typecheck && npm run test && npm run build",
@@ -52,6 +53,7 @@
   },
   "dependencies": {
     "clsx": "^2.1.1",
+    "react-input-mask-format": "2.2.0",
     "tailwind-merge": "^3.6.0"
   },
   "lint-staged": {
@@ -92,6 +94,7 @@
     "prettier": "^3.9.5",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
+    "react-hook-form": "^7.87.0",
     "storybook": "^10.5.0",
     "tailwindcss": "^4.3.2",
     "tsup": "^8.5.1",

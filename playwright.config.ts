@@ -14,7 +14,10 @@ export default defineConfig({
     deviceScaleFactor: 1,
     contextOptions: { reducedMotion: "reduce" },
   },
-  projects: [{ name: "chromium", use: { browserName: "chromium" } }],
+  projects: [
+    { name: "vrt", use: { browserName: "chromium" }, testMatch: /components\.spec\.ts/ },
+    { name: "interactions", use: { browserName: "chromium" }, testMatch: /interactions\.spec\.ts/ },
+  ],
   webServer: {
     command: "npx http-server storybook-static --port 6006 --silent",
     url: "http://127.0.0.1:6006/iframe.html",
