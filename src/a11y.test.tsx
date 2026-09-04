@@ -124,6 +124,13 @@ describe("axe: no violations", () => {
     await expectNoViolations(container);
   });
 
+  it("PhoneInput with open region picker", async () => {
+    const user = userEvent.setup();
+    const { container } = render(<PhoneInput label="Телефон" />);
+    await user.click(screen.getByRole("button", { name: /Регион/ }));
+    await expectNoViolations(container);
+  });
+
   it("ErrorBoundary fallback", async () => {
     vi.spyOn(console, "error").mockImplementation(() => undefined);
     function Boom(): never {
