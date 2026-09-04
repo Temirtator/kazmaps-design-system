@@ -2,9 +2,13 @@
 
 import { Eye, EyeOff } from "lucide-react";
 import { forwardRef, type InputHTMLAttributes, type ReactNode, useId, useState } from "react";
+import InputMask, { type BeforeMaskedStateChangeFn } from "react-input-mask-format";
 
+import { findRegion } from "../../data/regions";
 import { cn } from "../../lib/cn";
+import { digitsOnly, formatNational } from "../../lib/phone";
 
+/** @deprecated `mask="phone"` заменяется компонентом `PhoneInput`; будет удалён в 0.4.0. */
 export type InputMask = "phone" | "email" | "bin" | "url";
 
 export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
@@ -14,6 +18,7 @@ export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   required?: boolean;
   startIcon?: ReactNode;
   endIcon?: ReactNode;
+  /** @deprecated `mask="phone"` использует прежний движок форматирования; используйте `PhoneInput`. Будет удалён в 0.4.0. */
   mask?: InputMask;
   revealable?: boolean;
   /** Подпись reveal-кнопки в состоянии «пароль скрыт». */
@@ -31,18 +36,6 @@ function normalizeUrl(raw: string): string {
   const v = raw.trim().replace(/\s+/g, "");
   if (!v) return "";
   return /^[a-z][\w+.-]*:\/\//i.test(v) ? v : `https://${v}`;
-}
-
-function formatPhone(raw: string): string {
-  const digits = raw.replace(/\D/g, "");
-  const d = digits.startsWith("7") ? digits.slice(1) : digits;
-  let result = "+7";
-  if (d.length > 0) result += ` (${d.slice(0, 3)}`;
-  if (d.length >= 3) result += `)`;
-  if (d.length > 3) result += ` ${d.slice(3, 6)}`;
-  if (d.length > 6) result += ` ${d.slice(6, 8)}`;
-  if (d.length > 8) result += ` ${d.slice(8, 10)}`;
-  return result;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
@@ -80,11 +73,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     isPassword && revealable ? (revealed ? "text" : "password") : mask === "email" ? "email" : type;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (mask === "phone") {
-      // Note: mutating e.target.value works in React 18 (no event pooling) but is
-      // incompatible with RHF uncontrolled mode — use Controller when mask="phone".
-      e.target.value = formatPhone(e.target.value);
-    } else if (mask === "bin") {
+    if (mask === "bin") {
       e.target.value = formatBin(e.target.value);
     }
     onChange?.(e);
@@ -99,6 +88,60 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     }
     onBlur?.(e);
   };
+
+  const PHONE_MASK = "+7 (799) 999-99-99";
+  const KZ = findRegion("KZ")!;
+  const phoneRules: BeforeMaskedStateChangeFn = ({ previousState, currentState, nextState }) => {
+    const isChange = previousState !== undefined && currentState !== undefined;
+    if (!isChange) {
+      return digitsOnly(nextState.value) === "77" ? { ...nextState, value: "" } : nextState;
+    }
+    const rawDigits = digitsOnly(currentState.value);
+    let digits = rawDigits;
+    if (digits.length === 11 && (digits.startsWith("8") || digits.startsWith("7")))
+      digits = digits.slice(1);
+    if (digits === rawDigits) return nextState;
+    const value = `+7 ${formatNational(KZ, digits.slice(0, 10))}`;
+    return { ...nextState, value, selection: { start: value.length, end: value.length } };
+  };
+
+  const { value, disabled, readOnly, onFocus, onMouseDown, ...restWithoutControlled } = rest;
+
+  const inputClassName = cn(
+    "h-full w-full bg-transparent text-[length:var(--text-sm)] text-[var(--ink)]",
+    "placeholder:text-[var(--muted)] outline-none",
+    "disabled:cursor-not-allowed disabled:opacity-50",
+    startIcon && "pl-6",
+    (endIcon ?? (isPassword && revealable)) && "pr-6",
+    className,
+  );
+
+  const inputEl =
+    mask === "phone" ? (
+      <input
+        id={id}
+        type="tel"
+        inputMode="tel"
+        required={required}
+        aria-describedby={hasDesc ? descId : undefined}
+        aria-invalid={hasError || undefined}
+        className={inputClassName}
+        {...restWithoutControlled}
+      />
+    ) : (
+      <input
+        ref={ref}
+        id={id}
+        type={resolvedType}
+        required={required}
+        aria-describedby={hasDesc ? descId : undefined}
+        aria-invalid={hasError || undefined}
+        onChange={mask ? handleChange : onChange}
+        onBlur={mask === "url" ? handleBlur : onBlur}
+        className={inputClassName}
+        {...rest}
+      />
+    );
 
   return (
     <div className="flex flex-col gap-1">
@@ -135,25 +178,25 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
           </span>
         )}
 
-        <input
-          ref={ref}
-          id={id}
-          type={resolvedType}
-          required={required}
-          aria-describedby={hasDesc ? descId : undefined}
-          aria-invalid={hasError || undefined}
-          onChange={mask ? handleChange : onChange}
-          onBlur={mask === "url" ? handleBlur : onBlur}
-          className={cn(
-            "h-full w-full bg-transparent text-[length:var(--text-sm)] text-[var(--ink)]",
-            "placeholder:text-[var(--muted)] outline-none",
-            "disabled:cursor-not-allowed disabled:opacity-50",
-            startIcon && "pl-6",
-            (endIcon ?? (isPassword && revealable)) && "pr-6",
-            className,
-          )}
-          {...rest}
-        />
+        {mask === "phone" ? (
+          <InputMask
+            ref={ref}
+            mask={PHONE_MASK}
+            maskPlaceholder="_"
+            value={value}
+            onChange={onChange}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            onMouseDown={onMouseDown}
+            disabled={disabled}
+            readOnly={readOnly}
+            beforeMaskedStateChange={phoneRules}
+          >
+            {inputEl}
+          </InputMask>
+        ) : (
+          inputEl
+        )}
 
         {isPassword && revealable ? (
           <button
