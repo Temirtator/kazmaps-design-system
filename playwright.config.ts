@@ -16,7 +16,11 @@ export default defineConfig({
   },
   projects: [
     { name: "vrt", use: { browserName: "chromium" }, testMatch: /components\.spec\.ts/ },
-    { name: "interactions", use: { browserName: "chromium" }, testMatch: /interactions\.spec\.ts/ },
+    {
+      name: "interactions",
+      use: { browserName: "chromium", permissions: ["clipboard-read", "clipboard-write"] },
+      testMatch: /interactions\.spec\.ts/,
+    },
   ],
   webServer: {
     command: "npx http-server storybook-static --port 6006 --silent",
