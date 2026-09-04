@@ -6,7 +6,7 @@ import InputMask, { type BeforeMaskedStateChangeFn } from "react-input-mask-form
 
 import { findRegion } from "../../data/regions";
 import { cn } from "../../lib/cn";
-import { digitsOnly, formatNational } from "../../lib/phone";
+import { digitsOnly, formatNational, literalDigits, maskFor } from "../../lib/phone";
 
 /** @deprecated `mask="phone"` заменяется компонентом `PhoneInput`; будет удалён в 0.4.0. */
 export type InputMask = "phone" | "email" | "bin" | "url";
@@ -37,6 +37,26 @@ function normalizeUrl(raw: string): string {
   if (!v) return "";
   return /^[a-z][\w+.-]*:\/\//i.test(v) ? v : `https://${v}`;
 }
+
+const KZ = findRegion("KZ")!;
+const PHONE_MASK = `+${KZ.dial} ${maskFor(KZ)}`;
+const PHONE_EMPTY_SIGNATURE = KZ.dial + literalDigits(maskFor(KZ));
+
+const phoneRules: BeforeMaskedStateChangeFn = ({ previousState, currentState, nextState }) => {
+  const isChange = previousState !== undefined && currentState !== undefined;
+  if (!isChange) {
+    return digitsOnly(nextState.value) === PHONE_EMPTY_SIGNATURE
+      ? { ...nextState, value: "" }
+      : nextState;
+  }
+  const rawDigits = digitsOnly(currentState.value);
+  let digits = rawDigits;
+  if (digits.length === 11 && (digits.startsWith("8") || digits.startsWith("7")))
+    digits = digits.slice(1);
+  if (digits === rawDigits) return nextState;
+  const value = `+7 ${formatNational(KZ, digits.slice(0, 10))}`;
+  return { ...nextState, value, selection: { start: value.length, end: value.length } };
+};
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   {
@@ -87,22 +107,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
       onChange?.(e);
     }
     onBlur?.(e);
-  };
-
-  const PHONE_MASK = "+7 (799) 999-99-99";
-  const KZ = findRegion("KZ")!;
-  const phoneRules: BeforeMaskedStateChangeFn = ({ previousState, currentState, nextState }) => {
-    const isChange = previousState !== undefined && currentState !== undefined;
-    if (!isChange) {
-      return digitsOnly(nextState.value) === "77" ? { ...nextState, value: "" } : nextState;
-    }
-    const rawDigits = digitsOnly(currentState.value);
-    let digits = rawDigits;
-    if (digits.length === 11 && (digits.startsWith("8") || digits.startsWith("7")))
-      digits = digits.slice(1);
-    if (digits === rawDigits) return nextState;
-    const value = `+7 ${formatNational(KZ, digits.slice(0, 10))}`;
-    return { ...nextState, value, selection: { start: value.length, end: value.length } };
   };
 
   const { value, disabled, readOnly, onFocus, onMouseDown, ...restWithoutControlled } = rest;

@@ -63,13 +63,14 @@ function regionForPlusSeven(national: string): Region {
   return findRegion(iso)!;
 }
 
+const REGIONS_BY_DIAL_LENGTH_DESC = [...REGIONS].sort((a, b) => b.dial.length - a.dial.length);
+
 export function parseE164(value: string): { region: Region; national: string } | null {
   const trimmed = value.trim();
   if (!trimmed.startsWith("+")) return null;
   const digits = digitsOnly(trimmed);
   if (digits.length < E164_MIN_DIGITS) return null;
-  const candidates = [...REGIONS].sort((a, b) => b.dial.length - a.dial.length);
-  const match = candidates.find((r) => digits.startsWith(r.dial));
+  const match = REGIONS_BY_DIAL_LENGTH_DESC.find((r) => digits.startsWith(r.dial));
   if (!match) return null;
   const national = digits.slice(match.dial.length);
   const region =

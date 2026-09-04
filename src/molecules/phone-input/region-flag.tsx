@@ -5,12 +5,8 @@ type Paint = { fill: string; x?: number; y?: number; w?: number; h?: number };
 const H = 24;
 const W = 36;
 
-const stripes = (colors: string[], vertical = false): Paint[] =>
-  colors.map((fill, i) =>
-    vertical
-      ? { fill, x: (W / colors.length) * i, y: 0, w: W / colors.length, h: H }
-      : { fill, x: 0, y: (H / colors.length) * i, w: W, h: H / colors.length },
-  );
+const stripes = (colors: string[]): Paint[] =>
+  colors.map((fill, i) => ({ fill, x: 0, y: (H / colors.length) * i, w: W, h: H / colors.length }));
 
 const FLAGS: Record<string, Paint[]> = {
   KZ: [{ fill: "#00AFCA" }, { fill: "#FEC50C", x: 13, y: 7, w: 10, h: 10 }],
