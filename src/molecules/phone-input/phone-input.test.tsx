@@ -189,4 +189,27 @@ describe("PhoneInput", () => {
     await user.click(screen.getByRole("button", { name: /Region/ }));
     expect(screen.getAllByRole("option")).toHaveLength(2);
   });
+
+  it("keeps the typed digits when the already selected region is picked again", async () => {
+    const onChange = vi.fn();
+    const user = userEvent.setup();
+    render(<PhoneInput label="Телефон" onChange={onChange} />);
+    await user.type(screen.getByLabelText("Телефон"), "701");
+    await user.click(screen.getByRole("button", { name: /Регион/ }));
+    await user.click(screen.getByRole("option", { name: /Казахстан/ }));
+    expect(screen.queryByRole("listbox")).not.toBeInTheDocument();
+    expect(screen.getByLabelText("Телефон")).toHaveFocus();
+    expect(screen.getByLabelText("Телефон")).toHaveValue("(701) ___-__-__");
+    expect(last(onChange).national).toBe("701");
+  });
+
+  it("closes an open picker when the trigger is clicked again", async () => {
+    const user = userEvent.setup();
+    render(<PhoneInput label="Телефон" />);
+    const trigger = screen.getByRole("button", { name: /Регион/ });
+    await user.click(trigger);
+    expect(screen.getByRole("listbox")).toBeInTheDocument();
+    await user.click(trigger);
+    expect(screen.queryByRole("listbox")).not.toBeInTheDocument();
+  });
 });

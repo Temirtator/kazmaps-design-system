@@ -203,7 +203,7 @@ export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(function
 
   function selectRegion(next: Region) {
     setOpen(false);
-    emit({ region: next, national: "" });
+    if (next.iso !== stateRef.current.region.iso) emit({ region: next, national: "" });
     inputRef.current?.focus();
   }
 
@@ -258,6 +258,9 @@ export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(function
             aria-controls={open ? `${pickerId}-list` : undefined}
             aria-label={`${labels.region}: ${locale === "en" ? region.nameEn : region.name}`}
             title={locale === "en" ? region.nameEn : region.name}
+            onMouseDown={(e) => {
+              if (open) e.preventDefault();
+            }}
             onClick={() => setOpen((v) => !v)}
             onKeyDown={(e) => {
               if (e.key === "ArrowDown") {
