@@ -203,6 +203,19 @@ describe("PhoneInput", () => {
     expect(last(onChange).national).toBe("701");
   });
 
+  it("puts the caret at the edit position when a mid-string edit is renormalized", async () => {
+    const user = userEvent.setup();
+    render(<PhoneInput label="Телефон" />);
+    const input = screen.getByLabelText<HTMLInputElement>("Телефон");
+    await user.type(input, "7012345678");
+    input.setSelectionRange(2, 2);
+    await user.keyboard("{Delete}");
+    expect(input).toHaveValue("(712) 345-67-8_");
+    await user.keyboard("0");
+    expect(input).toHaveValue("(701) 234-56-78");
+    expect(input.selectionStart).toBe(3);
+  });
+
   it("closes an open picker when the trigger is clicked again", async () => {
     const user = userEvent.setup();
     render(<PhoneInput label="Телефон" />);

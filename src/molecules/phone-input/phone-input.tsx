@@ -81,6 +81,19 @@ function buildValue(region: Region, national: string): PhoneValue {
   };
 }
 
+function caretAfterDigits(display: string, count: number): number {
+  if (count <= 0) return 0;
+  let seen = 0;
+  for (let i = 0; i < display.length; i += 1) {
+    const code = display.charCodeAt(i);
+    if (code >= 48 && code <= 57) {
+      seen += 1;
+      if (seen === count) return i + 1;
+    }
+  }
+  return display.length;
+}
+
 function seed(value: string | undefined, defaultRegion: string): PhoneState {
   const fallback = findRegion(defaultRegion) ?? findRegion(DEFAULT_REGION)!;
   if (!value) return { region: fallback, national: "" };
@@ -178,8 +191,13 @@ export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(function
       const display = formatNational(normalized.region, normalized.national);
       const settled = digitsOnly(display);
       if (normalized.region.iso !== current.iso || settled !== digitsOnly(nextState.value)) {
+        const edit = currentState.selection.start ?? currentState.value.length;
+        const caret = caretAfterDigits(
+          display,
+          digitsOnly(currentState.value.slice(0, edit)).length,
+        );
         pending.current = { region: normalized.region, national: settled };
-        return { value: display, selection: { start: display.length, end: display.length } };
+        return { value: display, selection: { start: caret, end: caret } };
       }
       return nextState;
     }
