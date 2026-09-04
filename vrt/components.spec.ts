@@ -12,6 +12,8 @@ const STORIES = [
   { id: "atoms-toggle--interactive", name: "toggle-off" },
   { id: "molecules-errorboundary--caught", name: "error-boundary-fallback" },
   { id: "molecules-formfield--with-error", name: "form-field-error" },
+  { id: "molecules-phoneinput--states", name: "phone-input-states" },
+  { id: "molecules-phoneinput--sizes", name: "phone-input-sizes" },
   { id: "molecules-searchinput--interactive", name: "search-input" },
   { id: "molecules-segmentedcontrol--interactive", name: "segmented-control" },
   { id: "molecules-starrating--display", name: "star-rating-display" },
@@ -52,5 +54,15 @@ for (const theme of THEMES) {
     await page.keyboard.press("ArrowDown");
     await expect(page.getByRole("listbox")).toBeVisible();
     await expect(page).toHaveScreenshot(`select-open-${theme}.png`, { fullPage: true });
+  });
+
+  test(`phone-input-picker-open — ${theme}`, async ({ page }) => {
+    await openStory(page, "molecules-phoneinput--states", theme);
+    await page
+      .getByRole("button", { name: /Регион/ })
+      .first()
+      .click();
+    await expect(page.getByRole("listbox")).toBeVisible();
+    await expect(page).toHaveScreenshot(`phone-input-picker-open-${theme}.png`, { fullPage: true });
   });
 }

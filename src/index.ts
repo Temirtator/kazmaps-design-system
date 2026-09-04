@@ -25,3 +25,14 @@ export * from "./molecules/star-rating";
 export * from "./molecules/theme-toggle";
 export * from "./molecules/tabs";
 export * from "./molecules/error-boundary";
+export * from "./molecules/phone-input";
+
+export {
+  DEFAULT_REGION,
+  findRegion,
+  REGIONS,
+  type Region,
+  type RegionCode,
+  type RegionGroup,
+} from "./data/regions";
+export { formatE164, isKazakhstanMobile, parseE164, toE164 } from "./lib/phone";

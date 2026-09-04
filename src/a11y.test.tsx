@@ -16,6 +16,7 @@ import {
   FormField,
   Heading,
   Input,
+  PhoneInput,
   SearchInput,
   SegmentedControl,
   Select,
@@ -56,6 +57,8 @@ const CASES: [string, ReactElement][] = [
   ["Checkbox", <Checkbox key="k" label="Согласен" />],
   ["Toggle", <Toggle key="k" checked onChange={noop} label="Уведомления" />],
   ["Select", <Select key="k" label="Город" options={[{ value: "a", label: "Алматы" }]} />],
+  ["PhoneInput", <PhoneInput key="k" label="Телефон" hint="Код придёт в WhatsApp" />],
+  ["PhoneInput error", <PhoneInput key="k" label="Телефон" error="Введите номер полностью" />],
   [
     "FormField",
     <FormField key="k" label="Поле" errorMessage="Ошибка">
