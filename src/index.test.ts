@@ -26,6 +26,13 @@ const EXPECTED = [
   "ThemeToggle",
   "Tabs",
   "ErrorBoundary",
+  "PhoneInput",
+  "REGIONS",
+  "findRegion",
+  "toE164",
+  "parseE164",
+  "formatE164",
+  "isKazakhstanMobile",
 ];
 
 describe("public API", () => {
