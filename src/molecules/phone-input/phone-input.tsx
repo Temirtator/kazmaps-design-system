@@ -13,7 +13,13 @@ import {
 } from "react";
 import InputMask, { type BeforeMaskedStateChangeFn } from "react-input-mask-format";
 
-import { DEFAULT_REGION, findRegion, REGIONS, type Region } from "../../data/regions";
+import {
+  DEFAULT_REGION,
+  findRegion,
+  REGIONS,
+  type Region,
+  type RegionCode,
+} from "../../data/regions";
 import { cn } from "../../lib/cn";
 import {
   digitsOnly,
@@ -36,7 +42,7 @@ import {
 
 export interface PhoneValue {
   e164: string;
-  region: string;
+  region: RegionCode;
   national: string;
   complete: boolean;
 }
@@ -44,12 +50,12 @@ export interface PhoneValue {
 export interface PhoneInputProps {
   value?: string;
   defaultValue?: string;
-  defaultRegion?: string;
+  defaultRegion?: RegionCode;
   onChange?: (value: PhoneValue) => void;
-  onRegionChange?: (region: string) => void;
+  onRegionChange?: (region: RegionCode) => void;
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
-  regions?: string[];
+  regions?: RegionCode[];
   locale?: "ru" | "en";
   size?: "md" | "lg";
   label?: string;
@@ -75,7 +81,7 @@ function buildValue(region: Region, national: string): PhoneValue {
   const clean = isEmptyNational(region, national) ? "" : national;
   return {
     e164: toE164(region, clean),
-    region: region.iso,
+    region: region.iso as RegionCode,
     national: clean,
     complete: isComplete(region, clean),
   };
@@ -171,7 +177,7 @@ export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(function
       const v = buildValue(next.region, next.national);
       lastEmitted.current = v.e164;
       onChange?.(v);
-      if (regionChanged) onRegionChange?.(next.region.iso);
+      if (regionChanged) onRegionChange?.(next.region.iso as RegionCode);
     },
     [onChange, onRegionChange],
   );
