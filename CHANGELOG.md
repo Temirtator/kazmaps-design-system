@@ -3,7 +3,27 @@
 All notable changes to `@temirtator/kazmaps-design-system` are documented here.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning: semver.
 
-## [Unreleased]
+## [0.3.0] — 2026-09-04
+
+### Added
+
+- PhoneInput: телефон с выбором региона (флаг + код страны внутри поля), маской под регион и
+  E.164 наружу (`{ e164, region, national, complete }`). Все страны в пикере с поиском; точные
+  маски для KZ, RU, KG, UZ, TJ, TM, AZ, AM, BY, GE; остальным — цифры группами и проверка длины.
+  Пустое поле остаётся пустым на фокусе ради автозаполнения; ведущие `8`/`7`/`+7` нормализуются;
+  вставленный `+код` переключает регион. Размеры `md`/`lg`, `labels`/`locale` для i18n.
+- Данные `REGIONS`/`findRegion` и хелперы `toE164`, `parseE164`, `formatE164`, `isKazakhstanMobile`.
+- Playwright-контур интеракций в реальном Chromium поверх Storybook (`npm run test:e2e`).
+
+### Changed
+
+- Input `mask="phone"` переведён на `react-input-mask-format`: формат теперь
+  `+7 (7__) ___-__-__` (дефисы, постоянная `7`), вставка `8 701…` нормализуется. Контракт
+  `onChange(event)` прежний.
+
+### Deprecated
+
+- Input `mask="phone"` и тип `InputMask` — используйте `PhoneInput`; удаление в 0.4.0.
 
 ## [0.2.2] — 2026-07-28
 
