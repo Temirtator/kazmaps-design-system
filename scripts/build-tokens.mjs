@@ -127,6 +127,12 @@ export function tokensMd({ schema, brands }) {
       if (def.$description)
         lines.push(`- ${b.brand} \`--${role}\` = \`${def.$value}\` — ${def.$description}`);
     }
+    for (const t of schema.themes) {
+      for (const [role, def] of Object.entries(b.extras?.[t] ?? {})) {
+        if (def.$description)
+          lines.push(`- ${b.brand} ${t} \`--${role}\` = \`${def.$value}\` — ${def.$description}`);
+      }
+    }
   }
   lines.push(
     "",

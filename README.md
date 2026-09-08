@@ -25,6 +25,7 @@ npm i @temirtator/kazmaps-design-system lucide-react
 ```css
 @import "tailwindcss";
 @import "@temirtator/kazmaps-design-system/styles/core.css";
+@import "@temirtator/kazmaps-design-system/styles/theme.css";
 @import "@temirtator/kazmaps-design-system/styles/brands/business.css";
 
 @source "../node_modules/@temirtator/kazmaps-design-system/dist";
@@ -35,12 +36,13 @@ npm i @temirtator/kazmaps-design-system lucide-react
 ```css
 @import "tailwindcss";
 @import "@temirtator/kazmaps-design-system/styles/core.css";
+@import "@temirtator/kazmaps-design-system/styles/theme.css";
 @import "@temirtator/kazmaps-design-system/styles/brands/business.css";
 
 @source "../../node_modules/@temirtator/kazmaps-design-system/dist";
 ```
 
-**Примечание:** выберите один из двух файлов бренда: `business.css` или `booking.css`. Это определяет палитру цветов, радиусы и типографию для данного приложения.
+**Примечание:** выберите один файл бренда: `business.css`, `booking.css` или `maps.css`. `theme.css` даёт утилиты Tailwind `bg-surface-panel`, `text-text-muted`, `border-border-input` для всех цветовых ролей контракта; подключение необязательно, если вы пишете `bg-(--surface-panel)`.
 
 ### 2. Установка атрибутов на корневой элемент
 
@@ -58,8 +60,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
 **Атрибуты:**
 
-- `data-brand`: `business` | `booking` — определяет используемый бренд и его палитру.
-- `data-theme`: `light` | `dark` (или отсутствует) — переключает тему. По умолчанию (при отсутствии атрибута) используется тёмная тема.
+- `data-brand`: `business` | `booking` | `maps`.
+- `data-theme`: `light` | `dark`. Без атрибута business и booking показывают тёмную тему; maps — светлую и следует `prefers-color-scheme`.
 
 ### 3. Импорт компонентов
 
@@ -195,8 +197,8 @@ import { PhoneInput } from "@temirtator/kazmaps-design-system";
 
 **Контракт токенов:**
 
-- Core tokens (`dist/styles/core.css` внутри установленного пакета) — значения по умолчанию для обеих тем.
-- Brand tokens (`dist/styles/brands/{business,booking}.css`) — переопределение палитры, радиусов и шрифтов для каждого бренда.
+- Источник истины — `tokens/schema.json`, `tokens/core.json`, `tokens/brands/*.json`; CSS генерируется (`npm run tokens:build`), таблица значений — `docs/tokens.md`.
+- Канон имён v2: `--surface-*`, `--text-*`, `--border*`, `--accent*`, `--success|warning|danger|info` и `*-soft-bg`, `--radius-*`, `--shadow-*`, `--font-sans`. Старые имена (`--ink`, `--bg`, `--line`, `--brand`, `--warn`, `*-soft`) — алиасы, удаляются в 1.0.0.
 
 Полный список токенов и их значения также доступны в Storybook на странице **Foundations → Tokens**.
 
@@ -205,12 +207,9 @@ import { PhoneInput } from "@temirtator/kazmaps-design-system";
 Тема контролируется атрибутом `data-theme` на элементе `<html>`:
 
 ```tsx
-// Светлая тема
 <html data-theme="light">
-
-// Тёмная тема (по умолчанию, атрибут можно опустить)
 <html data-theme="dark">
-<html> {/* тоже тёмная */}
+<html> {/* business, booking: тёмная; maps: светлая или системная */}
 ```
 
 ### Переключение бренда
@@ -221,7 +220,7 @@ import { PhoneInput } from "@temirtator/kazmaps-design-system";
 <html data-brand="business" data-theme="light">
 ```
 
-Значения: `business` или `booking`.
+Значения: `business`, `booking` или `maps`.
 
 ### Переопределение токенов в приложении
 
