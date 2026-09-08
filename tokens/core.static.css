@@ -35,12 +35,10 @@
   }
 }
 
-/* dropdown / popover entry */
 .animate-scale-in {
   animation: scale-in var(--dur-base) var(--ease-spring) both;
 }
 
-/* page / route transition */
 .page-enter {
   animation: page-enter 280ms var(--ease-reveal) both;
 }
@@ -54,12 +52,10 @@
   }
 }
 
-/* skeleton shimmer — use with bg-gradient-to-r bg-[length:200%_100%] */
 .animate-shimmer {
   animation: shimmer 1.6s ease-in-out infinite;
 }
 
-/* stagger list — add .stagger-list to container; children get staggered reveal-rise */
 .stagger-list > * {
   animation: reveal-rise var(--dur-slow) var(--ease-reveal) both;
 }

@@ -16,8 +16,9 @@ export function loadSources() {
   const brands = BRANDS.flatMap((name) => {
     try {
       return [readJson(`tokens/brands/${name}.json`)];
-    } catch {
-      return [];
+    } catch (error) {
+      if (error.code === "ENOENT") return [];
+      throw error;
     }
   });
   return { schema, core, brands };
