@@ -30,13 +30,6 @@
   --shadow-sm: rgba(16, 24, 40, 0.08) 0px 1px 3px 0px;
   --shadow-md: rgba(16, 24, 40, 0.22) 0px 12px 32px 0px;
   --shadow-lg: rgba(16, 24, 40, 0.28) 0px 18px 48px 0px;
-  --surface-map: #e9ece4;
-  --text-on-map: #22272e;
-  --rating-star: #f2a615;
-  --marker-primary: #e0442f;
-  --border-state-card: #e4e7ec;
-  --gold: #f2a615;
-  --gold-soft: #fdf3e6;
   --bg: var(--surface-base);
   --card: var(--surface-panel);
   --bg-2: var(--surface-raised);
@@ -54,6 +47,13 @@
   --warn-soft: var(--warning-soft-bg);
   --danger-soft: var(--danger-soft-bg);
   --info-soft: var(--info-soft-bg);
+  --surface-map: #e9ece4;
+  --text-on-map: #22272e;
+  --rating-star: #f2a615;
+  --marker-primary: #e0442f;
+  --border-state-card: #e4e7ec;
+  --gold: #f2a615;
+  --gold-soft: #fdf3e6;
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;

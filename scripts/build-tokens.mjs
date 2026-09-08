@@ -15,7 +15,10 @@ export function loadSources() {
   const core = readJson("tokens/core.json");
   const brands = BRANDS.flatMap((name) => {
     try {
-      return [readJson(`tokens/brands/${name}.json`)];
+      const brand = readJson(`tokens/brands/${name}.json`);
+      if (brand.brand !== name)
+        throw new Error(`tokens/brands/${name}.json declares brand ${brand.brand}`);
+      return [brand];
     } catch (error) {
       if (error.code === "ENOENT") return [];
       throw error;
@@ -41,10 +44,13 @@ function themeLines(schema, brand, theme) {
 }
 
 function baseLines(schema, brand) {
-  const aliases = Object.entries(schema.aliases).map(([old, canon]) =>
+  const vars = brand.themes[brand.defaultTheme];
+  const canonLines = themedRoles(schema).map((r) => line(r, vars[r].$value));
+  const aliasLines = Object.entries(schema.aliases).map(([old, canon]) =>
     line(old, `var(--${canon})`),
   );
-  return [...themeLines(schema, brand, brand.defaultTheme), ...aliases, ...entries(brand.static)];
+  const extraLines = entries(brand.extras?.[brand.defaultTheme]);
+  return [...canonLines, ...aliasLines, ...extraLines, ...entries(brand.static)];
 }
 
 export function brandCss(schema, brand) {
@@ -160,7 +166,10 @@ export function build({ outStyles = "src/styles", outDocs = "docs" } = {}) {
     write(`${outStyles}/brands/${brand.brand}.css`, brandCss(src.schema, brand));
   write(`${outStyles}/theme.css`, themeCss(src.schema));
   write(`${outDocs}/tokens.md`, tokensMd(src));
-  execFileSync("npx", ["prettier", "--write", ...written], { cwd: ROOT, stdio: "ignore" });
+  execFileSync("npx", ["--no-install", "prettier", "--write", ...written], {
+    cwd: ROOT,
+    stdio: "ignore",
+  });
   return written;
 }
 

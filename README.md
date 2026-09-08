@@ -197,7 +197,8 @@ import { PhoneInput } from "@temirtator/kazmaps-design-system";
 
 **Контракт токенов:**
 
-- Источник истины — `tokens/schema.json`, `tokens/core.json`, `tokens/brands/*.json`; CSS генерируется (`npm run tokens:build`), таблица значений — `docs/tokens.md`.
+- В установленном пакете: `dist/styles/core.css` (тип-шкала, spacing, motion), `dist/styles/theme.css` (Tailwind `@theme`, утилиты `bg-surface-panel`, `text-text-muted`, `border-border-input`), `dist/styles/brands/{business,booking,maps}.css` (палитра, радиусы, тени, шрифт по бренду и теме).
+- В репозитории DS источник истины — `tokens/schema.json`, `tokens/core.json`, `tokens/brands/*.json`; CSS генерируется `npm run tokens:build`, таблица значений — `docs/tokens.md` (в пакет не входит).
 - Канон имён v2: `--surface-*`, `--text-*`, `--border*`, `--accent*`, `--success|warning|danger|info` и `*-soft-bg`, `--radius-*`, `--shadow-*`, `--font-sans`. Старые имена (`--ink`, `--bg`, `--line`, `--brand`, `--warn`, `*-soft`) — алиасы, удаляются в 1.0.0.
 
 Полный список токенов и их значения также доступны в Storybook на странице **Foundations → Tokens**.
@@ -221,6 +222,8 @@ import { PhoneInput } from "@temirtator/kazmaps-design-system";
 ```
 
 Значения: `business`, `booking` или `maps`.
+
+`data-brand` и `data-theme` ставятся на `<html>`: `theme.css` объявляет `--color-*` на `:root`, поэтому при атрибуте на любом другом элементе утилиты `bg-surface-panel` перестанут находить значения, а `bg-(--surface-panel)` продолжит работать.
 
 ### Переопределение токенов в приложении
 

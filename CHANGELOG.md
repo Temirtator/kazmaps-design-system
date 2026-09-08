@@ -12,7 +12,8 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning: se
 - Источник истины токенов — `tokens/schema.json`, `tokens/core.json`, `tokens/brands/*.json`
   (W3C DTCG, литералы). CSS генерируется `npm run tokens:build`, дрейф ловит `npm run tokens:check`.
 - `styles/theme.css` — Tailwind `@theme` с `--color-<роль>` для всех цветовых ролей контракта.
-- `docs/tokens.md` — таблица значений по брендам и темам, список ролей, ожидающих дизайнера.
+- `docs/tokens.md` — таблица значений по брендам и темам, список ролей и расширений брендов,
+  ожидающих значения от дизайнера.
 - Storybook: бренд `maps` в тулбаре, страница Foundations → Tokens читает JSON.
 - Бренд `maps` также объявляет расширения `--gold` и `--gold-soft`: их читают Button и StarRating;
   в C2 пара становится ролью контракта.
@@ -29,7 +30,6 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning: se
   `#00000080` до значения от дизайнера.
 - Шкала `--brand-50…700` и `--gold*` — расширения брендов business/booking, не часть контракта.
 - Удаление `Input mask="phone"` перенесено с 0.4.0 на 0.5.0.
-- `docs/tokens.md` перечисляет и расширения брендов с пометкой «ожидает значения от дизайнера».
 
 ### Deprecated
 
