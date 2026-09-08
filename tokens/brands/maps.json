@@ -128,14 +128,26 @@
       "text-on-map": { "$type": "color", "$value": "#22272e" },
       "rating-star": { "$type": "color", "$value": "#f2a615" },
       "marker-primary": { "$type": "color", "$value": "#e0442f" },
-      "border-state-card": { "$type": "color", "$value": "#e4e7ec" }
+      "border-state-card": { "$type": "color", "$value": "#e4e7ec" },
+      "gold": { "$type": "color", "$value": "#f2a615" },
+      "gold-soft": {
+        "$type": "color",
+        "$value": "#fdf3e6",
+        "$description": "ожидает значения от дизайнера"
+      }
     },
     "dark": {
       "surface-map": { "$type": "color", "$value": "#0a0e18" },
       "text-on-map": { "$type": "color", "$value": "#22272e" },
       "rating-star": { "$type": "color", "$value": "#f2a615" },
       "marker-primary": { "$type": "color", "$value": "#e0442f" },
-      "border-state-card": { "$type": "color", "$value": "#1e2a44" }
+      "border-state-card": { "$type": "color", "$value": "#1e2a44" },
+      "gold": { "$type": "color", "$value": "#f2a615" },
+      "gold-soft": {
+        "$type": "color",
+        "$value": "#141d31",
+        "$description": "ожидает значения от дизайнера"
+      }
     }
   }
 }

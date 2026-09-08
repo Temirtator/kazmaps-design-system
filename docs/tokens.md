@@ -71,7 +71,7 @@
 
 - business: `--brand-50`, `--brand-100`, `--brand-200`, `--brand-300`, `--brand-400`, `--brand-500`, `--brand-600`, `--brand-700`, `--gold`, `--gold-press`, `--gold-soft`
 - booking: `--brand-50`, `--brand-100`, `--brand-200`, `--brand-300`, `--brand-400`, `--brand-500`, `--brand-600`, `--brand-700`, `--gold`, `--gold-press`, `--gold-soft`
-- maps: `--surface-map`, `--text-on-map`, `--rating-star`, `--marker-primary`, `--border-state-card`
+- maps: `--surface-map`, `--text-on-map`, `--rating-star`, `--marker-primary`, `--border-state-card`, `--gold`, `--gold-soft`
 
 ## Ожидает значения от дизайнера
 

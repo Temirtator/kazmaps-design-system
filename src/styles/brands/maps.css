@@ -35,6 +35,8 @@
   --rating-star: #f2a615;
   --marker-primary: #e0442f;
   --border-state-card: #e4e7ec;
+  --gold: #f2a615;
+  --gold-soft: #fdf3e6;
   --bg: var(--surface-base);
   --card: var(--surface-panel);
   --bg-2: var(--surface-raised);
@@ -95,6 +97,8 @@
   --rating-star: #f2a615;
   --marker-primary: #e0442f;
   --border-state-card: #e4e7ec;
+  --gold: #f2a615;
+  --gold-soft: #fdf3e6;
 }
 
 [data-brand="maps"][data-theme="dark"] {
@@ -133,6 +137,8 @@
   --rating-star: #f2a615;
   --marker-primary: #e0442f;
   --border-state-card: #1e2a44;
+  --gold: #f2a615;
+  --gold-soft: #141d31;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -172,5 +178,7 @@
     --rating-star: #f2a615;
     --marker-primary: #e0442f;
     --border-state-card: #1e2a44;
+    --gold: #f2a615;
+    --gold-soft: #141d31;
   }
 }
