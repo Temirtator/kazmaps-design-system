@@ -6,7 +6,7 @@ const preview: Preview = {
   globalTypes: {
     brand: {
       description: "Brand preset",
-      toolbar: { title: "Brand", items: ["business", "booking"], dynamicTitle: true },
+      toolbar: { title: "Brand", items: ["business", "booking", "maps"], dynamicTitle: true },
     },
     theme: {
       description: "Color theme",

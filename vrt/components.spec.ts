@@ -23,8 +23,8 @@ const STORIES = [
 
 const THEMES = ["dark", "light"] as const;
 
-async function openStory(page: Page, id: string, theme: string): Promise<void> {
-  await page.goto(`/iframe.html?viewMode=story&id=${id}&globals=brand:business;theme:${theme}`);
+async function openStory(page: Page, id: string, theme: string, brand = "business"): Promise<void> {
+  await page.goto(`/iframe.html?viewMode=story&id=${id}&globals=brand:${brand};theme:${theme}`);
   await expect(page.locator("#storybook-root > *").first()).toBeVisible();
 }
 
@@ -65,4 +65,13 @@ for (const theme of THEMES) {
     await expect(page.getByRole("listbox")).toBeVisible();
     await expect(page).toHaveScreenshot(`phone-input-picker-open-${theme}.png`, { fullPage: true });
   });
+}
+
+for (const story of STORIES) {
+  for (const theme of THEMES) {
+    test(`maps ${story.name} — ${theme}`, async ({ page }) => {
+      await openStory(page, story.id, theme, "maps");
+      await expect(page).toHaveScreenshot(`maps-${story.name}-${theme}.png`, { fullPage: true });
+    });
+  }
 }
