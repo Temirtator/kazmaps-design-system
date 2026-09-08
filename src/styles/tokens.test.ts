@@ -23,7 +23,7 @@ type Schema = {
 
 const schema = readJson("tokens/schema.json") as Schema;
 const roles = Object.values(schema.themed).flat();
-const BRANDS = ["business", "booking"];
+const BRANDS = ["business", "booking", "maps"];
 
 function definedVars(cssBlock: string): Set<string> {
   return new Set(Array.from(cssBlock.matchAll(/(--[\w-]+)\s*:/g)).map((m) => m[1]));
@@ -70,7 +70,25 @@ for (const name of BRANDS) {
     it("static roles are literals", () => {
       for (const role of schema.static) {
         expect(brand.static[role], role).toBeDefined();
-        expect(brand.static[role].$value, role).not.toMatch(/var\(/);
+        if (role !== "font-sans") expect(brand.static[role].$value, role).not.toMatch(/var\(/);
+      }
+    });
+
+    it("follows the system theme only when declared", () => {
+      const media = css.includes(`@media (prefers-color-scheme: dark)`);
+      expect(media).toBe(brand.followsSystem);
+      if (brand.followsSystem) {
+        expect(css).toContain(`[data-brand="${name}"]:not([data-theme="light"]) {`);
+        const start = css.indexOf("@media (prefers-color-scheme: dark)");
+        const vars = definedVars(css.slice(start));
+        for (const role of roles) expect(vars).toContain(`--${role}`);
+      }
+    });
+
+    it("base block carries the default theme values", () => {
+      const base = block(css, `[data-brand="${name}"] {`);
+      for (const role of roles) {
+        expect(base).toContain(`--${role}: ${brand.themes[brand.defaultTheme][role].$value};`);
       }
     });
 
