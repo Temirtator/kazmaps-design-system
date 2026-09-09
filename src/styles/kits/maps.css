@@ -1,0 +1,56 @@
+/* Утилиты и keyframes, которые читают компоненты входа /maps.
+   Значения таймингов и теней — в brands/maps.css (кит-статики бренда). */
+@layer utilities {
+  .transition-interactive {
+    transition-property:
+      background-color, border-color, color, box-shadow, transform, scale, opacity;
+    transition-duration: var(--motion-fast);
+    transition-timing-function: var(--ease-standard);
+  }
+  .transition-surface {
+    transition-property: background-color, color, border-color;
+    transition-duration: var(--motion-panel);
+    transition-timing-function: var(--ease-standard);
+  }
+  .animate-modal-in {
+    animation: modal-scale-fade-in var(--motion-panel) var(--ease-standard);
+  }
+  .animate-shimmer-placeholder {
+    animation: shimmer-placeholder var(--motion-shimmer) var(--ease-standard) infinite;
+  }
+  .focus-ring {
+    outline: none;
+  }
+  .focus-ring:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .focus-ring-within {
+    outline: none;
+  }
+  .focus-ring-within:focus-within {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+
+@keyframes modal-scale-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes shimmer-placeholder {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(var(--shimmer-peak));
+  }
+}

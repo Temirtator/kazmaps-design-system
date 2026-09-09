@@ -133,3 +133,20 @@ describe("highlight roles", () => {
     expect(theme).toContain("--color-highlight-soft: var(--highlight-soft);");
   });
 });
+
+describe("kit css", () => {
+  it("ships the utilities the maps kit reads", () => {
+    const kit = read("kits/maps.css");
+    for (const cls of [
+      ".transition-interactive",
+      ".transition-surface",
+      ".animate-modal-in",
+      ".animate-shimmer-placeholder",
+      ".focus-ring:focus-visible",
+      ".focus-ring-within:focus-within",
+    ])
+      expect(kit).toContain(cls);
+    expect(kit).toContain("@keyframes modal-scale-fade-in");
+    expect(kit).toContain("@keyframes shimmer-placeholder");
+  });
+});

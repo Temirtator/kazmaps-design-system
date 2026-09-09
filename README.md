@@ -79,6 +79,27 @@ export default function MyComponent() {
 }
 ```
 
+### 4. Вход `/maps` (main-web)
+
+Второй вход пакета — примитивы main-web с родными именами. Он не пересекается с корневым:
+`Button` из `@temirtator/kazmaps-design-system/maps` и `Button` из корня — разные компоненты
+для разных брендов, слияние — после прихода дизайна.
+
+```tsx
+import { Button, Dialog } from "@temirtator/kazmaps-design-system/maps";
+```
+
+Кит читает утилиты и keyframes из `styles/kits/maps.css` — подключите его после файла бренда:
+
+```css
+@import "@temirtator/kazmaps-design-system/styles/brands/maps.css";
+@import "@temirtator/kazmaps-design-system/styles/kits/maps.css";
+@source "../../node_modules/@temirtator/kazmaps-design-system/dist";
+```
+
+Компоненты `/maps` работают только под `data-brand="maps"`: их тени, тайминги и `--ease-standard`
+объявлены как кит-статики этого бренда (`tokens/brands/maps.json`, блок `kit`).
+
 ## Компоненты
 
 ### Атомы (16 компонентов)
