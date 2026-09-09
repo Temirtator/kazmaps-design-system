@@ -12,6 +12,7 @@ const EXPECTED = [
   "LogoPin",
   "Panel",
   "PasswordInput",
+  "PhoneInput",
   "PlaceRow",
   "QrCode",
   "ScaleBar",
@@ -30,6 +31,8 @@ const EXPECTED = [
   "DayPicker",
   "useFocusTrap",
   "isTopmostTrap",
+  "formatE164",
+  "parseE164",
 ];
 
 describe("maps kit public API", () => {

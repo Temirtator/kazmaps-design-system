@@ -33,3 +33,27 @@ for (const story of STORIES) {
     });
   }
 }
+
+for (const theme of THEMES) {
+  test(`maps kit phone-input-states — ${theme}`, async ({ page }) => {
+    await page.goto(
+      `/iframe.html?viewMode=story&id=maps-kit-phoneinput--states&globals=brand:maps;theme:${theme}`,
+    );
+    await expect(page.locator("#storybook-root > *").first()).toBeVisible();
+    await expect(page).toHaveScreenshot(`maps-kit-phone-input-states-${theme}.png`, {
+      fullPage: true,
+    });
+  });
+
+  test(`maps kit phone-input-picker — ${theme}`, async ({ page }) => {
+    await page.goto(
+      `/iframe.html?viewMode=story&id=maps-kit-phoneinput--live&globals=brand:maps;theme:${theme}`,
+    );
+    await expect(page.getByLabel("Номер телефона")).toBeVisible();
+    await page.getByRole("button", { name: /Регион/ }).click();
+    await expect(page.getByRole("listbox")).toBeVisible();
+    await expect(page).toHaveScreenshot(`maps-kit-phone-input-picker-${theme}.png`, {
+      fullPage: true,
+    });
+  });
+}

@@ -1,23 +1,25 @@
 "use client";
 
 import { ChevronDown } from "lucide-react";
-import { forwardRef, useId, useImperativeHandle } from "react";
+import { useId } from "react";
 import InputMask from "react-input-mask-format";
 
-import { DEFAULT_REGION, type RegionCode } from "../../data/regions";
-import { cn } from "../../lib/cn";
+import { DEFAULT_REGION, type RegionCode } from "../data/regions";
 import {
   DEFAULT_LABELS,
   type PhoneInputLabels,
   type PhoneValue,
   RegionFlag,
   usePhoneMask,
-} from "../../lib/phone-input-core";
+} from "../lib/phone-input-core";
 import { RegionPicker } from "./region-picker";
 
 export type { PhoneValue };
 
-export interface PhoneInputProps {
+// Поля повторяют корневой `PhoneInputProps` один в один, чтобы main-web мог
+// брать компонент из кита без переходника. `size` кит принимает ради этой
+// совместимости, но не применяет: у полей кита одна высота — 47px.
+export type PhoneInputProps = {
   value?: string;
   defaultValue?: string;
   defaultRegion?: RegionCode;
@@ -40,35 +42,31 @@ export interface PhoneInputProps {
   autoComplete?: string;
   labels?: Partial<PhoneInputLabels>;
   className?: string;
-}
+};
 
-export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(function PhoneInput(
-  {
-    value: valueProp,
-    defaultValue,
-    defaultRegion = DEFAULT_REGION,
-    onChange,
-    onRegionChange,
-    onFocus,
-    onBlur,
-    regions: regionCodes,
-    locale = "ru",
-    size = "md",
-    label,
-    hint,
-    error,
-    required,
-    disabled,
-    readOnly,
-    id: idProp,
-    name,
-    autoFocus,
-    autoComplete = "tel-national",
-    labels: labelsProp,
-    className,
-  },
-  ref,
-) {
+export function PhoneInput({
+  value: valueProp,
+  defaultValue,
+  defaultRegion = DEFAULT_REGION,
+  onChange,
+  onRegionChange,
+  onFocus,
+  onBlur,
+  regions: regionCodes,
+  locale = "ru",
+  label,
+  hint,
+  error,
+  required,
+  disabled,
+  readOnly,
+  id: idProp,
+  name,
+  autoFocus,
+  autoComplete = "tel-national",
+  labels: labelsProp,
+  className = "",
+}: PhoneInputProps) {
   const generatedId = useId();
   const id = idProp ?? generatedId;
   const descId = `${id}-desc`;
@@ -97,36 +95,31 @@ export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(function
     onRegionChange,
   });
 
-  useImperativeHandle(ref, () => inputRef.current!);
-
   const hasError = Boolean(error);
-  const hasDesc = Boolean(error ?? hint);
-  const lg = size === "lg";
+  const description = error ?? hint;
+  const hasDesc = Boolean(description);
 
   return (
-    <div className={cn("flex flex-col gap-1", className)}>
-      {label && (
-        <label htmlFor={id} className="text-[length:var(--text-sm)] font-medium text-[var(--ink)]">
+    <div className={className}>
+      {label == null ? null : (
+        <label
+          htmlFor={id}
+          className="mb-1.5 block text-[11.5px] font-semibold text-(color:--text-primary)"
+        >
           {label}
-          {required && (
-            <span className="ml-0.5 text-[var(--danger)]" aria-hidden="true">
+          {required ? (
+            <span className="ml-0.5 text-(color:--danger)" aria-hidden="true">
               *
             </span>
-          )}
+          ) : null}
         </label>
       )}
 
       <div ref={containerRef} className="relative">
         <div
-          className={cn(
-            "flex items-center gap-2 rounded-[var(--radius-md)] border bg-[var(--card)]",
-            lg ? "h-12 px-3.5" : "h-10 px-3",
-            "transition-[border-color,box-shadow] duration-[var(--dur-base)] ease-[var(--ease-standard)]",
-            hasError
-              ? "border-[var(--danger)] has-[input:focus]:border-transparent has-[input:focus]:ring-2 has-[input:focus]:ring-[var(--danger)]"
-              : "border-[var(--line)] has-[input:focus]:border-transparent has-[input:focus]:ring-2 has-[input:focus]:ring-[var(--brand)]",
-            disabled && "opacity-50",
-          )}
+          className={`flex h-[47px] items-center overflow-hidden rounded-[8px] border bg-(--surface-panel) transition-surface focus-ring-within ${
+            hasError ? "border-(--danger)" : "border-(--border-input)"
+          } ${disabled ? "opacity-50" : ""}`}
         >
           <button
             type="button"
@@ -136,34 +129,26 @@ export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(function
             aria-controls={open ? `${pickerId}-list` : undefined}
             aria-label={`${labels.region}: ${locale === "en" ? region.nameEn : region.name}`}
             title={locale === "en" ? region.nameEn : region.name}
-            onMouseDown={(e) => {
-              if (open) e.preventDefault();
+            onMouseDown={(event) => {
+              if (open) event.preventDefault();
             }}
-            onClick={() => setOpen((v) => !v)}
-            onKeyDown={(e) => {
-              if (e.key === "ArrowDown") {
-                e.preventDefault();
+            onClick={() => {
+              setOpen((v) => !v);
+            }}
+            onKeyDown={(event) => {
+              if (event.key === "ArrowDown") {
+                event.preventDefault();
                 setOpen(true);
               }
             }}
-            className={cn(
-              "flex h-full shrink-0 items-center gap-1.5 border-r border-[var(--line)] pr-2.5",
-              "text-[var(--ink)] disabled:cursor-not-allowed",
-              "focus-visible:rounded-[var(--radius-sm)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand)]",
-            )}
+            className="flex h-full shrink-0 items-center gap-1.5 border-r border-(--border-input) px-2.5 text-[13.5px] text-(color:--text-tertiary) focus-ring"
           >
-            <RegionFlag iso={region.iso} size={lg ? 18 : 16} />
-            <span
-              className={cn(
-                "tabular-nums",
-                lg ? "text-[length:var(--text-base)]" : "text-[length:var(--text-sm)]",
-              )}
-            >
-              +{region.dial}
-            </span>
+            <RegionFlag iso={region.iso} size={16} />
+            <span className="tabular-nums">+{region.dial}</span>
             <ChevronDown
               size={14}
-              className={cn("text-[var(--muted)] transition-transform", open && "rotate-180")}
+              aria-hidden="true"
+              className={`transition-transform ${open ? "rotate-180" : ""}`}
             />
           </button>
 
@@ -190,16 +175,12 @@ export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(function
               placeholder={region.mask ? region.mask.replace(/9/g, "_") : undefined}
               aria-describedby={hasDesc ? descId : undefined}
               aria-invalid={hasError || undefined}
-              className={cn(
-                "h-full w-full min-w-0 bg-transparent tabular-nums text-[var(--ink)] outline-none",
-                lg ? "text-[length:var(--text-base)]" : "text-[length:var(--text-sm)]",
-                "placeholder:text-[var(--muted)] disabled:cursor-not-allowed",
-              )}
+              className="min-w-0 flex-1 bg-transparent px-3 text-[13.5px] text-(color:--text-primary) outline-none placeholder:text-(color:--text-tertiary)"
             />
           </InputMask>
         </div>
 
-        {open && (
+        {open ? (
           <RegionPicker
             id={pickerId}
             regions={available}
@@ -209,22 +190,19 @@ export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(function
             onSelect={selectRegion}
             onClose={closePicker}
           />
-        )}
+        ) : null}
       </div>
 
-      {hasDesc && (
+      {hasDesc ? (
         <p
           id={descId}
-          className={cn(
-            "text-[length:var(--text-xs)]",
-            hasError ? "text-[var(--danger)]" : "text-[var(--muted)]",
-          )}
+          className={`mt-1.5 text-[12px] ${
+            hasError ? "text-(color:--danger)" : "text-(color:--text-tertiary)"
+          }`}
         >
-          {error ?? hint}
+          {description}
         </p>
-      )}
+      ) : null}
     </div>
   );
-});
-
-PhoneInput.displayName = "PhoneInput";
+}

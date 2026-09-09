@@ -3,19 +3,15 @@
 import { Check, Search } from "lucide-react";
 import { useEffect, useRef } from "react";
 
-import type { Region } from "../../data/regions";
-import { cn } from "../../lib/cn";
+import type { Region } from "../data/regions";
 import {
   type PhoneInputLabels,
   type PickerCloseReason,
   RegionFlag,
   useRegionPicker,
-} from "../../lib/phone-input-core";
+} from "../lib/phone-input-core";
 
-export { DEFAULT_LABELS } from "../../lib/phone-input-core";
-export type { PhoneInputLabels, PickerCloseReason };
-
-export interface RegionPickerProps {
+export type RegionPickerProps = {
   id: string;
   regions: readonly Region[];
   value: string;
@@ -23,7 +19,7 @@ export interface RegionPickerProps {
   labels: PhoneInputLabels;
   onSelect: (region: Region) => void;
   onClose: (reason: PickerCloseReason) => void;
-}
+};
 
 export function RegionPicker({
   id,
@@ -56,7 +52,7 @@ export function RegionPicker({
     if (items.length === 0) return null;
     return (
       <li role="presentation">
-        <div className="px-3 pb-1 pt-2 text-[length:var(--text-xs)] font-medium uppercase tracking-wider text-[var(--muted-2)]">
+        <div className="px-3 pb-1 pt-2 text-[11px] font-semibold uppercase tracking-wider text-(color:--text-tertiary)">
           {title}
         </div>
         <ul role="group" aria-label={title} className="m-0 list-none p-0">
@@ -70,19 +66,21 @@ export function RegionPicker({
                 data-index={index}
                 role="option"
                 aria-selected={selected}
-                onMouseDown={(e) => e.preventDefault()}
-                onClick={() => onSelect(r)}
-                className={cn(
-                  "flex cursor-pointer items-center gap-2.5 rounded-[var(--radius-sm)] px-2.5 py-2",
-                  "text-[length:var(--text-sm)] text-[var(--ink)]",
-                  index === active && "bg-[var(--bg-2)]",
-                )}
+                onMouseDown={(event) => {
+                  event.preventDefault();
+                }}
+                onClick={() => {
+                  onSelect(r);
+                }}
+                className={`flex cursor-pointer items-center gap-2.5 rounded-[7px] px-2.5 py-2 text-[13.5px] text-(color:--text-primary) ${
+                  index === active ? "bg-(--surface-raised)" : ""
+                }`}
               >
                 <RegionFlag iso={r.iso} size={16} />
                 <span className="flex-1">{name(r)}</span>
-                <span className="tabular-nums text-[var(--muted)]">+{r.dial}</span>
-                <span className="inline-flex w-4 text-[var(--brand)]">
-                  {selected && <Check size={14} />}
+                <span className="tabular-nums text-(color:--text-tertiary)">+{r.dial}</span>
+                <span className="inline-flex w-4 text-(color:--accent)">
+                  {selected ? <Check size={14} aria-hidden="true" /> : null}
                 </span>
               </li>
             );
@@ -95,14 +93,10 @@ export function RegionPicker({
   return (
     <div
       ref={rootRef}
-      className={cn(
-        "absolute left-0 top-[calc(100%+6px)] z-50 w-full max-w-[340px] overflow-hidden",
-        "rounded-[var(--radius-lg)] border border-[var(--line)] bg-[var(--card)] shadow-[var(--shadow-lg)]",
-        "animate-scale-in",
-      )}
+      className="absolute left-0 top-[calc(100%+6px)] z-50 w-full max-w-[340px] overflow-hidden rounded-lg border border-(--border) bg-(--surface-panel) shadow-(--shadow-dropdown) animate-modal-in"
     >
-      <div className="flex items-center gap-2 border-b border-[var(--line)] px-3 py-2.5 text-[var(--muted)]">
-        <Search size={16} />
+      <div className="flex items-center gap-2 border-b border-(--border-input) px-3 py-2.5 text-(color:--text-tertiary)">
+        <Search size={16} aria-hidden="true" />
         <input
           ref={searchRef}
           type="search"
@@ -112,10 +106,14 @@ export function RegionPicker({
           aria-activedescendant={ordered.length > 0 ? optionId(active) : undefined}
           placeholder={labels.search}
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={(event) => {
+            setQuery(event.target.value);
+          }}
           onKeyDown={onKeyDown}
-          onBlur={(e) => onSearchBlur(e, rootRef.current)}
-          className="w-full bg-transparent text-[length:var(--text-sm)] text-[var(--ink)] outline-none placeholder:text-[var(--muted)]"
+          onBlur={(event) => {
+            onSearchBlur(event, rootRef.current);
+          }}
+          className="w-full bg-transparent text-[13.5px] text-(color:--text-primary) outline-none placeholder:text-(color:--text-tertiary)"
         />
       </div>
       <ul
@@ -127,14 +125,11 @@ export function RegionPicker({
       >
         {renderGroup(labels.groupCis, cis, 0)}
         {renderGroup(labels.groupOther, other, cis.length)}
-        {ordered.length === 0 && (
-          <li
-            role="presentation"
-            className="px-3 py-2 text-[length:var(--text-xs)] text-[var(--muted-2)]"
-          >
+        {ordered.length === 0 ? (
+          <li role="presentation" className="px-3 py-2 text-[12px] text-(color:--text-tertiary)">
             {labels.noResults}
           </li>
-        )}
+        ) : null}
       </ul>
     </div>
   );

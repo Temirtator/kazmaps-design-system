@@ -41,7 +41,10 @@ describe("maps kit boundaries", () => {
           spec.startsWith("../lib/") ||
           spec.startsWith("../data/") ||
           // qrcode is an optional peer dependency read only by qr-code.tsx's dynamic import.
-          ["react", "react-dom", "lucide-react", "qrcode"].includes(spec);
+          // react-input-mask-format is a regular dependency shared with the root phone input.
+          ["react", "react-dom", "lucide-react", "qrcode", "react-input-mask-format"].includes(
+            spec,
+          );
         if (!ok) offenders.push(`${file}: ${spec}`);
       }
     }

@@ -24,6 +24,8 @@ export type { PanelVariant } from "./panel";
 export { Panel } from "./panel";
 export type { PasswordInputProps } from "./password-input";
 export { PasswordInput } from "./password-input";
+export type { PhoneInputProps, PhoneValue } from "./phone-input";
+export { PhoneInput } from "./phone-input";
 export type { PlaceRowProps, PlaceRowStatus } from "./place-row";
 export { PlaceRow } from "./place-row";
 export { QrCode } from "./qr-code";
@@ -44,3 +46,9 @@ export type { ShowToast, ToastAction, ToastOptions } from "./toast";
 export { ToastProvider, useToast } from "./toast";
 export { Toggle } from "./toggle";
 export { isTopmostTrap, useFocusTrap } from "./use-focus-trap";
+
+export {
+  DEFAULT_LABELS as PHONE_INPUT_DEFAULT_LABELS,
+  type PhoneInputLabels,
+} from "../lib/phone-input-core";
+export { formatE164, parseE164 } from "../lib/phone";

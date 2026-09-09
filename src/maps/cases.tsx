@@ -16,6 +16,7 @@ import {
   LogoPin,
   Panel,
   PasswordInput,
+  PhoneInput,
   PlaceRow,
   QrCode,
   ScaleBar,
@@ -74,6 +75,8 @@ export const KIT_CASES: [string, ReactElement][] = [
     </Panel>,
   ],
   ["PasswordInput", <PasswordInput key="k" label="Пароль" value="secret" onChange={noop} />],
+  ["PhoneInput", <PhoneInput key="k" label="Телефон" hint="Код придёт в WhatsApp" />],
+  ["PhoneInput error", <PhoneInput key="k" label="Телефон" error="Введите номер полностью" />],
   [
     "PlaceRow",
     <PlaceRow
