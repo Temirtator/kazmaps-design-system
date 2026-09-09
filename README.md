@@ -89,7 +89,9 @@ export default function MyComponent() {
 import { Button, PlaceRow } from "@temirtator/kazmaps-design-system/maps";
 ```
 
-Кит читает утилиты и keyframes из `styles/kits/maps.css` — подключите его после файла бренда:
+Кит читает утилиты и keyframes из `styles/kits/maps.css` — подключите его после файла бренда.
+Сниппет ниже — это продолжение §1, а не полный набор импортов: `core.css` и `theme.css` должны
+быть подключены раньше `brands/maps.css` и `kits/maps.css`.
 
 ```css
 @import "@temirtator/kazmaps-design-system/styles/brands/maps.css";
@@ -98,7 +100,10 @@ import { Button, PlaceRow } from "@temirtator/kazmaps-design-system/maps";
 ```
 
 Компоненты `/maps` работают только под `data-brand="maps"`: их тени, тайминги и `--ease-standard`
-объявлены как кит-статики этого бренда (`tokens/brands/maps.json`, блок `kit`).
+объявлены как кит-статики этого бренда (`tokens/brands/maps.json`, блок `kit`). `--ease-standard`
+у кита и у `core.css` объявлены с одинаковой специфичностью — кит побеждает только за счёт
+порядка импорта (`core.css` раньше `brands/maps.css`), поэтому порядок из §1 и этого раздела
+менять нельзя.
 
 `QrCode` рендерит настоящий QR-код через `qrcode` — необязательный peer-пакет кита, установите
 его в приложении-потребителе (`npm i qrcode`); main-web уже это делает.

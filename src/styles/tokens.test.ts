@@ -12,6 +12,7 @@ type Brand = {
   followsSystem: boolean;
   themes: Record<string, Record<string, Token>>;
   static: Record<string, Token>;
+  kit?: Record<string, Token>;
   extras?: Record<string, Record<string, Token>>;
 };
 type Schema = {
@@ -24,6 +25,14 @@ type Schema = {
 const schema = readJson("tokens/schema.json") as Schema;
 const roles = Object.values(schema.themed).flat();
 const BRANDS = ["business", "booking", "maps"];
+const core = readJson("tokens/core.json") as Record<string, Token>;
+
+// maps' kit intentionally overrides core's --ease-standard with the kit's own
+// easing curve; the two declarations share specificity and maps wins only
+// because core.css is imported before the brand file (see README §4). Any
+// other kit key colliding with a core key would be a silent, order-dependent
+// override we did not intend, so only this one name is allow-listed.
+const KIT_CORE_COLLISION_ALLOWLIST = ["ease-standard"];
 
 function definedVars(cssBlock: string): Set<string> {
   return new Set(Array.from(cssBlock.matchAll(/(--[\w-]+)\s*:/g)).map((m) => m[1]));
@@ -71,6 +80,13 @@ for (const name of BRANDS) {
       for (const role of schema.static) {
         expect(brand.static[role], role).toBeDefined();
         if (role !== "font-sans") expect(brand.static[role].$value, role).not.toMatch(/var\(/);
+      }
+    });
+
+    it("kit keys do not collide with core, except the allow-listed override", () => {
+      for (const key of Object.keys(brand.kit ?? {})) {
+        if (KIT_CORE_COLLISION_ALLOWLIST.includes(key)) continue;
+        expect(Object.keys(core), key).not.toContain(key);
       }
     });
 

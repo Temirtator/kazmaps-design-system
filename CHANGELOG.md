@@ -24,6 +24,9 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning: se
 
 - Шкала текста `--text-xs…3xl` переехала из `core.css` в бренды. business/booking — прежние px;
   maps — rem-значения Tailwind (`radius-sm|md|lg` maps = 0.25/0.375/0.5rem).
+- Под `data-brand="maps"` любой корневой компонент, использующий `var(--ease-standard)`,
+  теперь анимируется с кривой кита `cubic-bezier(0.4, 0, 0.2, 1)`, а не с `core.css`
+  (`cubic-bezier(0.25, 0.46, 0.45, 0.94)`) — кит побеждает по порядку импорта, см. README §4.
 
 ### Deprecated
 
