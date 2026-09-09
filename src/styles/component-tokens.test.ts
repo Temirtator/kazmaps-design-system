@@ -12,7 +12,10 @@ type Schema = {
 const schema = readJson("tokens/schema.json") as Schema;
 const core = readJson("tokens/core.json") as Record<string, unknown>;
 
-const ALLOWED_UNTIL_C2 = new Set(["--brand-50", "--brand-700", "--gold", "--gold-soft"]);
+// Badge `brand` читает шкалу business/booking, которой нет в контракте; перевод на
+// accent-soft-bg/accent-press сдвинул бы пиксели (dark: brand-50 #11131f ≠ accent-soft-bg
+// #1a1d33). Уходит в C3 вместе с ревизией вида business/booking.
+const ALLOWED_UNTIL_C3 = new Set(["--brand-50", "--brand-700"]);
 
 const allowed = new Set(
   [
@@ -38,7 +41,7 @@ it("components reference only contract, alias or core tokens", () => {
   for (const file of files) {
     for (const m of readFileSync(file, "utf8").matchAll(/--[a-z][a-z0-9-]*/g)) {
       const name = m[0];
-      if (!allowed.has(name) && !ALLOWED_UNTIL_C2.has(name)) offenders.push(`${file}: ${name}`);
+      if (!allowed.has(name) && !ALLOWED_UNTIL_C3.has(name)) offenders.push(`${file}: ${name}`);
     }
   }
   expect(offenders).toEqual([]);

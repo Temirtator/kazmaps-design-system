@@ -27,6 +27,8 @@
   --danger-soft-bg: #3a222b;
   --info: #2a6fdb;
   --info-soft-bg: #1c2c47;
+  --highlight: #e8a317;
+  --highlight-soft: #3a2f1a;
   --shadow-sm: 0 1px 2px #0000004d;
   --shadow-md: 0 4px 12px #00000066;
   --shadow-lg: 0 20px 48px #00000080;
@@ -47,6 +49,8 @@
   --warn-soft: var(--warning-soft-bg);
   --danger-soft: var(--danger-soft-bg);
   --info-soft: var(--info-soft-bg);
+  --gold: var(--highlight);
+  --gold-soft: var(--highlight-soft);
   --brand-50: #11131f;
   --brand-100: #1a1d33;
   --brand-200: #262a52;
@@ -55,9 +59,7 @@
   --brand-500: #5e6ad2;
   --brand-600: #6e79d6;
   --brand-700: #8b94e0;
-  --gold: #e8a317;
   --gold-press: #c98b10;
-  --gold-soft: #3a2f1a;
   --text-xs: 11px;
   --text-sm: 13px;
   --text-base: 15px;
@@ -100,6 +102,8 @@
   --danger-soft-bg: #fce7eb;
   --info: #2a6fdb;
   --info-soft-bg: #e7f0fc;
+  --highlight: #e8a317;
+  --highlight-soft: #fbefd3;
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.14);
@@ -111,9 +115,7 @@
   --brand-500: #5e6ad2;
   --brand-600: #4f5ab8;
   --brand-700: #3a4394;
-  --gold: #e8a317;
   --gold-press: #c98b10;
-  --gold-soft: #fbefd3;
 }
 
 [data-brand="booking"][data-theme="dark"] {
@@ -144,6 +146,8 @@
   --danger-soft-bg: #3a222b;
   --info: #2a6fdb;
   --info-soft-bg: #1c2c47;
+  --highlight: #e8a317;
+  --highlight-soft: #3a2f1a;
   --shadow-sm: 0 1px 2px #0000004d;
   --shadow-md: 0 4px 12px #00000066;
   --shadow-lg: 0 20px 48px #00000080;
@@ -155,7 +159,5 @@
   --brand-500: #5e6ad2;
   --brand-600: #6e79d6;
   --brand-700: #8b94e0;
-  --gold: #e8a317;
   --gold-press: #c98b10;
-  --gold-soft: #3a2f1a;
 }

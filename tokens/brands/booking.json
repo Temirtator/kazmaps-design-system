@@ -113,6 +113,14 @@
         "$type": "color",
         "$value": "#e7f0fc"
       },
+      "highlight": {
+        "$type": "color",
+        "$value": "#e8a317"
+      },
+      "highlight-soft": {
+        "$type": "color",
+        "$value": "#fbefd3"
+      },
       "shadow-sm": {
         "$type": "shadow",
         "$value": "0 1px 3px rgba(0, 0, 0, 0.08)"
@@ -236,6 +244,14 @@
         "$type": "color",
         "$value": "#1c2c47"
       },
+      "highlight": {
+        "$type": "color",
+        "$value": "#e8a317"
+      },
+      "highlight-soft": {
+        "$type": "color",
+        "$value": "#3a2f1a"
+      },
       "shadow-sm": {
         "$type": "shadow",
         "$value": "0 1px 2px #0000004d"
@@ -313,17 +329,9 @@
         "$type": "color",
         "$value": "#3a4394"
       },
-      "gold": {
-        "$type": "color",
-        "$value": "#e8a317"
-      },
       "gold-press": {
         "$type": "color",
         "$value": "#c98b10"
-      },
-      "gold-soft": {
-        "$type": "color",
-        "$value": "#fbefd3"
       }
     },
     "dark": {
@@ -359,17 +367,9 @@
         "$type": "color",
         "$value": "#8b94e0"
       },
-      "gold": {
-        "$type": "color",
-        "$value": "#e8a317"
-      },
       "gold-press": {
         "$type": "color",
         "$value": "#c98b10"
-      },
-      "gold-soft": {
-        "$type": "color",
-        "$value": "#3a2f1a"
       }
     }
   }

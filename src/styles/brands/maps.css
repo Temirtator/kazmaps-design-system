@@ -27,6 +27,8 @@
   --danger-soft-bg: #fdecec;
   --info: #1668c9;
   --info-soft-bg: #eef4fc;
+  --highlight: #f2a615;
+  --highlight-soft: #fdf3e6;
   --shadow-sm: rgba(16, 24, 40, 0.08) 0px 1px 3px 0px;
   --shadow-md: rgba(16, 24, 40, 0.22) 0px 12px 32px 0px;
   --shadow-lg: rgba(16, 24, 40, 0.28) 0px 18px 48px 0px;
@@ -47,13 +49,13 @@
   --warn-soft: var(--warning-soft-bg);
   --danger-soft: var(--danger-soft-bg);
   --info-soft: var(--info-soft-bg);
+  --gold: var(--highlight);
+  --gold-soft: var(--highlight-soft);
   --surface-map: #e9ece4;
   --text-on-map: #22272e;
   --rating-star: #f2a615;
   --marker-primary: #e0442f;
   --border-state-card: #e4e7ec;
-  --gold: #f2a615;
-  --gold-soft: #fdf3e6;
   --shimmer-peak: 0.94;
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
@@ -107,6 +109,8 @@
   --danger-soft-bg: #fdecec;
   --info: #1668c9;
   --info-soft-bg: #eef4fc;
+  --highlight: #f2a615;
+  --highlight-soft: #fdf3e6;
   --shadow-sm: rgba(16, 24, 40, 0.08) 0px 1px 3px 0px;
   --shadow-md: rgba(16, 24, 40, 0.22) 0px 12px 32px 0px;
   --shadow-lg: rgba(16, 24, 40, 0.28) 0px 18px 48px 0px;
@@ -115,8 +119,6 @@
   --rating-star: #f2a615;
   --marker-primary: #e0442f;
   --border-state-card: #e4e7ec;
-  --gold: #f2a615;
-  --gold-soft: #fdf3e6;
   --shimmer-peak: 0.94;
 }
 
@@ -148,6 +150,8 @@
   --danger-soft-bg: #141d31;
   --info: #35e0ff;
   --info-soft-bg: #141d31;
+  --highlight: #f2a615;
+  --highlight-soft: #141d31;
   --shadow-sm: rgba(16, 24, 40, 0.08) 0px 1px 3px 0px;
   --shadow-md: rgba(16, 24, 40, 0.22) 0px 12px 32px 0px;
   --shadow-lg: rgba(16, 24, 40, 0.28) 0px 18px 48px 0px;
@@ -156,8 +160,6 @@
   --rating-star: #f2a615;
   --marker-primary: #e0442f;
   --border-state-card: #1e2a44;
-  --gold: #f2a615;
-  --gold-soft: #141d31;
   --shimmer-peak: 1.12;
 }
 
@@ -190,6 +192,8 @@
     --danger-soft-bg: #141d31;
     --info: #35e0ff;
     --info-soft-bg: #141d31;
+    --highlight: #f2a615;
+    --highlight-soft: #141d31;
     --shadow-sm: rgba(16, 24, 40, 0.08) 0px 1px 3px 0px;
     --shadow-md: rgba(16, 24, 40, 0.22) 0px 12px 32px 0px;
     --shadow-lg: rgba(16, 24, 40, 0.28) 0px 18px 48px 0px;
@@ -198,8 +202,6 @@
     --rating-star: #f2a615;
     --marker-primary: #e0442f;
     --border-state-card: #1e2a44;
-    --gold: #f2a615;
-    --gold-soft: #141d31;
     --shimmer-peak: 1.12;
   }
 }

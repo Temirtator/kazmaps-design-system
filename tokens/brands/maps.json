@@ -47,6 +47,12 @@
         "$value": "#eef4fc",
         "$description": "ожидает значения от дизайнера"
       },
+      "highlight": { "$type": "color", "$value": "#f2a615" },
+      "highlight-soft": {
+        "$type": "color",
+        "$value": "#fdf3e6",
+        "$description": "ожидает значения от дизайнера"
+      },
       "shadow-sm": { "$type": "shadow", "$value": "rgba(16, 24, 40, 0.08) 0px 1px 3px 0px" },
       "shadow-md": { "$type": "shadow", "$value": "rgba(16, 24, 40, 0.22) 0px 12px 32px 0px" },
       "shadow-lg": { "$type": "shadow", "$value": "rgba(16, 24, 40, 0.28) 0px 18px 48px 0px" }
@@ -95,6 +101,12 @@
         "$value": "#141d31",
         "$description": "ожидает значения от дизайнера"
       },
+      "highlight": { "$type": "color", "$value": "#f2a615" },
+      "highlight-soft": {
+        "$type": "color",
+        "$value": "#141d31",
+        "$description": "ожидает значения от дизайнера"
+      },
       "shadow-sm": { "$type": "shadow", "$value": "rgba(16, 24, 40, 0.08) 0px 1px 3px 0px" },
       "shadow-md": { "$type": "shadow", "$value": "rgba(16, 24, 40, 0.22) 0px 12px 32px 0px" },
       "shadow-lg": { "$type": "shadow", "$value": "rgba(16, 24, 40, 0.28) 0px 18px 48px 0px" }
@@ -136,12 +148,6 @@
       "rating-star": { "$type": "color", "$value": "#f2a615" },
       "marker-primary": { "$type": "color", "$value": "#e0442f" },
       "border-state-card": { "$type": "color", "$value": "#e4e7ec" },
-      "gold": { "$type": "color", "$value": "#f2a615" },
-      "gold-soft": {
-        "$type": "color",
-        "$value": "#fdf3e6",
-        "$description": "ожидает значения от дизайнера"
-      },
       "shimmer-peak": { "$type": "number", "$value": "0.94" }
     },
     "dark": {
@@ -150,12 +156,6 @@
       "rating-star": { "$type": "color", "$value": "#f2a615" },
       "marker-primary": { "$type": "color", "$value": "#e0442f" },
       "border-state-card": { "$type": "color", "$value": "#1e2a44" },
-      "gold": { "$type": "color", "$value": "#f2a615" },
-      "gold-soft": {
-        "$type": "color",
-        "$value": "#141d31",
-        "$description": "ожидает значения от дизайнера"
-      },
       "shimmer-peak": { "$type": "number", "$value": "1.12" }
     }
   }

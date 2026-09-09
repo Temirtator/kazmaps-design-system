@@ -100,3 +100,36 @@ describe("brand scale", () => {
     }
   });
 });
+
+describe("highlight roles", () => {
+  const VALUES: Record<string, Record<string, [string, string]>> = {
+    business: { light: ["#c99a16", "#f9f0d8"], dark: ["#f0bf00", "#241f10"] },
+    booking: { light: ["#e8a317", "#fbefd3"], dark: ["#e8a317", "#3a2f1a"] },
+    maps: { light: ["#f2a615", "#fdf3e6"], dark: ["#f2a615", "#141d31"] },
+  };
+
+  it.each(Object.keys(VALUES))("%s themes highlight and highlight-soft", (brand) => {
+    const css = read(`brands/${brand}.css`);
+    for (const theme of ["light", "dark"] as const) {
+      const [highlight, soft] = VALUES[brand][theme];
+      const block = css.slice(css.indexOf(`[data-brand="${brand}"][data-theme="${theme}"] {`));
+      expect(block.slice(0, block.indexOf("\n}\n"))).toContain(`--highlight: ${highlight};`);
+      expect(block.slice(0, block.indexOf("\n}\n"))).toContain(`--highlight-soft: ${soft};`);
+    }
+  });
+
+  it("aliases gold to highlight in the base block", () => {
+    for (const brand of ["business", "booking", "maps"]) {
+      const block = baseBlock(read(`brands/${brand}.css`), brand);
+      expect(block).toContain("--gold: var(--highlight);");
+      expect(block).toContain("--gold-soft: var(--highlight-soft);");
+      expect(block).not.toMatch(/--gold: #/);
+    }
+  });
+
+  it("theme.css exposes color-highlight", () => {
+    const theme = read("theme.css");
+    expect(theme).toContain("--color-highlight: var(--highlight);");
+    expect(theme).toContain("--color-highlight-soft: var(--highlight-soft);");
+  });
+});

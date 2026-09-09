@@ -33,6 +33,8 @@
 | `--danger-soft-bg`     | `#fdecec`               | `#2a1416`               | `#fce7eb`                         | `#3a222b`               | `#fdecec`                                  | `#141d31`                                  |
 | `--info`               | `#4ea7fc`               | `#4ea7fc`               | `#2a6fdb`                         | `#2a6fdb`               | `#1668c9`                                  | `#35e0ff`                                  |
 | `--info-soft-bg`       | `#e8f3fe`               | `#0e1f2e`               | `#e7f0fc`                         | `#1c2c47`               | `#eef4fc`                                  | `#141d31`                                  |
+| `--highlight`          | `#c99a16`               | `#f0bf00`               | `#e8a317`                         | `#e8a317`               | `#f2a615`                                  | `#f2a615`                                  |
+| `--highlight-soft`     | `#f9f0d8`               | `#241f10`               | `#fbefd3`                         | `#3a2f1a`               | `#fdf3e6`                                  | `#141d31`                                  |
 | `--shadow-sm`          | `0 1px 2px #0000000f`   | `0 1px 2px #0000004d`   | `0 1px 3px rgba(0, 0, 0, 0.08)`   | `0 1px 2px #0000004d`   | `rgba(16, 24, 40, 0.08) 0px 1px 3px 0px`   | `rgba(16, 24, 40, 0.08) 0px 1px 3px 0px`   |
 | `--shadow-md`          | `0 4px 12px #00000014`  | `0 4px 12px #00000066`  | `0 4px 12px rgba(0, 0, 0, 0.1)`   | `0 4px 12px #00000066`  | `rgba(16, 24, 40, 0.22) 0px 12px 32px 0px` | `rgba(16, 24, 40, 0.22) 0px 12px 32px 0px` |
 | `--shadow-lg`          | `0 16px 48px #0000001f` | `0 16px 48px #00000080` | `0 20px 48px rgba(0, 0, 0, 0.14)` | `0 20px 48px #00000080` | `rgba(16, 24, 40, 0.28) 0px 18px 48px 0px` | `rgba(16, 24, 40, 0.28) 0px 18px 48px 0px` |
@@ -86,12 +88,14 @@
 - `--warn-soft` → `--warning-soft-bg`
 - `--danger-soft` → `--danger-soft-bg`
 - `--info-soft` → `--info-soft-bg`
+- `--gold` → `--highlight`
+- `--gold-soft` → `--highlight-soft`
 
 ## Расширения брендов
 
-- business: `--brand-50`, `--brand-100`, `--brand-200`, `--brand-300`, `--brand-400`, `--brand-500`, `--brand-600`, `--brand-700`, `--gold`, `--gold-press`, `--gold-soft`
-- booking: `--brand-50`, `--brand-100`, `--brand-200`, `--brand-300`, `--brand-400`, `--brand-500`, `--brand-600`, `--brand-700`, `--gold`, `--gold-press`, `--gold-soft`
-- maps: `--surface-map`, `--text-on-map`, `--rating-star`, `--marker-primary`, `--border-state-card`, `--gold`, `--gold-soft`, `--shimmer-peak`
+- business: `--brand-50`, `--brand-100`, `--brand-200`, `--brand-300`, `--brand-400`, `--brand-500`, `--brand-600`, `--brand-700`, `--gold-press`
+- booking: `--brand-50`, `--brand-100`, `--brand-200`, `--brand-300`, `--brand-400`, `--brand-500`, `--brand-600`, `--brand-700`, `--gold-press`
+- maps: `--surface-map`, `--text-on-map`, `--rating-star`, `--marker-primary`, `--border-state-card`, `--shimmer-peak`
 
 ## Ожидает значения от дизайнера
 
@@ -103,12 +107,12 @@
 - maps light `--danger-soft-bg` = `#fdecec` — ожидает значения от дизайнера
 - maps light `--info` = `#1668c9` — ожидает значения от дизайнера
 - maps light `--info-soft-bg` = `#eef4fc` — ожидает значения от дизайнера
+- maps light `--highlight-soft` = `#fdf3e6` — ожидает значения от дизайнера
 - maps dark `--accent-press` = `#35e0ff` — ожидает значения от дизайнера
 - maps dark `--danger-soft-bg` = `#141d31` — ожидает значения от дизайнера
 - maps dark `--info` = `#35e0ff` — ожидает значения от дизайнера
 - maps dark `--info-soft-bg` = `#141d31` — ожидает значения от дизайнера
-- maps light `--gold-soft` = `#fdf3e6` — ожидает значения от дизайнера
-- maps dark `--gold-soft` = `#141d31` — ожидает значения от дизайнера
+- maps dark `--highlight-soft` = `#141d31` — ожидает значения от дизайнера
 
 ## Как отдать значения
 
