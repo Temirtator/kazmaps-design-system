@@ -86,7 +86,7 @@ export default function MyComponent() {
 для разных брендов, слияние — после прихода дизайна.
 
 ```tsx
-import { Button, Dialog } from "@temirtator/kazmaps-design-system/maps";
+import { Button, PlaceRow } from "@temirtator/kazmaps-design-system/maps";
 ```
 
 Кит читает утилиты и keyframes из `styles/kits/maps.css` — подключите его после файла бренда:
@@ -99,6 +99,9 @@ import { Button, Dialog } from "@temirtator/kazmaps-design-system/maps";
 
 Компоненты `/maps` работают только под `data-brand="maps"`: их тени, тайминги и `--ease-standard`
 объявлены как кит-статики этого бренда (`tokens/brands/maps.json`, блок `kit`).
+
+`QrCode` рендерит настоящий QR-код через `qrcode` — необязательный peer-пакет кита, установите
+его в приложении-потребителе (`npm i qrcode`); main-web уже это делает.
 
 ## Компоненты
 

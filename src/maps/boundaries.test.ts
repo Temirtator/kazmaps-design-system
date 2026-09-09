@@ -2,25 +2,46 @@ import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
 const ROOT = join(__dirname, "..");
-const IMPORT = /from "([^"]+)"/g;
+const IMPORT = /(?:from\s+|import\s*\(?\s*)"([^"]+)"/g;
 
-function files(dir: string): string[] {
-  return readdirSync(join(ROOT, dir))
-    .filter((f) => /\.tsx?$/.test(f) && !/\.(test|stories)\.tsx?$/.test(f))
-    .map((f) => join(dir, f));
+function walk(dir: string): string[] {
+  return readdirSync(join(ROOT, dir), { withFileTypes: true }).flatMap((e) =>
+    e.isDirectory() ? walk(join(dir, e.name)) : [join(dir, e.name)],
+  );
+}
+
+function sourceFiles(paths: string[]): string[] {
+  return paths.filter((f) => /\.tsx?$/.test(f) && !/\.(test|stories)\.tsx?$/.test(f));
+}
+
+function importSpecs(file: string): string[] {
+  return [...readFileSync(join(ROOT, file), "utf8").matchAll(IMPORT)].map((m) => m[1]);
 }
 
 describe("maps kit boundaries", () => {
+  it("import regex extracts from-imports, bare side-effect imports and dynamic imports", () => {
+    const fixture = [
+      'import { Foo } from "./foo";',
+      'import "./side-effect.css";',
+      'void import("./dynamic");',
+    ].join("\n");
+    expect([...fixture.matchAll(IMPORT)].map((m) => m[1])).toEqual([
+      "./foo",
+      "./side-effect.css",
+      "./dynamic",
+    ]);
+  });
+
   it("maps imports only itself, lib, data and peers", () => {
     const offenders: string[] = [];
-    for (const file of files("maps")) {
-      for (const m of readFileSync(join(ROOT, file), "utf8").matchAll(IMPORT)) {
-        const spec = m[1];
+    for (const file of sourceFiles(walk("maps"))) {
+      for (const spec of importSpecs(file)) {
         const ok =
           spec.startsWith("./") ||
           spec.startsWith("../lib/") ||
           spec.startsWith("../data/") ||
-          ["react", "react-dom", "lucide-react"].includes(spec);
+          // qrcode is an optional peer dependency read only by qr-code.tsx's dynamic import.
+          ["react", "react-dom", "lucide-react", "qrcode"].includes(spec);
         if (!ok) offenders.push(`${file}: ${spec}`);
       }
     }
@@ -29,13 +50,22 @@ describe("maps kit boundaries", () => {
 
   it("root never imports maps", () => {
     const offenders: string[] = [];
-    const walk = (dir: string): string[] =>
-      readdirSync(join(ROOT, dir), { withFileTypes: true }).flatMap((e) =>
-        e.isDirectory() ? walk(join(dir, e.name)) : [join(dir, e.name)],
-      );
-    for (const file of [...walk("atoms"), ...walk("molecules"), ...walk("lib"), "index.ts"]) {
-      if (!/\.tsx?$/.test(file)) continue;
-      if (readFileSync(join(ROOT, file), "utf8").includes("maps/")) offenders.push(file);
+    const files = [
+      ...sourceFiles(walk("atoms")),
+      ...sourceFiles(walk("molecules")),
+      ...sourceFiles(walk("lib")),
+      ...sourceFiles(walk("data")),
+      "index.ts",
+    ];
+    for (const file of files) {
+      for (const spec of importSpecs(file)) {
+        const offends =
+          spec === "./maps" ||
+          spec.startsWith("./maps/") ||
+          spec.startsWith("../maps") ||
+          spec.includes("/maps/");
+        if (offends) offenders.push(`${file}: ${spec}`);
+      }
     }
     expect(offenders).toEqual([]);
   });
