@@ -1,10 +1,13 @@
 import { Layers, MapPin, Route } from "lucide-react";
-import type { ReactElement } from "react";
+import { type ReactElement, useEffect } from "react";
 
 import {
   AvatarInitial,
+  BottomSheet,
   Button,
   Chip,
+  DayPicker,
+  Dialog,
   EmptyState,
   IconButton,
   InDevelopment,
@@ -23,7 +26,9 @@ import {
   ShimmerBlock,
   StarRating,
   TextInput,
+  ToastProvider,
   Toggle,
+  useToast,
 } from "./index";
 
 const noop = () => undefined;
@@ -113,4 +118,55 @@ export const KIT_CASES: [string, ReactElement][] = [
     <TextInput key="k" label="Имя" value="" onChange={noop} error="Обязательное поле" />,
   ],
   ["Toggle", <Toggle key="k" checked onChange={noop} label="Уведомления" />],
+];
+
+function ToastDemo() {
+  const show = useToast();
+  useEffect(() => {
+    show("Маршрут сохранён", { action: { label: "Открыть", onClick: () => undefined } });
+  }, [show]);
+  return null;
+}
+
+export const OVERLAY_CASES: [string, ReactElement][] = [
+  [
+    "Dialog",
+    <Dialog
+      key="k"
+      title="Удалить маршрут?"
+      subtitle="Действие нельзя отменить"
+      onClose={() => undefined}
+    >
+      <p className="text-[13.5px]">Маршрут исчезнет из списка.</p>
+    </Dialog>,
+  ],
+  [
+    "BottomSheet",
+    <BottomSheet
+      key="k"
+      snaps={[{ id: "half", heightClassName: "h-[50vh]" }]}
+      snap="half"
+      onSnapChange={() => undefined}
+      label="Лист"
+      title="Рядом"
+    >
+      <div className="p-4">Содержимое листа</div>
+    </BottomSheet>,
+  ],
+  [
+    "Toast",
+    <ToastProvider key="k">
+      <ToastDemo />
+    </ToastProvider>,
+  ],
+  [
+    "DayPicker",
+    <DayPicker
+      key="k"
+      value="2026-09-09"
+      max="2026-12-31"
+      label="Дата"
+      onChange={() => undefined}
+    />,
+  ],
 ];

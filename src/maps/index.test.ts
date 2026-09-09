@@ -23,6 +23,13 @@ const EXPECTED = [
   "StarRating",
   "TextInput",
   "Toggle",
+  "Dialog",
+  "BottomSheet",
+  "ToastProvider",
+  "useToast",
+  "DayPicker",
+  "useFocusTrap",
+  "isTopmostTrap",
 ];
 
 describe("maps kit public API", () => {

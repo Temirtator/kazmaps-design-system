@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import { KIT_CASES } from "./cases";
+import { KIT_CASES, OVERLAY_CASES } from "./cases";
 
 const meta: Meta = { title: "Maps kit/Cases" };
 export default meta;
@@ -19,3 +19,8 @@ export const All: StoryObj = {
     </div>
   ),
 };
+
+export const Dialog: StoryObj = { render: () => OVERLAY_CASES[0][1] };
+export const BottomSheet: StoryObj = { render: () => OVERLAY_CASES[1][1] };
+export const Toast: StoryObj = { render: () => OVERLAY_CASES[2][1] };
+export const DayPicker: StoryObj = { render: () => OVERLAY_CASES[3][1] };
