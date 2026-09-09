@@ -16,9 +16,6 @@ import { RegionPicker } from "./region-picker";
 
 export type { PhoneValue };
 
-// Поля повторяют корневой `PhoneInputProps` один в один, чтобы main-web мог
-// брать компонент из кита без переходника. `size` кит принимает ради этой
-// совместимости, но не применяет: у полей кита одна высота — 47px.
 export type PhoneInputProps = {
   value?: string;
   defaultValue?: string;
@@ -29,7 +26,6 @@ export type PhoneInputProps = {
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   regions?: RegionCode[];
   locale?: "ru" | "en";
-  size?: "md" | "lg";
   label?: string;
   hint?: string;
   error?: string;
