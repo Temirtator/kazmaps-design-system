@@ -34,6 +34,10 @@ const EXPECTED = [
   "formatE164",
   "parseE164",
   "PHONE_INPUT_DEFAULT_LABELS",
+  "findRegion",
+  "REGIONS",
+  "isKazakhstanMobile",
+  "toE164",
 ];
 
 describe("maps kit public API", () => {

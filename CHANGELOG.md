@@ -12,7 +12,8 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning: se
   StarRating, SegmentedRow, AvatarInitial, Dialog, BottomSheet, ToastProvider/useToast,
   Panel, ListRow, EmptyState, SectionHeader, SectionError, ShimmerBlock, DayPicker,
   ScaleBar, LogoPin, LogoLockup, PlaceRow, QrCode, InDevelopment, useFocusTrap,
-  isTopmostTrap, PhoneInput, formatE164, parseE164, PHONE_INPUT_DEFAULT_LABELS).
+  isTopmostTrap, PhoneInput, formatE164, parseE164, PHONE_INPUT_DEFAULT_LABELS,
+  Region, RegionCode, findRegion, REGIONS, isKazakhstanMobile, toE164).
 - `styles/kits/maps.css` — утилиты и keyframes кита; кит-статики бренда maps
   (`--motion-*`, `--shadow-button-*`, `--shadow-modal` …) в `tokens/brands/maps.json`.
 - Роли контракта `--highlight` / `--highlight-soft` (все бренды); `--gold`/`--gold-soft`

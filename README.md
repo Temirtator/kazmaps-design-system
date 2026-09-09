@@ -110,7 +110,9 @@ import { Button, PlaceRow } from "@temirtator/kazmaps-design-system/maps";
 
 Кит также включает оверлеи — `Dialog`, `BottomSheet`, `ToastProvider`/`useToast` — и
 `PhoneInput`: телефон с выбором региона, маской и E.164 наружу на безголовом ядре
-`useRegionPicker`/`usePhoneMask`.
+`useRegionPicker`/`usePhoneMask`. `/maps` также экспортирует типы и хелперы региона/телефона,
+используемые в сигнатуре `PhoneInputProps`: `Region`, `RegionCode`, `findRegion`, `REGIONS`,
+`isKazakhstanMobile`, `toE164`.
 
 ## Компоненты
 

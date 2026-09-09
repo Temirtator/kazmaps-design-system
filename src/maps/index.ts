@@ -52,3 +52,6 @@ export {
   type PhoneInputLabels,
 } from "../lib/phone-input-core";
 export { formatE164, parseE164 } from "../lib/phone";
+export type { Region, RegionCode } from "../data/regions";
+export { findRegion, REGIONS } from "../data/regions";
+export { isKazakhstanMobile, toE164 } from "../lib/phone";
