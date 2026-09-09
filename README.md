@@ -25,6 +25,7 @@ npm i @temirtator/kazmaps-design-system lucide-react
 ```css
 @import "tailwindcss";
 @import "@temirtator/kazmaps-design-system/styles/core.css";
+@import "@temirtator/kazmaps-design-system/styles/theme.css";
 @import "@temirtator/kazmaps-design-system/styles/brands/business.css";
 
 @source "../node_modules/@temirtator/kazmaps-design-system/dist";
@@ -35,12 +36,13 @@ npm i @temirtator/kazmaps-design-system lucide-react
 ```css
 @import "tailwindcss";
 @import "@temirtator/kazmaps-design-system/styles/core.css";
+@import "@temirtator/kazmaps-design-system/styles/theme.css";
 @import "@temirtator/kazmaps-design-system/styles/brands/business.css";
 
 @source "../../node_modules/@temirtator/kazmaps-design-system/dist";
 ```
 
-**Примечание:** выберите один из двух файлов бренда: `business.css` или `booking.css`. Это определяет палитру цветов, радиусы и типографию для данного приложения.
+**Примечание:** выберите один файл бренда: `business.css`, `booking.css` или `maps.css`. `theme.css` даёт утилиты Tailwind `bg-surface-panel`, `text-text-muted`, `border-border-input` для всех цветовых ролей контракта; подключение необязательно, если вы пишете `bg-(--surface-panel)`.
 
 ### 2. Установка атрибутов на корневой элемент
 
@@ -58,8 +60,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
 **Атрибуты:**
 
-- `data-brand`: `business` | `booking` — определяет используемый бренд и его палитру.
-- `data-theme`: `light` | `dark` (или отсутствует) — переключает тему. По умолчанию (при отсутствии атрибута) используется тёмная тема.
+- `data-brand`: `business` | `booking` | `maps`.
+- `data-theme`: `light` | `dark`. Без атрибута business и booking показывают тёмную тему; maps — светлую и следует `prefers-color-scheme`.
 
 ### 3. Импорт компонентов
 
@@ -185,7 +187,7 @@ import { PhoneInput } from "@temirtator/kazmaps-design-system";
 - `locale="ru" | "en"` переключает только названия стран в списке пикера. Остальной интерфейс пикера — доступное имя кнопки региона, плейсхолдер поля поиска, оба заголовка групп, текст пустого результата — всегда берётся из `labels`, дефолты которого русские. Англоязычному потребителю нужно передать `labels` вместе с `locale`.
 - Плейсхолдеры маски остаются видны по мере ввода (`+7 (7__) ___-__-__`), поле намеренно пустое при фокусе — чтобы срабатывал автозаполнитель браузера.
 - Хелперы: `parseE164`, `formatE164` («+7 701 234-56-78» для подписей), `isKazakhstanMobile` (белый список операторов identity — только такие номера достижимы по SMS).
-- `Input mask="phone"` — deprecated: тот же движок, формат `+7 (7__) ___-__-__`; используйте `PhoneInput`. Удаление — 0.4.0. Пометка `@deprecated` стоит на всём типе `InputMask` и на пропе `mask` целиком, потому что TypeScript не умеет депрекейтить отдельный член union — поэтому IDE зачеркнёт и `mask="email" | "bin" | "url"`, хотя они никуда не уходят и полностью поддерживаются. Заменяется и удаляется в 0.4.0 только `mask="phone"`.
+- `Input mask="phone"` — deprecated: тот же движок, формат `+7 (7__) ___-__-__`; используйте `PhoneInput`. Удаление — 0.5.0. Пометка `@deprecated` стоит на всём типе `InputMask` и на пропе `mask` целиком, потому что TypeScript не умеет депрекейтить отдельный член union — поэтому IDE зачеркнёт и `mask="email" | "bin" | "url"`, хотя они никуда не уходят и полностью поддерживаются. Заменяется и удаляется в 0.5.0 только `mask="phone"`.
 
 ## Темизация
 
@@ -195,8 +197,9 @@ import { PhoneInput } from "@temirtator/kazmaps-design-system";
 
 **Контракт токенов:**
 
-- Core tokens (`dist/styles/core.css` внутри установленного пакета) — значения по умолчанию для обеих тем.
-- Brand tokens (`dist/styles/brands/{business,booking}.css`) — переопределение палитры, радиусов и шрифтов для каждого бренда.
+- В установленном пакете: `dist/styles/core.css` (тип-шкала, spacing, motion), `dist/styles/theme.css` (Tailwind `@theme`, утилиты `bg-surface-panel`, `text-text-muted`, `border-border-input`), `dist/styles/brands/{business,booking,maps}.css` (палитра, радиусы, тени, шрифт по бренду и теме).
+- В репозитории DS источник истины — `tokens/schema.json`, `tokens/core.json`, `tokens/brands/*.json`; CSS генерируется `npm run tokens:build`, таблица значений — `docs/tokens.md` (в пакет не входит).
+- Канон имён v2: `--surface-*`, `--text-*`, `--border*`, `--accent*`, `--success|warning|danger|info` и `*-soft-bg`, `--radius-*`, `--shadow-*`, `--font-sans`. Старые имена (`--ink`, `--bg`, `--line`, `--brand`, `--warn`, `*-soft`) — алиасы, удаляются в 1.0.0.
 
 Полный список токенов и их значения также доступны в Storybook на странице **Foundations → Tokens**.
 
@@ -205,12 +208,9 @@ import { PhoneInput } from "@temirtator/kazmaps-design-system";
 Тема контролируется атрибутом `data-theme` на элементе `<html>`:
 
 ```tsx
-// Светлая тема
 <html data-theme="light">
-
-// Тёмная тема (по умолчанию, атрибут можно опустить)
 <html data-theme="dark">
-<html> {/* тоже тёмная */}
+<html> {/* business, booking: тёмная; maps: светлая или системная */}
 ```
 
 ### Переключение бренда
@@ -221,7 +221,9 @@ import { PhoneInput } from "@temirtator/kazmaps-design-system";
 <html data-brand="business" data-theme="light">
 ```
 
-Значения: `business` или `booking`.
+Значения: `business`, `booking` или `maps`.
+
+`data-brand` и `data-theme` ставятся на `<html>`: `theme.css` объявляет `--color-*` на `:root`, поэтому при атрибуте на любом другом элементе утилиты `bg-surface-panel` перестанут находить значения, а `bg-(--surface-panel)` продолжит работать.
 
 ### Переопределение токенов в приложении
 

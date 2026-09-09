@@ -1,0 +1,369 @@
+{
+  "brand": "booking",
+  "defaultTheme": "dark",
+  "followsSystem": false,
+  "themes": {
+    "light": {
+      "surface-base": {
+        "$type": "color",
+        "$value": "#f4f6f9"
+      },
+      "surface-panel": {
+        "$type": "color",
+        "$value": "#ffffff"
+      },
+      "surface-raised": {
+        "$type": "color",
+        "$value": "#eef1f6"
+      },
+      "surface-subtle": {
+        "$type": "color",
+        "$value": "#eef1f6"
+      },
+      "backdrop-scrim": {
+        "$type": "color",
+        "$value": "#00000080",
+        "$description": "ожидает значения от дизайнера"
+      },
+      "text-primary": {
+        "$type": "color",
+        "$value": "#1b2230"
+      },
+      "text-secondary": {
+        "$type": "color",
+        "$value": "#3a4456"
+      },
+      "text-muted": {
+        "$type": "color",
+        "$value": "#6b7585"
+      },
+      "text-tertiary": {
+        "$type": "color",
+        "$value": "#97a0ae"
+      },
+      "text-faint": {
+        "$type": "color",
+        "$value": "#97a0ae"
+      },
+      "text-on-accent": {
+        "$type": "color",
+        "$value": "#ffffff"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "#e6e9ef"
+      },
+      "border-subtle": {
+        "$type": "color",
+        "$value": "#eff1f5"
+      },
+      "border-hairline": {
+        "$type": "color",
+        "$value": "#eff1f5"
+      },
+      "border-input": {
+        "$type": "color",
+        "$value": "#e6e9ef"
+      },
+      "accent": {
+        "$type": "color",
+        "$value": "#5e6ad2"
+      },
+      "accent-press": {
+        "$type": "color",
+        "$value": "#4f5ab8"
+      },
+      "accent-soft-bg": {
+        "$type": "color",
+        "$value": "#eef0fb"
+      },
+      "accent-soft-border": {
+        "$type": "color",
+        "$value": "#c4c8f0"
+      },
+      "success": {
+        "$type": "color",
+        "$value": "#1f8a5b"
+      },
+      "success-soft-bg": {
+        "$type": "color",
+        "$value": "#e5f4ec"
+      },
+      "warning": {
+        "$type": "color",
+        "$value": "#c9871a"
+      },
+      "warning-soft-bg": {
+        "$type": "color",
+        "$value": "#fbefd3"
+      },
+      "danger": {
+        "$type": "color",
+        "$value": "#d8334a"
+      },
+      "danger-soft-bg": {
+        "$type": "color",
+        "$value": "#fce7eb"
+      },
+      "info": {
+        "$type": "color",
+        "$value": "#2a6fdb"
+      },
+      "info-soft-bg": {
+        "$type": "color",
+        "$value": "#e7f0fc"
+      },
+      "shadow-sm": {
+        "$type": "shadow",
+        "$value": "0 1px 3px rgba(0, 0, 0, 0.08)"
+      },
+      "shadow-md": {
+        "$type": "shadow",
+        "$value": "0 4px 12px rgba(0, 0, 0, 0.1)"
+      },
+      "shadow-lg": {
+        "$type": "shadow",
+        "$value": "0 20px 48px rgba(0, 0, 0, 0.14)"
+      }
+    },
+    "dark": {
+      "surface-base": {
+        "$type": "color",
+        "$value": "#141921"
+      },
+      "surface-panel": {
+        "$type": "color",
+        "$value": "#1e2635"
+      },
+      "surface-raised": {
+        "$type": "color",
+        "$value": "#1c2330"
+      },
+      "surface-subtle": {
+        "$type": "color",
+        "$value": "#1c2330"
+      },
+      "backdrop-scrim": {
+        "$type": "color",
+        "$value": "#00000080",
+        "$description": "ожидает значения от дизайнера"
+      },
+      "text-primary": {
+        "$type": "color",
+        "$value": "#e8edf4"
+      },
+      "text-secondary": {
+        "$type": "color",
+        "$value": "#b8c4d4"
+      },
+      "text-muted": {
+        "$type": "color",
+        "$value": "#7a8699"
+      },
+      "text-tertiary": {
+        "$type": "color",
+        "$value": "#5a6575"
+      },
+      "text-faint": {
+        "$type": "color",
+        "$value": "#5a6575"
+      },
+      "text-on-accent": {
+        "$type": "color",
+        "$value": "#ffffff"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "#414b5e"
+      },
+      "border-subtle": {
+        "$type": "color",
+        "$value": "#243040"
+      },
+      "border-hairline": {
+        "$type": "color",
+        "$value": "#243040"
+      },
+      "border-input": {
+        "$type": "color",
+        "$value": "#414b5e"
+      },
+      "accent": {
+        "$type": "color",
+        "$value": "#6e79d6"
+      },
+      "accent-press": {
+        "$type": "color",
+        "$value": "#8b94e0"
+      },
+      "accent-soft-bg": {
+        "$type": "color",
+        "$value": "#262a52"
+      },
+      "accent-soft-border": {
+        "$type": "color",
+        "$value": "#262a52"
+      },
+      "success": {
+        "$type": "color",
+        "$value": "#1f8a5b"
+      },
+      "success-soft-bg": {
+        "$type": "color",
+        "$value": "#17362b"
+      },
+      "warning": {
+        "$type": "color",
+        "$value": "#c9871a"
+      },
+      "warning-soft-bg": {
+        "$type": "color",
+        "$value": "#382d1a"
+      },
+      "danger": {
+        "$type": "color",
+        "$value": "#d8334a"
+      },
+      "danger-soft-bg": {
+        "$type": "color",
+        "$value": "#3a222b"
+      },
+      "info": {
+        "$type": "color",
+        "$value": "#2a6fdb"
+      },
+      "info-soft-bg": {
+        "$type": "color",
+        "$value": "#1c2c47"
+      },
+      "shadow-sm": {
+        "$type": "shadow",
+        "$value": "0 1px 2px #0000004d"
+      },
+      "shadow-md": {
+        "$type": "shadow",
+        "$value": "0 4px 12px #00000066"
+      },
+      "shadow-lg": {
+        "$type": "shadow",
+        "$value": "0 20px 48px #00000080"
+      }
+    }
+  },
+  "static": {
+    "radius-sm": {
+      "$type": "dimension",
+      "$value": "8px"
+    },
+    "radius-md": {
+      "$type": "dimension",
+      "$value": "12px"
+    },
+    "radius-lg": {
+      "$type": "dimension",
+      "$value": "16px"
+    },
+    "radius-full": {
+      "$type": "dimension",
+      "$value": "9999px"
+    },
+    "font-sans": {
+      "$type": "fontFamily",
+      "$value": "\"Lexend\", \"Manrope\", system-ui, -apple-system, sans-serif"
+    }
+  },
+  "extras": {
+    "light": {
+      "brand-50": {
+        "$type": "color",
+        "$value": "#f0f2fc"
+      },
+      "brand-100": {
+        "$type": "color",
+        "$value": "#dee0f7"
+      },
+      "brand-200": {
+        "$type": "color",
+        "$value": "#c4c8f0"
+      },
+      "brand-300": {
+        "$type": "color",
+        "$value": "#9ea5e5"
+      },
+      "brand-400": {
+        "$type": "color",
+        "$value": "#7d86db"
+      },
+      "brand-500": {
+        "$type": "color",
+        "$value": "#5e6ad2"
+      },
+      "brand-600": {
+        "$type": "color",
+        "$value": "#4f5ab8"
+      },
+      "brand-700": {
+        "$type": "color",
+        "$value": "#3a4394"
+      },
+      "gold": {
+        "$type": "color",
+        "$value": "#e8a317"
+      },
+      "gold-press": {
+        "$type": "color",
+        "$value": "#c98b10"
+      },
+      "gold-soft": {
+        "$type": "color",
+        "$value": "#fbefd3"
+      }
+    },
+    "dark": {
+      "brand-50": {
+        "$type": "color",
+        "$value": "#11131f"
+      },
+      "brand-100": {
+        "$type": "color",
+        "$value": "#1a1d33"
+      },
+      "brand-200": {
+        "$type": "color",
+        "$value": "#262a52"
+      },
+      "brand-300": {
+        "$type": "color",
+        "$value": "#343a72"
+      },
+      "brand-400": {
+        "$type": "color",
+        "$value": "#454d96"
+      },
+      "brand-500": {
+        "$type": "color",
+        "$value": "#5e6ad2"
+      },
+      "brand-600": {
+        "$type": "color",
+        "$value": "#6e79d6"
+      },
+      "brand-700": {
+        "$type": "color",
+        "$value": "#8b94e0"
+      },
+      "gold": {
+        "$type": "color",
+        "$value": "#e8a317"
+      },
+      "gold-press": {
+        "$type": "color",
+        "$value": "#c98b10"
+      },
+      "gold-soft": {
+        "$type": "color",
+        "$value": "#3a2f1a"
+      }
+    }
+  }
+}

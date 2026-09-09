@@ -1,6 +1,6 @@
 {
   "name": "@temirtator/kazmaps-design-system",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "KazMaps design system — multi-brand UI kit (tokens, atoms, molecules) for Tailwind v4 + React 19 apps",
   "type": "module",
   "license": "MIT",
@@ -25,8 +25,10 @@
       "import": "./dist/index.js"
     },
     "./styles/core.css": "./dist/styles/core.css",
+    "./styles/theme.css": "./dist/styles/theme.css",
     "./styles/brands/business.css": "./dist/styles/brands/business.css",
-    "./styles/brands/booking.css": "./dist/styles/brands/booking.css"
+    "./styles/brands/booking.css": "./dist/styles/brands/booking.css",
+    "./styles/brands/maps.css": "./dist/styles/brands/maps.css"
   },
   "scripts": {
     "build": "tsup",
@@ -36,7 +38,9 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "test": "vitest run --passWithNoTests",
+    "tokens:build": "node scripts/build-tokens.mjs",
+    "tokens:check": "npm run tokens:build && git diff --quiet --exit-code -- src/styles docs/tokens.md",
+    "test": "npm run tokens:check && vitest run --passWithNoTests",
     "test:watch": "vitest",
     "test:vrt": "storybook build && playwright test --project=vrt",
     "test:vrt:update": "storybook build && playwright test --project=vrt --update-snapshots",
@@ -91,7 +95,7 @@
     "jsdom": "^29.1.1",
     "lint-staged": "^16.4.0",
     "lucide-react": "^1.24.0",
-    "prettier": "^3.9.5",
+    "prettier": "3.9.5",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-hook-form": "^7.87.0",

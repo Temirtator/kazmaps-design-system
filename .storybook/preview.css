@@ -2,4 +2,5 @@
 @import "../src/styles/core.css";
 @import "../src/styles/brands/business.css";
 @import "../src/styles/brands/booking.css";
+@import "../src/styles/brands/maps.css";
 @source "../src";

@@ -3,6 +3,40 @@
 All notable changes to `@temirtator/kazmaps-design-system` are documented here.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning: semver.
 
+## [0.4.0] — 2026-09-08
+
+### Added
+
+- Бренд `maps` (`styles/brands/maps.css`): светлая тема по умолчанию, тёмная по `data-theme="dark"`
+  или системной `prefers-color-scheme`. Значения — палитра main-web.
+- Источник истины токенов — `tokens/schema.json`, `tokens/core.json`, `tokens/brands/*.json`
+  (W3C DTCG, литералы). CSS генерируется `npm run tokens:build`, дрейф ловит `npm run tokens:check`.
+- `styles/theme.css` — Tailwind `@theme` с `--color-<роль>` для всех цветовых ролей контракта.
+- `docs/tokens.md` — таблица значений по брендам и темам, список ролей и расширений брендов,
+  ожидающих значения от дизайнера.
+- Storybook: бренд `maps` в тулбаре, страница Foundations → Tokens читает JSON.
+- Бренд `maps` также объявляет расширения `--gold` и `--gold-soft`: их читают Button и StarRating;
+  в C2 пара становится ролью контракта.
+
+### Changed
+
+- Канон имён контракта v2: `--surface-base|panel|raised|subtle`, `--backdrop-scrim`,
+  `--text-primary|secondary|muted|tertiary|faint|on-accent`, `--border|-subtle|-hairline|-input`,
+  `--accent|-press|-soft-bg|-soft-border`, `--success|warning|danger|info` + `*-soft-bg`.
+  Значения business и booking не изменились.
+- Новые роли business/booking получили перенесённые значения (`text-faint` = прежний `muted-2`,
+  `surface-subtle` = `bg-2`, `border-hairline` = `line-2`, `border-input` = `line`,
+  `accent-soft-border` = `brand-200`, `text-on-accent` = `#ffffff`); `backdrop-scrim` временно
+  `#00000080` до значения от дизайнера.
+- Шкала `--brand-50…700` и `--gold*` — расширения брендов business/booking, не часть контракта.
+- Удаление `Input mask="phone"` перенесено с 0.4.0 на 0.5.0.
+
+### Deprecated
+
+- Старые имена `--bg`, `--bg-2`, `--card`, `--ink`, `--ink-2`, `--muted`, `--muted-2`, `--line`,
+  `--line-2`, `--brand`, `--brand-press`, `--brand-soft`, `--warn`, `--success-soft`, `--warn-soft`,
+  `--danger-soft`, `--info-soft` — алиасы на канон, удаление в 1.0.0.
+
 ## [0.3.0] — 2026-09-04
 
 ### Added

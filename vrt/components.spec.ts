@@ -1,9 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
 
-// Screenshots run against the built Storybook (`npm run test:vrt` rebuilds it
-// first — baselines against a stale storybook-static are meaningless).
-// Brand is pinned to business: booking differs only in font stack, and this
-// Storybook loads no webfonts, so booking shots would duplicate these.
 const STORIES = [
   { id: "atoms-checkbox--states", name: "checkbox-states" },
   { id: "atoms-input--states", name: "input-states" },
@@ -23,8 +19,8 @@ const STORIES = [
 
 const THEMES = ["dark", "light"] as const;
 
-async function openStory(page: Page, id: string, theme: string): Promise<void> {
-  await page.goto(`/iframe.html?viewMode=story&id=${id}&globals=brand:business;theme:${theme}`);
+async function openStory(page: Page, id: string, theme: string, brand = "business"): Promise<void> {
+  await page.goto(`/iframe.html?viewMode=story&id=${id}&globals=brand:${brand};theme:${theme}`);
   await expect(page.locator("#storybook-root > *").first()).toBeVisible();
 }
 
@@ -66,3 +62,38 @@ for (const theme of THEMES) {
     await expect(page).toHaveScreenshot(`phone-input-picker-open-${theme}.png`, { fullPage: true });
   });
 }
+
+for (const story of STORIES) {
+  for (const theme of THEMES) {
+    test(`maps ${story.name} — ${theme}`, async ({ page }) => {
+      await openStory(page, story.id, theme, "maps");
+      await expect(page).toHaveScreenshot(`maps-${story.name}-${theme}.png`, { fullPage: true });
+    });
+  }
+}
+
+async function readSurfacePanel(page: Page): Promise<string> {
+  return page.evaluate(() =>
+    getComputedStyle(document.documentElement).getPropertyValue("--surface-panel").trim(),
+  );
+}
+
+test.describe("maps follows the system theme", () => {
+  test.use({ colorScheme: "dark" });
+
+  test("no data-theme falls back to the system dark scheme", async ({ page }) => {
+    await page.goto(`/iframe.html?viewMode=story&id=${STORIES[0].id}&globals=brand:maps`);
+    await expect(page.locator("#storybook-root > *").first()).toBeVisible();
+    await page.evaluate(() => document.documentElement.removeAttribute("data-theme"));
+    await page.waitForTimeout(50);
+    expect(await readSurfacePanel(page)).toBe("#0d1320");
+  });
+
+  test("explicit data-theme=light overrides the system dark scheme", async ({ page }) => {
+    await page.goto(`/iframe.html?viewMode=story&id=${STORIES[0].id}&globals=brand:maps`);
+    await expect(page.locator("#storybook-root > *").first()).toBeVisible();
+    await page.evaluate(() => document.documentElement.setAttribute("data-theme", "light"));
+    await page.waitForTimeout(50);
+    expect(await readSurfacePanel(page)).toBe("#fff");
+  });
+});

@@ -1,0 +1,369 @@
+{
+  "brand": "business",
+  "defaultTheme": "dark",
+  "followsSystem": false,
+  "themes": {
+    "light": {
+      "surface-base": {
+        "$type": "color",
+        "$value": "#fbfbfb"
+      },
+      "surface-panel": {
+        "$type": "color",
+        "$value": "#ffffff"
+      },
+      "surface-raised": {
+        "$type": "color",
+        "$value": "#f4f4f5"
+      },
+      "surface-subtle": {
+        "$type": "color",
+        "$value": "#f4f4f5"
+      },
+      "backdrop-scrim": {
+        "$type": "color",
+        "$value": "#00000080",
+        "$description": "ожидает значения от дизайнера"
+      },
+      "text-primary": {
+        "$type": "color",
+        "$value": "#282a30"
+      },
+      "text-secondary": {
+        "$type": "color",
+        "$value": "#3c4149"
+      },
+      "text-muted": {
+        "$type": "color",
+        "$value": "#6f6e77"
+      },
+      "text-tertiary": {
+        "$type": "color",
+        "$value": "#86848d"
+      },
+      "text-faint": {
+        "$type": "color",
+        "$value": "#86848d"
+      },
+      "text-on-accent": {
+        "$type": "color",
+        "$value": "#ffffff"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "#e9e8ea"
+      },
+      "border-subtle": {
+        "$type": "color",
+        "$value": "#e4e2e4"
+      },
+      "border-hairline": {
+        "$type": "color",
+        "$value": "#e4e2e4"
+      },
+      "border-input": {
+        "$type": "color",
+        "$value": "#e9e8ea"
+      },
+      "accent": {
+        "$type": "color",
+        "$value": "#5e6ad2"
+      },
+      "accent-press": {
+        "$type": "color",
+        "$value": "#4f5ab8"
+      },
+      "accent-soft-bg": {
+        "$type": "color",
+        "$value": "#f0f1fb"
+      },
+      "accent-soft-border": {
+        "$type": "color",
+        "$value": "#c5cbf0"
+      },
+      "success": {
+        "$type": "color",
+        "$value": "#27a644"
+      },
+      "success-soft-bg": {
+        "$type": "color",
+        "$value": "#e7f6ec"
+      },
+      "warning": {
+        "$type": "color",
+        "$value": "#c99a16"
+      },
+      "warning-soft-bg": {
+        "$type": "color",
+        "$value": "#f9f0d8"
+      },
+      "danger": {
+        "$type": "color",
+        "$value": "#eb5757"
+      },
+      "danger-soft-bg": {
+        "$type": "color",
+        "$value": "#fdecec"
+      },
+      "info": {
+        "$type": "color",
+        "$value": "#4ea7fc"
+      },
+      "info-soft-bg": {
+        "$type": "color",
+        "$value": "#e8f3fe"
+      },
+      "shadow-sm": {
+        "$type": "shadow",
+        "$value": "0 1px 2px #0000000f"
+      },
+      "shadow-md": {
+        "$type": "shadow",
+        "$value": "0 4px 12px #00000014"
+      },
+      "shadow-lg": {
+        "$type": "shadow",
+        "$value": "0 16px 48px #0000001f"
+      }
+    },
+    "dark": {
+      "surface-base": {
+        "$type": "color",
+        "$value": "#08090a"
+      },
+      "surface-panel": {
+        "$type": "color",
+        "$value": "#232326"
+      },
+      "surface-raised": {
+        "$type": "color",
+        "$value": "#1c1c1f"
+      },
+      "surface-subtle": {
+        "$type": "color",
+        "$value": "#1c1c1f"
+      },
+      "backdrop-scrim": {
+        "$type": "color",
+        "$value": "#00000080",
+        "$description": "ожидает значения от дизайнера"
+      },
+      "text-primary": {
+        "$type": "color",
+        "$value": "#f7f8f8"
+      },
+      "text-secondary": {
+        "$type": "color",
+        "$value": "#d0d6e0"
+      },
+      "text-muted": {
+        "$type": "color",
+        "$value": "#8a8f98"
+      },
+      "text-tertiary": {
+        "$type": "color",
+        "$value": "#62666d"
+      },
+      "text-faint": {
+        "$type": "color",
+        "$value": "#62666d"
+      },
+      "text-on-accent": {
+        "$type": "color",
+        "$value": "#ffffff"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "#23252a"
+      },
+      "border-subtle": {
+        "$type": "color",
+        "$value": "#34343a"
+      },
+      "border-hairline": {
+        "$type": "color",
+        "$value": "#34343a"
+      },
+      "border-input": {
+        "$type": "color",
+        "$value": "#23252a"
+      },
+      "accent": {
+        "$type": "color",
+        "$value": "#5e6ad2"
+      },
+      "accent-press": {
+        "$type": "color",
+        "$value": "#4f5ab8"
+      },
+      "accent-soft-bg": {
+        "$type": "color",
+        "$value": "#1a1d33"
+      },
+      "accent-soft-border": {
+        "$type": "color",
+        "$value": "#262a52"
+      },
+      "success": {
+        "$type": "color",
+        "$value": "#27a644"
+      },
+      "success-soft-bg": {
+        "$type": "color",
+        "$value": "#0f2417"
+      },
+      "warning": {
+        "$type": "color",
+        "$value": "#f0bf00"
+      },
+      "warning-soft-bg": {
+        "$type": "color",
+        "$value": "#241f10"
+      },
+      "danger": {
+        "$type": "color",
+        "$value": "#eb5757"
+      },
+      "danger-soft-bg": {
+        "$type": "color",
+        "$value": "#2a1416"
+      },
+      "info": {
+        "$type": "color",
+        "$value": "#4ea7fc"
+      },
+      "info-soft-bg": {
+        "$type": "color",
+        "$value": "#0e1f2e"
+      },
+      "shadow-sm": {
+        "$type": "shadow",
+        "$value": "0 1px 2px #0000004d"
+      },
+      "shadow-md": {
+        "$type": "shadow",
+        "$value": "0 4px 12px #00000066"
+      },
+      "shadow-lg": {
+        "$type": "shadow",
+        "$value": "0 16px 48px #00000080"
+      }
+    }
+  },
+  "static": {
+    "radius-sm": {
+      "$type": "dimension",
+      "$value": "6px"
+    },
+    "radius-md": {
+      "$type": "dimension",
+      "$value": "8px"
+    },
+    "radius-lg": {
+      "$type": "dimension",
+      "$value": "12px"
+    },
+    "radius-full": {
+      "$type": "dimension",
+      "$value": "9999px"
+    },
+    "font-sans": {
+      "$type": "fontFamily",
+      "$value": "\"Inter\", \"SF Pro Display\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif"
+    }
+  },
+  "extras": {
+    "light": {
+      "brand-50": {
+        "$type": "color",
+        "$value": "#f0f1fb"
+      },
+      "brand-100": {
+        "$type": "color",
+        "$value": "#e0e3f7"
+      },
+      "brand-200": {
+        "$type": "color",
+        "$value": "#c5cbf0"
+      },
+      "brand-300": {
+        "$type": "color",
+        "$value": "#a3abe8"
+      },
+      "brand-400": {
+        "$type": "color",
+        "$value": "#828dde"
+      },
+      "brand-500": {
+        "$type": "color",
+        "$value": "#5e6ad2"
+      },
+      "brand-600": {
+        "$type": "color",
+        "$value": "#525dba"
+      },
+      "brand-700": {
+        "$type": "color",
+        "$value": "#454d96"
+      },
+      "gold": {
+        "$type": "color",
+        "$value": "#c99a16"
+      },
+      "gold-press": {
+        "$type": "color",
+        "$value": "#b0860f"
+      },
+      "gold-soft": {
+        "$type": "color",
+        "$value": "#f9f0d8"
+      }
+    },
+    "dark": {
+      "brand-50": {
+        "$type": "color",
+        "$value": "#11131f"
+      },
+      "brand-100": {
+        "$type": "color",
+        "$value": "#1a1d33"
+      },
+      "brand-200": {
+        "$type": "color",
+        "$value": "#262a52"
+      },
+      "brand-300": {
+        "$type": "color",
+        "$value": "#343a72"
+      },
+      "brand-400": {
+        "$type": "color",
+        "$value": "#454d96"
+      },
+      "brand-500": {
+        "$type": "color",
+        "$value": "#5e6ad2"
+      },
+      "brand-600": {
+        "$type": "color",
+        "$value": "#6e79d6"
+      },
+      "brand-700": {
+        "$type": "color",
+        "$value": "#8b94e0"
+      },
+      "gold": {
+        "$type": "color",
+        "$value": "#f0bf00"
+      },
+      "gold-press": {
+        "$type": "color",
+        "$value": "#d9ad00"
+      },
+      "gold-soft": {
+        "$type": "color",
+        "$value": "#241f10"
+      }
+    }
+  }
+}

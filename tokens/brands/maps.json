@@ -1,0 +1,153 @@
+{
+  "brand": "maps",
+  "defaultTheme": "light",
+  "followsSystem": true,
+  "themes": {
+    "light": {
+      "surface-base": { "$type": "color", "$value": "#e9ece4" },
+      "surface-panel": { "$type": "color", "$value": "#ffffff" },
+      "surface-raised": { "$type": "color", "$value": "#f2f4f7" },
+      "surface-subtle": { "$type": "color", "$value": "#f7f8fa" },
+      "backdrop-scrim": { "$type": "color", "$value": "#dcdfd8" },
+      "text-primary": { "$type": "color", "$value": "#22272e" },
+      "text-secondary": { "$type": "color", "$value": "#39424f" },
+      "text-muted": { "$type": "color", "$value": "#667085" },
+      "text-tertiary": { "$type": "color", "$value": "#98a2b3" },
+      "text-faint": { "$type": "color", "$value": "#8a9182" },
+      "text-on-accent": { "$type": "color", "$value": "#ffffff" },
+      "border": { "$type": "color", "$value": "#d5dae2" },
+      "border-subtle": { "$type": "color", "$value": "#dfe3e8" },
+      "border-hairline": { "$type": "color", "$value": "#eceef2" },
+      "border-input": { "$type": "color", "$value": "#c9d0da" },
+      "accent": { "$type": "color", "$value": "#1668c9" },
+      "accent-press": {
+        "$type": "color",
+        "$value": "#1668c9",
+        "$description": "ожидает значения от дизайнера"
+      },
+      "accent-soft-bg": { "$type": "color", "$value": "#eef4fc" },
+      "accent-soft-border": { "$type": "color", "$value": "#cfe0f5" },
+      "success": { "$type": "color", "$value": "#12a454" },
+      "success-soft-bg": { "$type": "color", "$value": "#e7f7ee" },
+      "warning": { "$type": "color", "$value": "#ef7d1a" },
+      "warning-soft-bg": { "$type": "color", "$value": "#fdf3e6" },
+      "danger": { "$type": "color", "$value": "#dd3b2e" },
+      "danger-soft-bg": {
+        "$type": "color",
+        "$value": "#fdecec",
+        "$description": "ожидает значения от дизайнера"
+      },
+      "info": {
+        "$type": "color",
+        "$value": "#1668c9",
+        "$description": "ожидает значения от дизайнера"
+      },
+      "info-soft-bg": {
+        "$type": "color",
+        "$value": "#eef4fc",
+        "$description": "ожидает значения от дизайнера"
+      },
+      "shadow-sm": { "$type": "shadow", "$value": "rgba(16, 24, 40, 0.08) 0px 1px 3px 0px" },
+      "shadow-md": { "$type": "shadow", "$value": "rgba(16, 24, 40, 0.22) 0px 12px 32px 0px" },
+      "shadow-lg": { "$type": "shadow", "$value": "rgba(16, 24, 40, 0.28) 0px 18px 48px 0px" }
+    },
+    "dark": {
+      "surface-base": { "$type": "color", "$value": "#0a0e18" },
+      "surface-panel": { "$type": "color", "$value": "#0d1320" },
+      "surface-raised": { "$type": "color", "$value": "#141d31" },
+      "surface-subtle": { "$type": "color", "$value": "#141d31" },
+      "backdrop-scrim": { "$type": "color", "$value": "#0a0e18" },
+      "text-primary": { "$type": "color", "$value": "#e8edf7" },
+      "text-secondary": { "$type": "color", "$value": "#93a5c4" },
+      "text-muted": { "$type": "color", "$value": "#5f7392" },
+      "text-tertiary": { "$type": "color", "$value": "#5f7392" },
+      "text-faint": { "$type": "color", "$value": "#5f7392" },
+      "text-on-accent": { "$type": "color", "$value": "#0a0e18" },
+      "border": { "$type": "color", "$value": "#1e2a44" },
+      "border-subtle": { "$type": "color", "$value": "#1e2a44" },
+      "border-hairline": { "$type": "color", "$value": "#1e2a44" },
+      "border-input": { "$type": "color", "$value": "#1e2a44" },
+      "accent": { "$type": "color", "$value": "#35e0ff" },
+      "accent-press": {
+        "$type": "color",
+        "$value": "#35e0ff",
+        "$description": "ожидает значения от дизайнера"
+      },
+      "accent-soft-bg": { "$type": "color", "$value": "#141d31" },
+      "accent-soft-border": { "$type": "color", "$value": "#1e2a44" },
+      "success": { "$type": "color", "$value": "#3fd68a" },
+      "success-soft-bg": { "$type": "color", "$value": "#141d31" },
+      "warning": { "$type": "color", "$value": "#ffb638" },
+      "warning-soft-bg": { "$type": "color", "$value": "#141d31" },
+      "danger": { "$type": "color", "$value": "#ff5a4d" },
+      "danger-soft-bg": {
+        "$type": "color",
+        "$value": "#141d31",
+        "$description": "ожидает значения от дизайнера"
+      },
+      "info": {
+        "$type": "color",
+        "$value": "#35e0ff",
+        "$description": "ожидает значения от дизайнера"
+      },
+      "info-soft-bg": {
+        "$type": "color",
+        "$value": "#141d31",
+        "$description": "ожидает значения от дизайнера"
+      },
+      "shadow-sm": { "$type": "shadow", "$value": "rgba(16, 24, 40, 0.08) 0px 1px 3px 0px" },
+      "shadow-md": { "$type": "shadow", "$value": "rgba(16, 24, 40, 0.22) 0px 12px 32px 0px" },
+      "shadow-lg": { "$type": "shadow", "$value": "rgba(16, 24, 40, 0.28) 0px 18px 48px 0px" }
+    }
+  },
+  "static": {
+    "radius-sm": {
+      "$type": "dimension",
+      "$value": "8px",
+      "$description": "временно, промер с фреймов в C2"
+    },
+    "radius-md": {
+      "$type": "dimension",
+      "$value": "12px",
+      "$description": "временно, промер с фреймов в C2"
+    },
+    "radius-lg": {
+      "$type": "dimension",
+      "$value": "16px",
+      "$description": "временно, промер с фреймов в C2"
+    },
+    "radius-full": { "$type": "dimension", "$value": "9999px" },
+    "font-sans": {
+      "$type": "fontFamily",
+      "$value": "var(--font-ibm-plex-sans), system-ui, sans-serif"
+    }
+  },
+  "extras": {
+    "light": {
+      "surface-map": { "$type": "color", "$value": "#e9ece4" },
+      "text-on-map": { "$type": "color", "$value": "#22272e" },
+      "rating-star": { "$type": "color", "$value": "#f2a615" },
+      "marker-primary": { "$type": "color", "$value": "#e0442f" },
+      "border-state-card": { "$type": "color", "$value": "#e4e7ec" },
+      "gold": { "$type": "color", "$value": "#f2a615" },
+      "gold-soft": {
+        "$type": "color",
+        "$value": "#fdf3e6",
+        "$description": "ожидает значения от дизайнера"
+      }
+    },
+    "dark": {
+      "surface-map": { "$type": "color", "$value": "#0a0e18" },
+      "text-on-map": { "$type": "color", "$value": "#22272e" },
+      "rating-star": { "$type": "color", "$value": "#f2a615" },
+      "marker-primary": { "$type": "color", "$value": "#e0442f" },
+      "border-state-card": { "$type": "color", "$value": "#1e2a44" },
+      "gold": { "$type": "color", "$value": "#f2a615" },
+      "gold-soft": {
+        "$type": "color",
+        "$value": "#141d31",
+        "$description": "ожидает значения от дизайнера"
+      }
+    }
+  }
+}
