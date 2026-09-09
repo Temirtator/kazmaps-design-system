@@ -33,6 +33,7 @@ const EXPECTED = [
   "isTopmostTrap",
   "formatE164",
   "parseE164",
+  "PHONE_INPUT_DEFAULT_LABELS",
 ];
 
 describe("maps kit public API", () => {

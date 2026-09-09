@@ -3,6 +3,34 @@
 All notable changes to `@temirtator/kazmaps-design-system` are documented here.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning: semver.
 
+## [0.5.0] — 2026-09-10
+
+### Added
+
+- Второй вход `@temirtator/kazmaps-design-system/maps` — примитивы main-web с родными
+  именами (Button, IconButton, Chip, Toggle, TextInput, PasswordInput, SearchInput,
+  StarRating, SegmentedRow, AvatarInitial, Dialog, BottomSheet, ToastProvider/useToast,
+  Panel, ListRow, EmptyState, SectionHeader, SectionError, ShimmerBlock, DayPicker,
+  ScaleBar, LogoPin, LogoLockup, PlaceRow, QrCode, InDevelopment, useFocusTrap,
+  isTopmostTrap, PhoneInput, formatE164, parseE164, PHONE_INPUT_DEFAULT_LABELS).
+- `styles/kits/maps.css` — утилиты и keyframes кита; кит-статики бренда maps
+  (`--motion-*`, `--shadow-button-*`, `--shadow-modal` …) в `tokens/brands/maps.json`.
+- Роли контракта `--highlight` / `--highlight-soft` (все бренды); `--gold`/`--gold-soft`
+  стали алиасами.
+- Безголовое ядро телефона `useRegionPicker` / `usePhoneMask`; `maps/PhoneInput`.
+- Бренд booking в VRT; интеракции PhoneInput под business и maps.
+
+### Changed
+
+- Шкала текста `--text-xs…3xl` переехала из `core.css` в бренды. business/booking — прежние px;
+  maps — rem-значения Tailwind (`radius-sm|md|lg` maps = 0.25/0.375/0.5rem).
+
+### Deprecated
+
+- `Input mask="phone"` остаётся с пометкой `@deprecated`: удаление перенесено на следующую
+  минорную версию после миграции business-client на `PhoneInput` (три места: настройки,
+  два шага онбординга).
+
 ## [0.4.0] — 2026-09-08
 
 ### Added

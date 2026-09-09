@@ -103,6 +103,10 @@ import { Button, PlaceRow } from "@temirtator/kazmaps-design-system/maps";
 `QrCode` рендерит настоящий QR-код через `qrcode` — необязательный peer-пакет кита, установите
 его в приложении-потребителе (`npm i qrcode`); main-web уже это делает.
 
+Кит также включает оверлеи — `Dialog`, `BottomSheet`, `ToastProvider`/`useToast` — и
+`PhoneInput`: телефон с выбором региона, маской и E.164 наружу на безголовом ядре
+`useRegionPicker`/`usePhoneMask`.
+
 ## Компоненты
 
 ### Атомы (16 компонентов)
