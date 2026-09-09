@@ -15,6 +15,7 @@ npm i @temirtator/kazmaps-design-system lucide-react
 - `react` ^19.0.0
 - `react-dom` ^19.0.0
 - `lucide-react` ^1.0.0
+- `qrcode` ^1.5.4 — необязательный, нужен только `QrCode` из `/maps`
 
 ## Подключение в Next.js или Tailwind v4 приложение
 

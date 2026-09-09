@@ -126,7 +126,10 @@ export const KIT_CASES: [string, ReactElement][] = [
 function ToastDemo() {
   const show = useToast();
   useEffect(() => {
-    show("Маршрут сохранён", { action: { label: "Открыть", onClick: () => undefined } });
+    show("Маршрут сохранён", {
+      action: { label: "Открыть", onClick: () => undefined },
+      durationMs: 60_000,
+    });
   }, [show]);
   return null;
 }

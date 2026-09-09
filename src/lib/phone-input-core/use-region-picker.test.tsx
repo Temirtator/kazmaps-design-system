@@ -14,6 +14,7 @@ describe("useRegionPicker", () => {
     const { result } = setup();
     expect(result.current.ordered[result.current.active]?.iso).toBe("KZ");
     act(() => result.current.setQuery("+99"));
+    expect(result.current.ordered.length).toBeGreaterThan(0);
     expect(result.current.ordered.every((r) => r.dial.startsWith("99"))).toBe(true);
     expect(result.current.active).toBe(0);
   });
