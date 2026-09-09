@@ -50,7 +50,13 @@ function baseLines(schema, brand) {
     line(old, `var(--${canon})`),
   );
   const extraLines = entries(brand.extras?.[brand.defaultTheme]);
-  return [...canonLines, ...aliasLines, ...extraLines, ...entries(brand.static)];
+  return [
+    ...canonLines,
+    ...aliasLines,
+    ...extraLines,
+    ...entries(brand.static),
+    ...entries(brand.kit),
+  ];
 }
 
 export function brandCss(schema, brand) {
@@ -112,6 +118,12 @@ export function tokensMd({ schema, brands }) {
   );
   for (const role of schema.static) {
     lines.push(row([`\`--${role}\``, ...brands.map((b) => `\`${b.static[role].$value}\``)]));
+  }
+  lines.push("", "## Кит бренда", "");
+  for (const b of brands) {
+    if (!b.kit) continue;
+    for (const [role, def] of Object.entries(b.kit))
+      lines.push(`- ${b.brand}: \`--${role}\` = \`${def.$value}\``);
   }
   lines.push("", "## Алиасы (deprecated, удаление в 1.0.0)", "");
   for (const [old, canon] of Object.entries(schema.aliases))

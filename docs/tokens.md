@@ -41,11 +41,31 @@
 
 | Роль            | business                                                                                       | booking                                                     | maps                                               |
 | --------------- | ---------------------------------------------------------------------------------------------- | ----------------------------------------------------------- | -------------------------------------------------- |
-| `--radius-sm`   | `6px`                                                                                          | `8px`                                                       | `8px`                                              |
-| `--radius-md`   | `8px`                                                                                          | `12px`                                                      | `12px`                                             |
-| `--radius-lg`   | `12px`                                                                                         | `16px`                                                      | `16px`                                             |
+| `--text-xs`     | `11px`                                                                                         | `11px`                                                      | `0.75rem`                                          |
+| `--text-sm`     | `13px`                                                                                         | `13px`                                                      | `0.875rem`                                         |
+| `--text-base`   | `15px`                                                                                         | `15px`                                                      | `1rem`                                             |
+| `--text-lg`     | `17px`                                                                                         | `17px`                                                      | `1.125rem`                                         |
+| `--text-xl`     | `20px`                                                                                         | `20px`                                                      | `1.25rem`                                          |
+| `--text-2xl`    | `24px`                                                                                         | `24px`                                                      | `1.5rem`                                           |
+| `--text-3xl`    | `30px`                                                                                         | `30px`                                                      | `1.875rem`                                         |
+| `--radius-sm`   | `6px`                                                                                          | `8px`                                                       | `0.25rem`                                          |
+| `--radius-md`   | `8px`                                                                                          | `12px`                                                      | `0.375rem`                                         |
+| `--radius-lg`   | `12px`                                                                                         | `16px`                                                      | `0.5rem`                                           |
 | `--radius-full` | `9999px`                                                                                       | `9999px`                                                    | `9999px`                                           |
 | `--font-sans`   | `"Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif` | `"Lexend", "Manrope", system-ui, -apple-system, sans-serif` | `var(--font-ibm-plex-sans), system-ui, sans-serif` |
+
+## Кит бренда
+
+- maps: `--ease-standard` = `cubic-bezier(0.4, 0, 0.2, 1)`
+- maps: `--motion-fast` = `140ms`
+- maps: `--motion-panel` = `240ms`
+- maps: `--motion-shimmer` = `1.6s`
+- maps: `--shadow-column` = `rgba(16, 24, 40, 0.05) 2px 0px 8px 0px`
+- maps: `--shadow-button-sm` = `rgba(16, 24, 40, 0.08) 0px 1px 3px 0px`
+- maps: `--shadow-button-md` = `rgba(16, 24, 40, 0.1) 0px 1px 3px 0px`
+- maps: `--shadow-modal` = `rgba(16, 24, 40, 0.28) 0px 18px 48px 0px`
+- maps: `--shadow-sheet-top` = `rgba(16, 24, 40, 0.14) 0px -4px 20px 0px`
+- maps: `--shadow-dropdown` = `rgba(16, 24, 40, 0.22) 0px 12px 32px 0px`
 
 ## Алиасы (deprecated, удаление в 1.0.0)
 
@@ -71,7 +91,7 @@
 
 - business: `--brand-50`, `--brand-100`, `--brand-200`, `--brand-300`, `--brand-400`, `--brand-500`, `--brand-600`, `--brand-700`, `--gold`, `--gold-press`, `--gold-soft`
 - booking: `--brand-50`, `--brand-100`, `--brand-200`, `--brand-300`, `--brand-400`, `--brand-500`, `--brand-600`, `--brand-700`, `--gold`, `--gold-press`, `--gold-soft`
-- maps: `--surface-map`, `--text-on-map`, `--rating-star`, `--marker-primary`, `--border-state-card`, `--gold`, `--gold-soft`
+- maps: `--surface-map`, `--text-on-map`, `--rating-star`, `--marker-primary`, `--border-state-card`, `--gold`, `--gold-soft`, `--shimmer-peak`
 
 ## Ожидает значения от дизайнера
 
@@ -87,9 +107,6 @@
 - maps dark `--danger-soft-bg` = `#141d31` — ожидает значения от дизайнера
 - maps dark `--info` = `#35e0ff` — ожидает значения от дизайнера
 - maps dark `--info-soft-bg` = `#141d31` — ожидает значения от дизайнера
-- maps `--radius-sm` = `8px` — временно, промер с фреймов в C2
-- maps `--radius-md` = `12px` — временно, промер с фреймов в C2
-- maps `--radius-lg` = `16px` — временно, промер с фреймов в C2
 - maps light `--gold-soft` = `#fdf3e6` — ожидает значения от дизайнера
 - maps dark `--gold-soft` = `#141d31` — ожидает значения от дизайнера
 

@@ -58,6 +58,13 @@
   --gold: #e8a317;
   --gold-press: #c98b10;
   --gold-soft: #3a2f1a;
+  --text-xs: 11px;
+  --text-sm: 13px;
+  --text-base: 15px;
+  --text-lg: 17px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 30px;
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;

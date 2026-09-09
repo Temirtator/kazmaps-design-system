@@ -251,6 +251,13 @@
     }
   },
   "static": {
+    "text-xs": { "$type": "dimension", "$value": "11px" },
+    "text-sm": { "$type": "dimension", "$value": "13px" },
+    "text-base": { "$type": "dimension", "$value": "15px" },
+    "text-lg": { "$type": "dimension", "$value": "17px" },
+    "text-xl": { "$type": "dimension", "$value": "20px" },
+    "text-2xl": { "$type": "dimension", "$value": "24px" },
+    "text-3xl": { "$type": "dimension", "$value": "30px" },
     "radius-sm": {
       "$type": "dimension",
       "$value": "6px"

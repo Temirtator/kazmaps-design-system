@@ -30,7 +30,20 @@
     ],
     "shadow": ["shadow-sm", "shadow-md", "shadow-lg"]
   },
-  "static": ["radius-sm", "radius-md", "radius-lg", "radius-full", "font-sans"],
+  "static": [
+    "text-xs",
+    "text-sm",
+    "text-base",
+    "text-lg",
+    "text-xl",
+    "text-2xl",
+    "text-3xl",
+    "radius-sm",
+    "radius-md",
+    "radius-lg",
+    "radius-full",
+    "font-sans"
+  ],
   "aliases": {
     "bg": "surface-base",
     "card": "surface-panel",
