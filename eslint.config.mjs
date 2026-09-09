@@ -60,7 +60,7 @@ export default tseslint.config(
         {
           patterns: [
             {
-              group: ["**/maps/*", "../maps", "./maps"],
+              group: ["**/maps/*", "**/maps", "../maps", "./maps"],
               message: "root entry must not depend on the maps kit",
             },
           ],

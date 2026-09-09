@@ -32,6 +32,15 @@ describe("maps kit boundaries", () => {
     ]);
   });
 
+  it("root-direction matcher flags the maps barrel at any depth", () => {
+    for (const spec of ["./maps", "./maps/foo", "../maps", "../../maps", "../../../maps"]) {
+      expect(spec.split("/").includes("maps"), spec).toBe(true);
+    }
+    for (const spec of ["../../lib/cn", "../data/regions", "react"]) {
+      expect(spec.split("/").includes("maps"), spec).toBe(false);
+    }
+  });
+
   it("maps imports only itself, lib, data and peers", () => {
     const offenders: string[] = [];
     for (const file of sourceFiles(walk("maps"))) {
@@ -62,11 +71,7 @@ describe("maps kit boundaries", () => {
     ];
     for (const file of files) {
       for (const spec of importSpecs(file)) {
-        const offends =
-          spec === "./maps" ||
-          spec.startsWith("./maps/") ||
-          spec.startsWith("../maps") ||
-          spec.includes("/maps/");
+        const offends = spec.split("/").includes("maps");
         if (offends) offenders.push(`${file}: ${spec}`);
       }
     }
