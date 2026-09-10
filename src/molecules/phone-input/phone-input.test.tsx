@@ -38,6 +38,45 @@ describe("PhoneInput", () => {
     });
   });
 
+  it("types a KZ number whose network code starts with 7 without the literal swallowing it", async () => {
+    const onChange = vi.fn();
+    const user = userEvent.setup();
+    render(<PhoneInput label="Телефон" onChange={onChange} />);
+    const input = screen.getByLabelText("Телефон");
+    await user.type(input, "7771234567");
+    expect(input).toHaveValue("(777) 123-45-67");
+    expect(last(onChange)).toEqual({
+      e164: "+77771234567",
+      national: "7771234567",
+      complete: true,
+      region: "KZ",
+    });
+  });
+
+  it("drops a leading 8 typed into an empty KZ field", async () => {
+    const onChange = vi.fn();
+    const user = userEvent.setup();
+    render(<PhoneInput label="Телефон" onChange={onChange} />);
+    const input = screen.getByLabelText("Телефон");
+    await user.type(input, "87071234567");
+    expect(input).toHaveValue("(707) 123-45-67");
+    expect(last(onChange)).toEqual({
+      e164: "+77071234567",
+      national: "7071234567",
+      complete: true,
+      region: "KZ",
+    });
+  });
+
+  it("leaves the KZ field empty and incomplete when only the mask's literal digit is typed", async () => {
+    const onChange = vi.fn();
+    const user = userEvent.setup();
+    render(<PhoneInput label="Телефон" onChange={onChange} />);
+    const input = screen.getByLabelText("Телефон");
+    await user.type(input, "7");
+    expect(last(onChange)).toMatchObject({ e164: "", national: "", complete: false });
+  });
+
   it("stays empty on focus and treats the bare template as empty", async () => {
     const onChange = vi.fn();
     const user = userEvent.setup();

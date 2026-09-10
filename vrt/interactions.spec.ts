@@ -27,6 +27,18 @@ for (const { brand, story } of BRANDS) {
       await expect(readout(page)).toContainText('"e164":"+77012345678"');
     });
 
+    test("typing a KZ number whose network code starts with 7 is not swallowed by the mask literal", async ({
+      page,
+    }) => {
+      await openLive(page, brand, story);
+      const input = page.getByLabel("Номер телефона");
+      await input.click();
+      await expect(input).toHaveValue("");
+      await input.pressSequentially("7771234567");
+      await expect(input).toHaveValue("(777) 123-45-67");
+      await expect(readout(page)).toContainText('"e164":"+77771234567"');
+    });
+
     test("pasting an 8-prefixed number normalizes to KZ", async ({ page }) => {
       await openLive(page, brand, story);
       const input = page.getByLabel("Номер телефона");
