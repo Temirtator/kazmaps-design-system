@@ -187,10 +187,17 @@ export function usePhoneMask({
     const digits = digitsOnly(e.target.value);
     const literal = literalDigits(mask);
     const current = stateRef.current;
-    const startingFresh = current.national === "";
-    const rest = digits.startsWith(literal) ? digits.slice(literal.length) : digits;
-    if (startingFresh && current.region.dial === "7" && rest.startsWith("8")) {
-      emit({ region: current.region, national: "" });
+    // "Пусто" здесь — семантическая пустота (isEmptyNational), не только
+    // строгое "": набранный литерал сам по себе ("7" для KZ) уже не пустая
+    // строка после предыдущего изменения, но правило про ведущую 8 должно
+    // работать и в этом состоянии. Литерал есть только там, где первый слот
+    // не может принять 8 (KZ); для RU/остальных region.dial === "7" условие
+    // раньше ломало легитимные номера вида 8005553535.
+    const startingFresh = isEmptyNational(current.region, current.national);
+    if (startingFresh && literal !== "" && digits.slice(literal.length).startsWith("8")) {
+      // Отбрасываем именно это нажатие: национальный номер остаётся тем,
+      // чем был (маска не стирается), а сама "8" никуда не попадает.
+      emit({ region: current.region, national: current.national });
       return;
     }
     // Оставляем цифры как есть, даже если они совпадают с одним литералом
