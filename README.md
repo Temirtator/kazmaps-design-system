@@ -291,6 +291,8 @@ npm run storybook
 
 Откроется на `http://localhost:6006`.
 
+Опубликованная версия: https://temirtator.github.io/kazmaps-design-system/
+
 ### Проверка кода
 
 ```bash
