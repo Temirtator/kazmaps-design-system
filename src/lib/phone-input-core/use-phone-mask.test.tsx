@@ -23,4 +23,18 @@ describe("usePhoneMask", () => {
     );
     expect(result.current.open).toBe(false);
   });
+
+  it("drops a leading 8 typed into an empty KZ field, then completes to the right number", () => {
+    const onChange = vi.fn();
+    const { result } = renderHook(() => usePhoneMask({ onChange }));
+    act(() => result.current.handleChange({ target: { value: "(78_) ___-__-__" } } as never));
+    expect(result.current.national).toBe("");
+    expect(onChange).toHaveBeenLastCalledWith(
+      expect.objectContaining({ e164: "", national: "", complete: false }),
+    );
+    act(() => result.current.handleChange({ target: { value: "(707) 123-45-67" } } as never));
+    expect(onChange).toHaveBeenLastCalledWith(
+      expect.objectContaining({ e164: "+77071234567", complete: true }),
+    );
+  });
 });

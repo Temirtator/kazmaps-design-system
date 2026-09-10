@@ -38,6 +38,79 @@ describe("PhoneInput", () => {
     });
   });
 
+  it("types a KZ number whose network code starts with 7 without the literal swallowing it", async () => {
+    const onChange = vi.fn();
+    const user = userEvent.setup();
+    render(<PhoneInput label="Телефон" onChange={onChange} />);
+    const input = screen.getByLabelText("Телефон");
+    await user.type(input, "7771234567");
+    expect(input).toHaveValue("(777) 123-45-67");
+    expect(last(onChange)).toEqual({
+      e164: "+77771234567",
+      national: "7771234567",
+      complete: true,
+      region: "KZ",
+    });
+  });
+
+  it("drops a leading 8 typed into an empty KZ field", async () => {
+    const onChange = vi.fn();
+    const user = userEvent.setup();
+    render(<PhoneInput label="Телефон" onChange={onChange} />);
+    const input = screen.getByLabelText("Телефон");
+    await user.type(input, "87071234567");
+    expect(input).toHaveValue("(707) 123-45-67");
+    expect(last(onChange)).toEqual({
+      e164: "+77071234567",
+      national: "7071234567",
+      complete: true,
+      region: "KZ",
+    });
+  });
+
+  it("leaves the KZ field empty and incomplete when only the mask's literal digit is typed", async () => {
+    const onChange = vi.fn();
+    const user = userEvent.setup();
+    render(<PhoneInput label="Телефон" onChange={onChange} />);
+    const input = screen.getByLabelText("Телефон");
+    await user.type(input, "7");
+    expect(input).toHaveValue("(7__) ___-__-__");
+    expect(last(onChange)).toMatchObject({ e164: "", national: "", complete: false });
+  });
+
+  it("keeps dropping a leading 8 after the mask literal was already confirmed", async () => {
+    const onChange = vi.fn();
+    const user = userEvent.setup();
+    render(<PhoneInput label="Телефон" onChange={onChange} />);
+    const input = screen.getByLabelText("Телефон");
+    await user.type(input, "78");
+    expect(input).toHaveValue("(7__) ___-__-__");
+    expect(last(onChange)).toMatchObject({ e164: "", national: "", complete: false });
+    await user.type(input, "707123456");
+    expect(input).toHaveValue("(770) 712-34-56");
+    expect(last(onChange)).toEqual({
+      e164: "+77707123456",
+      national: "7707123456",
+      complete: true,
+      region: "KZ",
+    });
+  });
+
+  it("does not drop a legitimate leading 8 for RU, which has no mask literal", async () => {
+    const onChange = vi.fn();
+    const user = userEvent.setup();
+    render(<PhoneInput label="Телефон" defaultRegion="RU" onChange={onChange} />);
+    const input = screen.getByLabelText("Телефон");
+    await user.type(input, "8005553535");
+    expect(input).toHaveValue("(800) 555-35-35");
+    expect(last(onChange)).toEqual({
+      e164: "+78005553535",
+      national: "8005553535",
+      complete: true,
+      region: "RU",
+    });
+  });
+
   it("stays empty on focus and treats the bare template as empty", async () => {
     const onChange = vi.fn();
     const user = userEvent.setup();
