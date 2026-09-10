@@ -1,4 +1,4 @@
-import { cn } from "../../lib/cn";
+import { cn } from "../cn";
 
 type Paint = { fill: string; x?: number; y?: number; w?: number; h?: number };
 

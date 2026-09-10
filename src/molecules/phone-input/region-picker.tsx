@@ -1,29 +1,19 @@
 "use client";
 
 import { Check, Search } from "lucide-react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 import type { Region } from "../../data/regions";
 import { cn } from "../../lib/cn";
-import { RegionFlag } from "./region-flag";
+import {
+  type PhoneInputLabels,
+  type PickerCloseReason,
+  RegionFlag,
+  useRegionPicker,
+} from "../../lib/phone-input-core";
 
-export interface PhoneInputLabels {
-  region: string;
-  search: string;
-  groupCis: string;
-  groupOther: string;
-  noResults: string;
-}
-
-export const DEFAULT_LABELS: PhoneInputLabels = {
-  region: "Регион",
-  search: "Страна или код",
-  groupCis: "Казахстан и СНГ",
-  groupOther: "Другие страны",
-  noResults: "Ничего не найдено",
-};
-
-export type PickerCloseReason = "escape" | "blur";
+export { DEFAULT_LABELS } from "../../lib/phone-input-core";
+export type { PhoneInputLabels, PickerCloseReason };
 
 export interface RegionPickerProps {
   id: string;
@@ -35,17 +25,6 @@ export interface RegionPickerProps {
   onClose: (reason: PickerCloseReason) => void;
 }
 
-function matches(region: Region, query: string): boolean {
-  const q = query.trim().toLowerCase().replace(/^\+/, "");
-  if (q === "") return true;
-  return (
-    region.name.toLowerCase().includes(q) ||
-    region.nameEn.toLowerCase().includes(q) ||
-    region.iso.toLowerCase() === q ||
-    region.dial.startsWith(q)
-  );
-}
-
 export function RegionPicker({
   id,
   regions,
@@ -55,27 +34,12 @@ export function RegionPicker({
   onSelect,
   onClose,
 }: RegionPickerProps) {
-  const [query, setQuery] = useState("");
   const rootRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
 
-  const filtered = useMemo(() => regions.filter((r) => matches(r, query)), [regions, query]);
-  const cis = filtered.filter((r) => r.group === "cis");
-  const other = filtered.filter((r) => r.group === "other");
-  const ordered = [...cis, ...other];
-
-  const defaultActive = () =>
-    Math.max(
-      0,
-      ordered.findIndex((r) => r.iso === value),
-    );
-  const [active, setActive] = useState(defaultActive);
-  const [activeQuery, setActiveQuery] = useState(query);
-  if (query !== activeQuery) {
-    setActiveQuery(query);
-    setActive(defaultActive());
-  }
+  const { query, setQuery, cis, other, ordered, active, onKeyDown, onSearchBlur, optionId } =
+    useRegionPicker({ id, regions, value, onSelect, onClose });
 
   useEffect(() => {
     searchRef.current?.focus();
@@ -86,30 +50,6 @@ export function RegionPicker({
     el?.scrollIntoView?.({ block: "nearest" });
   }, [active]);
 
-  function onKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
-    if (e.key === "ArrowDown") {
-      e.preventDefault();
-      setActive((i) => Math.min(i + 1, ordered.length - 1));
-    } else if (e.key === "ArrowUp") {
-      e.preventDefault();
-      setActive((i) => Math.max(i - 1, 0));
-    } else if (e.key === "Enter") {
-      e.preventDefault();
-      const r = ordered[active];
-      if (r) onSelect(r);
-    } else if (e.key === "Escape") {
-      e.preventDefault();
-      e.stopPropagation();
-      onClose("escape");
-    }
-  }
-
-  function onSearchBlur(e: React.FocusEvent<HTMLInputElement>) {
-    const next = e.relatedTarget;
-    if (!(next instanceof Node) || !rootRef.current?.contains(next)) onClose("blur");
-  }
-
-  const optionId = (i: number) => `${id}-opt-${i}`;
   const name = (r: Region) => (locale === "en" ? r.nameEn : r.name);
 
   function renderGroup(title: string, items: Region[], offset: number) {
@@ -174,7 +114,7 @@ export function RegionPicker({
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={onKeyDown}
-          onBlur={onSearchBlur}
+          onBlur={(e) => onSearchBlur(e, rootRef.current)}
           className="w-full bg-transparent text-[length:var(--text-sm)] text-[var(--ink)] outline-none placeholder:text-[var(--muted)]"
         />
       </div>

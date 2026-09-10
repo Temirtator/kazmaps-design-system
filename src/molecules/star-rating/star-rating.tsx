@@ -26,7 +26,9 @@ const STAR_COUNT = 5;
 function starClass(filled: boolean): string {
   return cn(
     "transition-colors duration-[var(--dur-fast)] ease-[var(--ease-standard)]",
-    filled ? "fill-[var(--gold)] text-[var(--gold)]" : "fill-transparent text-[var(--line-2)]",
+    filled
+      ? "fill-[var(--highlight)] text-[var(--highlight)]"
+      : "fill-transparent text-[var(--line-2)]",
   );
 }
 

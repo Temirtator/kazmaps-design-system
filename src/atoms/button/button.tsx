@@ -41,7 +41,7 @@ const VARIANTS: Record<ButtonVariant, string> = {
   warning: "bg-[var(--warn-soft)] text-[var(--warn)] hover:opacity-90",
   dark: "bg-[#23252a] text-[#f7f8f8] border border-[var(--line-2)] hover:bg-[#2c2f36]",
   cta: "bg-[var(--ink)] text-[var(--bg)] shadow-[var(--shadow-md)] hover:opacity-90",
-  gold: "bg-[var(--gold-soft)] text-[var(--gold)] hover:opacity-90",
+  gold: "bg-[var(--highlight-soft)] text-[var(--highlight)] hover:opacity-90",
   link: "bg-transparent text-[var(--brand)] hover:underline px-0",
 };
 

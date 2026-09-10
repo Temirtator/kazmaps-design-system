@@ -1,15 +1,15 @@
 import { defineConfig } from "tsup";
 
 export default defineConfig({
-  entry: ["src/index.ts"],
+  entry: ["src/index.ts", "src/maps/index.ts"],
   format: ["esm"],
   dts: true,
   sourcemap: false,
   clean: true,
   minify: false,
   target: "es2022",
-  external: ["react", "react-dom", "lucide-react"],
+  external: ["react", "react-dom", "lucide-react", "qrcode"],
   banner: { js: '"use client";' },
   onSuccess:
-    "mkdir -p dist/styles/brands && cp src/styles/core.css src/styles/theme.css dist/styles/ && cp src/styles/brands/*.css dist/styles/brands/",
+    "mkdir -p dist/styles/brands && cp src/styles/core.css src/styles/theme.css dist/styles/ && cp src/styles/brands/*.css dist/styles/brands/ && mkdir -p dist/styles/kits && cp src/styles/kits/*.css dist/styles/kits/",
 });

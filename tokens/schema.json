@@ -28,9 +28,23 @@
       "info",
       "info-soft-bg"
     ],
+    "highlight": ["highlight", "highlight-soft"],
     "shadow": ["shadow-sm", "shadow-md", "shadow-lg"]
   },
-  "static": ["radius-sm", "radius-md", "radius-lg", "radius-full", "font-sans"],
+  "static": [
+    "text-xs",
+    "text-sm",
+    "text-base",
+    "text-lg",
+    "text-xl",
+    "text-2xl",
+    "text-3xl",
+    "radius-sm",
+    "radius-md",
+    "radius-lg",
+    "radius-full",
+    "font-sans"
+  ],
   "aliases": {
     "bg": "surface-base",
     "card": "surface-panel",
@@ -48,6 +62,8 @@
     "success-soft": "success-soft-bg",
     "warn-soft": "warning-soft-bg",
     "danger-soft": "danger-soft-bg",
-    "info-soft": "info-soft-bg"
+    "info-soft": "info-soft-bg",
+    "gold": "highlight",
+    "gold-soft": "highlight-soft"
   }
 }

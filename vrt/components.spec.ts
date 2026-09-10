@@ -72,6 +72,17 @@ for (const story of STORIES) {
   }
 }
 
+for (const story of STORIES) {
+  for (const theme of THEMES) {
+    test(`booking ${story.name} — ${theme}`, async ({ page }) => {
+      await openStory(page, story.id, theme, "booking");
+      await expect(page).toHaveScreenshot(`booking-${story.name}-${theme}.png`, {
+        fullPage: true,
+      });
+    });
+  }
+}
+
 async function readSurfacePanel(page: Page): Promise<string> {
   return page.evaluate(() =>
     getComputedStyle(document.documentElement).getPropertyValue("--surface-panel").trim(),

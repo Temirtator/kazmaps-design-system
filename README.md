@@ -15,6 +15,7 @@ npm i @temirtator/kazmaps-design-system lucide-react
 - `react` ^19.0.0
 - `react-dom` ^19.0.0
 - `lucide-react` ^1.0.0
+- `qrcode` ^1.5.4 — необязательный, нужен только `QrCode` из `/maps`
 
 ## Подключение в Next.js или Tailwind v4 приложение
 
@@ -78,6 +79,41 @@ export default function MyComponent() {
   );
 }
 ```
+
+### 4. Вход `/maps` (main-web)
+
+Второй вход пакета — примитивы main-web с родными именами. Он не пересекается с корневым:
+`Button` из `@temirtator/kazmaps-design-system/maps` и `Button` из корня — разные компоненты
+для разных брендов, слияние — после прихода дизайна.
+
+```tsx
+import { Button, PlaceRow } from "@temirtator/kazmaps-design-system/maps";
+```
+
+Кит читает утилиты и keyframes из `styles/kits/maps.css` — подключите его после файла бренда.
+Сниппет ниже — это продолжение §1, а не полный набор импортов: `core.css` и `theme.css` должны
+быть подключены раньше `brands/maps.css` и `kits/maps.css`.
+
+```css
+@import "@temirtator/kazmaps-design-system/styles/brands/maps.css";
+@import "@temirtator/kazmaps-design-system/styles/kits/maps.css";
+@source "../../node_modules/@temirtator/kazmaps-design-system/dist";
+```
+
+Компоненты `/maps` работают только под `data-brand="maps"`: их тени, тайминги и `--ease-standard`
+объявлены как кит-статики этого бренда (`tokens/brands/maps.json`, блок `kit`). `--ease-standard`
+у кита и у `core.css` объявлены с одинаковой специфичностью — кит побеждает только за счёт
+порядка импорта (`core.css` раньше `brands/maps.css`), поэтому порядок из §1 и этого раздела
+менять нельзя.
+
+`QrCode` рендерит настоящий QR-код через `qrcode` — необязательный peer-пакет кита, установите
+его в приложении-потребителе (`npm i qrcode`); main-web уже это делает.
+
+Кит также включает оверлеи — `Dialog`, `BottomSheet`, `ToastProvider`/`useToast` — и
+`PhoneInput`: телефон с выбором региона, маской и E.164 наружу на безголовом ядре
+`useRegionPicker`/`usePhoneMask`. `/maps` также экспортирует типы и хелперы региона/телефона,
+используемые в сигнатуре `PhoneInputProps`: `Region`, `RegionCode`, `findRegion`, `REGIONS`,
+`isKazakhstanMobile`, `toE164`.
 
 ## Компоненты
 
@@ -187,7 +223,7 @@ import { PhoneInput } from "@temirtator/kazmaps-design-system";
 - `locale="ru" | "en"` переключает только названия стран в списке пикера. Остальной интерфейс пикера — доступное имя кнопки региона, плейсхолдер поля поиска, оба заголовка групп, текст пустого результата — всегда берётся из `labels`, дефолты которого русские. Англоязычному потребителю нужно передать `labels` вместе с `locale`.
 - Плейсхолдеры маски остаются видны по мере ввода (`+7 (7__) ___-__-__`), поле намеренно пустое при фокусе — чтобы срабатывал автозаполнитель браузера.
 - Хелперы: `parseE164`, `formatE164` («+7 701 234-56-78» для подписей), `isKazakhstanMobile` (белый список операторов identity — только такие номера достижимы по SMS).
-- `Input mask="phone"` — deprecated: тот же движок, формат `+7 (7__) ___-__-__`; используйте `PhoneInput`. Удаление — 0.5.0. Пометка `@deprecated` стоит на всём типе `InputMask` и на пропе `mask` целиком, потому что TypeScript не умеет депрекейтить отдельный член union — поэтому IDE зачеркнёт и `mask="email" | "bin" | "url"`, хотя они никуда не уходят и полностью поддерживаются. Заменяется и удаляется в 0.5.0 только `mask="phone"`.
+- `Input mask="phone"` — deprecated: тот же движок, формат `+7 (7__) ___-__-__`; используйте `PhoneInput`. Удаление в следующей минорной версии после миграции business-client на `PhoneInput`. Пометка `@deprecated` стоит на всём типе `InputMask` и на пропе `mask` целиком, потому что TypeScript не умеет депрекейтить отдельный член union — поэтому IDE зачеркнёт и `mask="email" | "bin" | "url"`, хотя они никуда не уходят и полностью поддерживаются. Заменяется и удаляется только `mask="phone"` — в следующей минорной версии после миграции business-client на `PhoneInput`.
 
 ## Темизация
 

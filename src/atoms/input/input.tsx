@@ -8,7 +8,7 @@ import { findRegion } from "../../data/regions";
 import { cn } from "../../lib/cn";
 import { digitsOnly, formatNational, literalDigits, maskFor } from "../../lib/phone";
 
-/** @deprecated `mask="phone"` заменяется компонентом `PhoneInput`; будет удалён в 0.5.0. */
+/** @deprecated `mask="phone"` заменяется компонентом `PhoneInput`; удаление в следующей минорной версии после миграции business-client на `PhoneInput`. */
 export type InputMask = "phone" | "email" | "bin" | "url";
 
 export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
@@ -18,7 +18,7 @@ export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   required?: boolean;
   startIcon?: ReactNode;
   endIcon?: ReactNode;
-  /** @deprecated `mask="phone"` использует прежний движок форматирования; используйте `PhoneInput`. Будет удалён в 0.5.0. */
+  /** @deprecated `mask="phone"` использует прежний движок форматирования; используйте `PhoneInput`. Удаление в следующей минорной версии после миграции business-client на `PhoneInput`. */
   mask?: InputMask;
   revealable?: boolean;
   /** Подпись reveal-кнопки в состоянии «пароль скрыт». */

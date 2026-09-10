@@ -27,4 +27,6 @@
   --color-danger-soft-bg: var(--danger-soft-bg);
   --color-info: var(--info);
   --color-info-soft-bg: var(--info-soft-bg);
+  --color-highlight: var(--highlight);
+  --color-highlight-soft: var(--highlight-soft);
 }

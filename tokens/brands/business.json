@@ -113,6 +113,14 @@
         "$type": "color",
         "$value": "#e8f3fe"
       },
+      "highlight": {
+        "$type": "color",
+        "$value": "#c99a16"
+      },
+      "highlight-soft": {
+        "$type": "color",
+        "$value": "#f9f0d8"
+      },
       "shadow-sm": {
         "$type": "shadow",
         "$value": "0 1px 2px #0000000f"
@@ -236,6 +244,14 @@
         "$type": "color",
         "$value": "#0e1f2e"
       },
+      "highlight": {
+        "$type": "color",
+        "$value": "#f0bf00"
+      },
+      "highlight-soft": {
+        "$type": "color",
+        "$value": "#241f10"
+      },
       "shadow-sm": {
         "$type": "shadow",
         "$value": "0 1px 2px #0000004d"
@@ -251,6 +267,13 @@
     }
   },
   "static": {
+    "text-xs": { "$type": "dimension", "$value": "11px" },
+    "text-sm": { "$type": "dimension", "$value": "13px" },
+    "text-base": { "$type": "dimension", "$value": "15px" },
+    "text-lg": { "$type": "dimension", "$value": "17px" },
+    "text-xl": { "$type": "dimension", "$value": "20px" },
+    "text-2xl": { "$type": "dimension", "$value": "24px" },
+    "text-3xl": { "$type": "dimension", "$value": "30px" },
     "radius-sm": {
       "$type": "dimension",
       "$value": "6px"
@@ -306,17 +329,9 @@
         "$type": "color",
         "$value": "#454d96"
       },
-      "gold": {
-        "$type": "color",
-        "$value": "#c99a16"
-      },
       "gold-press": {
         "$type": "color",
         "$value": "#b0860f"
-      },
-      "gold-soft": {
-        "$type": "color",
-        "$value": "#f9f0d8"
       }
     },
     "dark": {
@@ -352,17 +367,9 @@
         "$type": "color",
         "$value": "#8b94e0"
       },
-      "gold": {
-        "$type": "color",
-        "$value": "#f0bf00"
-      },
       "gold-press": {
         "$type": "color",
         "$value": "#d9ad00"
-      },
-      "gold-soft": {
-        "$type": "color",
-        "$value": "#241f10"
       }
     }
   }

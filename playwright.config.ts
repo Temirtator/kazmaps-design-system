@@ -15,7 +15,7 @@ export default defineConfig({
     contextOptions: { reducedMotion: "reduce" },
   },
   projects: [
-    { name: "vrt", use: { browserName: "chromium" }, testMatch: /components\.spec\.ts/ },
+    { name: "vrt", use: { browserName: "chromium" }, testMatch: /(components|maps-kit)\.spec\.ts/ },
     {
       name: "interactions",
       use: { browserName: "chromium", permissions: ["clipboard-read", "clipboard-write"] },
